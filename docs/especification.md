@@ -6,20 +6,35 @@ O crescimento das plataformas de apostas online tem levado ao aumento de casos d
 
 ## Personas
 
-Pedro Paulo tem 26 anos, é arquiteto recém-formado e autônomo. Pensa em se desenvolver profissionalmente através de um mestrado fora do país, pois adora viajar, é solteiro e sempre quis fazer um intercâmbio. Está buscando uma agência que o ajude a encontrar universidades na Europa que aceitem alunos estrangeiros.
+As personas representam diferentes tipos de usuários do TravaJogo e ajudam a entender o que cada um busca na ferramenta.
 
-Enumere e detalhe as personas da sua solução. Para tanto, baseie-se tanto nos documentos disponibilizados na disciplina e/ou nos seguintes links:
+Lucas Silva - O Jogador em Busca de Controle
 
-> **Links Úteis**:
-> - [Rock Content](https://rockcontent.com/blog/personas/)
-> - [Hotmart](https://blog.hotmart.com/pt-br/como-criar-persona-negocio/)
-> - [O que é persona?](https://resultadosdigitais.com.br/blog/persona-o-que-e/)
-> - [Persona x Público-alvo](https://flammo.com.br/blog/persona-e-publico-alvo-qual-a-diferenca/)
-> - [Mapa de Empatia](https://resultadosdigitais.com.br/blog/mapa-da-empatia/)
-> - [Mapa de Stalkeholders](https://www.racecomunicacao.com.br/blog/como-fazer-o-mapeamento-de-stakeholders/)
->
-Lembre-se que você deve ser enumerar e descrever precisamente e personalizada todos os clientes ideais que sua solução almeja.
+* Idade: 22 anos
+* Profissão: Estudante universitário
+* História: Lucas começou a apostar em jogos de futebol por diversão, mas agora tá endividado e ansioso com o quanto gasta. Quer organizar melhor seus hábitos e reduzir o acesso às plataformas de apostas, que tão sempre a um clique de distância.
+* Necessidades: Ferramentas pra acompanhar gastos e tempo sem jogar, um jeito de bloquear sites de apostas e trocar ideias com quem tá na mesma situação.
+1. "Como um jovem que aposta online, quero ver quanto já gastei e economizei pra entender meu progresso."
+2. "Como alguém que quer parar de jogar tanto, quero um bloqueador que dificulte abrir esses sites."
+3. "Como um jogador querendo mudar, quero conversar com outras pessoas que tão tentando controlar isso também."
 
+Carlos Mendes - O Familiar Preocupado
+
+* Idade: 45 anos
+* Profissão: Comerciante
+* História: Carlos é pai de um jovem que aposta muito online e quer ajudar o filho a ter mais controle, além de encontrar recursos pra entender a situação.
+* Necessidades: Uma forma de acompanhar os hábitos do filho e links pra grupos de apoio que possam orientar os dois.
+1. "Como pai preocupado, quero usar uma ferramenta pra ver o tempo e os gastos do meu filho com apostas."
+1. "Como familiar, quero links pra grupos de apoio que me ajudem a lidar com essa situação."
+
+Mariana Rocha - A Psicóloga Especializada
+
+* Idade: 30 anos
+* Profissão: Psicóloga
+* História: Mariana atende pacientes que apostam demais e precisa de recursos simples pra indicar a eles, além de algo que complemente o trabalho dela com informações práticas.
+* Necessidades: Uma ferramenta que os pacientes possam usar pra monitorar hábitos e links pra instituições de suporte gratuito.
+1. "Como psicóloga, quero indicar uma aplicação que mostre aos meus pacientes o tempo e o dinheiro gastos em apostas."
+2. "Como profissional da saúde, quero uma lista de contatos de apoio gratuito pra recomendar a quem precisa."
 ## Histórias de Usuários
 
 Com base na análise das personas forma identificadas as seguintes histórias de usuários:
