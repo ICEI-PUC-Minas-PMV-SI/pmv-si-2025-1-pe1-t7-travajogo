@@ -7,16 +7,18 @@ As ferramentas pra acompanhar gastos e tempo em apostas são raras ou estão esp
 
 ## Problema
 
-Nesse momento você deve apresentar o problema que a sua aplicação deve resolver. No entanto, **não** é a hora de comentar sobre a solução/aplicação.
-
-Descreva também o contexto em que essa aplicação será usada, se  houver: empresa, tecnologias, etc. Novamente, descreva apenas o que de fato existir, pois ainda não é a hora de apresentar requisitos detalhados ou projetos.
-
-Nesse momento, o grupo pode optar por fazer uso  de ferramentas como Design Thinking, que permite um olhar de ponta a ponta para o problema.
+Como ter uma visão clara dos gastos e do tempo sem apostar num cenário onde isso nem sempre é fácil de acompanhar? Muitas pessoas não conseguem organizar isso sozinhas, e os sites de apostas focam mais em atrair jogadores 
+do que oferecer controle, dificultando decisões conscientes e aumentando os riscos de perca.
 
 > **Links Úteis**:
-> - [Objetivos, Problema de pesquisa e Justificativa](https://medium.com/@versioparole/objetivos-problema-de-pesquisa-e-justificativa-c98c8233b9c3)
-> - [Matriz Certezas, Suposições e Dúvidas](https://medium.com/educa%C3%A7%C3%A3o-fora-da-caixa/matriz-certezas-suposi%C3%A7%C3%B5es-e-d%C3%BAvidas-fa2263633655)
-> - [Brainstorming](https://www.euax.com.br/2018/09/brainstorming/)
+> -1. **Organização Mundial da Saúde (OMS) - Transtorno Causado por Jogatina**  
+   [https://www.who.int/news-room/fact-sheets/detail/gambling](https://www.who.int/news-room/fact-sheets/detail/gambling)
+
+> -2. **American Psychiatric Association (APA) - Gambling Disorder**  
+   [https://www.psychiatry.org/patients-families/gambling-disorder/what-is-gambling-disorder](https://www.psychiatry.org/patients-families/gambling-disorder/what-is-gambling-disorder)
+
+> -3. **National Council on Problem Gambling (NCPG)**  
+   [https://www.ncpgambling.org/help-treatment/faq/](https://www.ncpgambling.org/help-treatment/faq/)
 
 ## Objetivos
 
