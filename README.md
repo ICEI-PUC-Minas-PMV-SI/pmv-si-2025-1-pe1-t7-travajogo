@@ -15,7 +15,7 @@ Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo de
 * Jessica Santos
 * Vitor Camargo
 * Ygor Yuri
-
+* Wander Carolino
 
 ## Orientador
 
