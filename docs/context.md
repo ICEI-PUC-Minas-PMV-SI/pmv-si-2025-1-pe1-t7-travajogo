@@ -22,9 +22,10 @@ do que oferecer controle, dificultando decisões conscientes e aumentando os ris
 
 ## Objetivos
 
-Aqui você deve descrever os objetivos do trabalho indicando que o objetivo geral é desenvolver um software para solucionar o problema apresentado acima. 
+Centralizar informações: Reunir num único lugar os dados mais importantes pras pessoas que apostam online, como o tempo que estão sem jogar e os gastos acumulados, para que elas tenham tudo à mão e possam acompanhar seus hábitos com facilidade.
 
-Apresente também alguns (pelo menos 2) objetivos específicos dependendo de onde você vai querer concentrar a sua prática investigativa, ou como você vai aprofundar no seu trabalho.
+Facilitar o controle: Criar uma calculadora interativa que mostra o quanto foi gasto em apostas, e o quanto foi economizado desde a última vez, além de um cronômetro para contar os dias sem jogar, ajudando os usuários a entenderem melhor o impacto das suas escolhas.
+
  
 > **Links Úteis**:
 > - [Objetivo geral e objetivo específico: como fazer e quais verbos utilizar](https://blog.mettzer.com/diferenca-entre-objetivo-geral-e-objetivo-especifico/)
