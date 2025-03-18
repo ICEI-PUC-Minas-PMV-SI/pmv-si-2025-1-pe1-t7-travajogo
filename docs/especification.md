@@ -61,10 +61,12 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 
 |ID    | Descrição do Requisito  | Prioridade | 
 |------|-----------------------------------------|----| 
-|RF-001| A aplicação deve permitir que o usuário gerencie suas tarefas | ALTA |  
-|RF-002| A aplicação deve permitir a emissão de um relatório de tarefas realizadas no mês   | MÉDIA | 
-
-
+|RF-001| A aplicação deve permitir que o usuário realize testes de autoavaliação.| ALTA |  
+|RF-002| A aplicação deve disponibilizar história inspiradoras de superação.     | MÉDIA | 
+|RF-003| A aplicação deve fornecer ou sugerir ferramentas ou métodos para bloquear ou restringir sites de apostas.| ALTA |
+|RF-004| A aplicação deve permitir que os familiares encontrem grupos de apoio através de fórum de suporte ou chat.| MÉDIA|
+|RF-005| A aplicação deve disponibilizar materiais educativos para profissionais da saúde, lista de recursos e contatos de apoio.| MÉDIA|
+|RF-006| Cadastro de Login e senha, Usuários poderão criar perfil para salvar progresso em autoavaliações e acompanhar recursos.| ALTA |
 ### Requisitos não Funcionais
 
 |ID     | Descrição do Requisito  |Prioridade |
