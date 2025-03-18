@@ -22,9 +22,9 @@ do que oferecer controle, dificultando decisões conscientes e aumentando os ris
 
 ## Objetivos
 
-Centralizar informações: Reunir num único lugar os dados mais importantes pras pessoas que apostam online, como o tempo que estão sem jogar e os gastos acumulados, para que elas tenham tudo à mão e possam acompanhar seus hábitos com facilidade.
+**Centralizar informações**: Reunir num único lugar os dados mais importantes pras pessoas que apostam online, como o tempo que estão sem jogar e os gastos acumulados, para que elas tenham tudo à mão e possam acompanhar seus hábitos com facilidade.
 
-Facilitar o controle: Criar uma calculadora interativa que mostra o quanto foi gasto em apostas, e o quanto foi economizado desde a última vez, além de um cronômetro para contar os dias sem jogar, ajudando os usuários a entenderem melhor o impacto das suas escolhas.
+**Facilitar o controle**: Criar uma calculadora interativa que mostra o quanto foi gasto em apostas, e o quanto foi economizado desde a última vez, além de um cronômetro para contar os dias sem jogar, ajudando os usuários a entenderem melhor o impacto das suas escolhas.
 
  
 > **Links Úteis**:
