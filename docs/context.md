@@ -1,8 +1,8 @@
 # Introdução
 
-Controlar os hábitos em jogos de azar online virou um problema grande no Brasil, onde o acesso fácil por celulares e a quantidade de propagandas aumentam o número de pessoas jogando. Mais de 2 mil sites de apostas surgiram desde 2018, movimentando cerca de R$ 20 bilhões por mês e gerando lucros como os R$ 24,2 bilhões em taxas entre 2023 e 2024 (ZORZETTO; ORLANDI, 2024). Só que esse crescimento tem um lado ruim: 45% dos jogadores acabam perdendo muito dinheiro, muitas vezes sem nem perceber o tamanho do estrago, segundo os mesmos autores.
+Controlar os hábitos em jogos de azar online virou um problema grande no Brasil, onde o acesso fácil por celulares e a quantidade de propagandas aumentam o número de pessoas jogando. Mais de 2 mil sites de apostas surgiram desde 2018, movimentando cerca de R$ 20 bilhões por mês e gerando lucros como os R$ 24,2 bilhões em taxas entre 2023 e 2024 (ZORZETTO; ORLANDI, 2024). Só que esse crescimento tem um lado ruim: 45% dos jogadores acabam perdendo muito dinheiro, muitas vezes sem nem perceber o tamanho do estrago, segundo os mesmos autores. teste
 
-As ferramentas pra acompanhar gastos e tempo em apostas são raras ou estão espalhadas, deixando quem joga sem uma forma simples de ver esses números. É aí que entra o TravaJogo: uma aplicação web que junta num só lugar o tempo sem jogar, os gastos totais e o que foi economizado, e vem com um bloqueador próprio pra impedir o acesso a sites de apostas. O foco é oferecer uma maneira prática de acompanhar e limitar esses hábitos, pra quem quer organizar melhor o que faz num cenário que incentiva jogar o tempo todo.
+As ferramentas pra acompanhar gastos e tempo em apostas são raras ou estão espalhadas, deixando quem joga sem uma forma simples de ver esses números. É aí que entra o TravaJogo: uma aplicação web que junta num só lugar o tempo sem jogar, os gastos totais e o que foi economizado, e vem com um bloqueador próprio pra impedir o acesso a sites de apostas. O foco é oferecer uma maneira prática de acompanhar e limitar esses hábitos, pra quem quer organizar melhor o que faz num cenário que incentiva jogar o tempo todo. 
 
 
 ## Problema

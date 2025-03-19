@@ -6,7 +6,7 @@ Para cada requisito funcional, pode ser entregue um artefato desse tipo.
 
 O professor Rommel Carneiro apresenta alguns exemplos prontos para serem utilizados como referência:
 - Login do sistema: [https://repl.it/@rommelpuc/LoginApp](https://repl.it/@rommelpuc/LoginApp) 
-- Cadastro de Contatos: [https://repl.it/@rommelpuc/Cadastro-de-Contatos](https://repl.it/@rommelpuc/Cadastro-de-Contatos)
+- Cadastro de Contatos: [https://repl.it/@rommelpuc/Cadastro-de-Contatos](https://repl.it/@rommelpuc/Cadastro-de-Contatos) test
 
 
 > **Links Úteis**:
