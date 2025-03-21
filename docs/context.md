@@ -62,4 +62,16 @@ Adicione informações sobre o público-alvo por meio de uma descrição textual
 
 FERNANDES SOUSA, J. Impactos sociais dos jogos de cassino online no Brasil. REVISTA CEREUS, v. 16, n. 4, p. 46-56, 22 dez. 2024. Disponível em: 
 
- - [Link](https://www.ojs.unirg.edu.br/index.php/1/article/view/5437)   
+> - [Link](https://www.ojs.unirg.edu.br/index.php/1/article/view/5437)  - Acesso em 23 de Fevereiro de 2025
+ 
+ DA COSTA DOMINGUES MARTINS, L.; AMANDA MARIA BONINI; ISABELLA STEOLA. IMPACTO SOCIAL DOS JOGOS DE AZAR ONLINE E SUAS CONSEQUÊNCIAS DEMOCRÁTICAS. Anais do Congresso Brasileiro de Processo Coletivo e Cidadania, [S. l.], v. 12, n. 12, p. 772–791, 2024
+> - [Link](https://revistas.unaerp.br/cbpcc/article/view/3487) - Acesso em 24 de Fevereiro de 2025  
+
+SAMEER EL KHATIB, A. Diversão ou Armadilha? Um estudo exploratório das Apostas Esportivas (Bets) entre Universitários Brasileiros sob a Lente da Teoria do Comportamento Planejado (TCP). SciELO Preprints, 2024. DOI: 10.1590/SciELOPreprints.10133. 
+> - [Link](https://preprints.scielo.org/index.php/scielo/preprint/view/10133) - Acesso em 24 de Fevereiro de 2025
+
+BITTENCOURT Carla. Apostas on-line atraem crianças e adolescentes, apesar de ilegais. (2024) 
+> [Link](https://lunetas.com.br/apostas-on-line-atraem-criancas-e-adolescentes-apesar-de-ilegais/#:~:text=Portanto%2C%20a%20probabilidade%20do%20desenvolvimento,casos%20de%20depress%C3%A3o%20e%20suic%C3%ADdio) - Acesso em 24 de Fevereiro de 2025 
+
+ZORZETTO, R; ORLANDI. A. Os efeitos nocivos dos jogos online. revista fasep. ed. 344. out. 2024. 
+> [Link](https://revistapesquisa.fapesp.br/wp-content/uploads/2024/09/012-021_capa-jogos_344.pdf) - Acesso em 25 de Fevereiro de 2025
