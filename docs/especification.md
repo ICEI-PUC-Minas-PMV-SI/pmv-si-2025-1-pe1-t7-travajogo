@@ -108,3 +108,20 @@ Enumere as restrições à sua solução. Lembre-se de que as restrições geral
 > **Links Úteis**:
 > - [O que são Requisitos Funcionais e Requisitos Não Funcionais?](https://codificar.com.br/requisitos-funcionais-nao-funcionais/)
 > - [O que são requisitos funcionais e requisitos não funcionais?](https://analisederequisitos.com.br/requisitos-funcionais-e-requisitos-nao-funcionais-o-que-sao/)
+
+## Referências 
+
+ATLASSIAN. Histórias de usuários com exemplos e template. 
+> - [Link](https://www.atlassian.com/br/agile/project-management/user-stories) - Acesso em 07 de Março de 2025
+
+CODIFICAR. O que são requisitos funcionais e requisitos não funcionais?
+> - [Link](https://codificar.com.br/requisitos-funcionais-nao-funcionais/) - Acesso em 07 de Março de 2025
+
+FLAMMO. Persona e público-alvo: qual a diferença? 
+> - [Link](https://flammo.com.br/blog/persona-e-publico-alvo-qual-a-diferenca/) - Acesso em 07 de Março de 2025 
+
+LUÍZ TOOLS. User Stories: requisitos que humanos entendem 
+> - [Link](https://www.luiztools.com.br/post/user-stories-descricao-de-requisitos-que-humanos-entendem/.) - Acesso em 07 de Março de 2025
+
+RESULTADOS DIGITAIS. O que é persona?
+> - [Link](https://resultadosdigitais.com.br/blog/persona-o-que-e/) - Acesso em 07 de Março de 2025
