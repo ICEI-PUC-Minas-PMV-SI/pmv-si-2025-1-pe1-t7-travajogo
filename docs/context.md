@@ -8,7 +8,7 @@ As ferramentas pra acompanhar gastos e tempo em apostas são raras ou estão esp
 ## Problema
 
 Como ter uma visão clara dos gastos e do tempo sem apostar num cenário onde isso nem sempre é fácil de acompanhar? Muitas pessoas não conseguem organizar isso sozinhas, e os sites de apostas focam mais em atrair jogadores 
-do que oferecer controle, dificultando decisões conscientes e aumentando os riscos de perca.
+do que oferecer controle, dificultando decisões conscientes e aumentando os riscos de perda.
 
 > **Links Úteis**:
 > -1. **Organização Mundial da Saúde (OMS) - Transtorno Causado por Jogatina**  
