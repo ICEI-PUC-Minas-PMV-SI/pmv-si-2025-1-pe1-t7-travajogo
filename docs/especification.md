@@ -1,8 +1,8 @@
-# ESPECIFICAÇÃO DO PROJETO - PLATAFORMA DE APOIO A PESSOAS COM VÍCIO EM APOSTAS
+# ESPECIFICAÇÃO DO PROJETO - TRAVA JOGO: PLATAFORMA DE CONTROLE DE HÁBITOS EM APOSTAS ONLINE
 
 1. INTRODUÇÃO
 
-O crescimento das plataformas de apostas online tem levado ao aumento de casos de dependência, afetando aspectos financeiros, psicológicos e sociais dos jogadores. Diante desse cenário, este projeto propõe a criação de um site que ofereça suporte para pessoas que desejam controlar ou superar o vício em apostas, bem como para seus familiares e profissionais da saúde.
+Com o aumento do uso de plataformas de apostas online, muitas pessoas enfrentam dificuldades para acompanhar e controlar seus hábitos de jogo, o que pode levar a gastos excessivos e tempo prolongado nessas atividades. O *TravaJogo: Plataforma de Controle de Hábitos em Apostas Online* é uma aplicação web que busca resolver esse problema, oferecendo ferramentas práticas para que usuários, como jovens jogadores, familiares e profissionais da saúde, possam monitorar gastos, limitar o acesso a sites de apostas e acessar recursos externos, promovendo uma gestão mais consciente do tempo e do dinheiro investidos em apostas.
 
 ## Personas
 
@@ -44,8 +44,6 @@ Com base na análise das personas forma identificadas as seguintes histórias de
 |Usuário do sistema  | Registrar minhas tarefas           | Não esquecer de fazê-las               |
 |Administrador       | Alterar permissões                 | Permitir que possam administrar contas |
 
-Apresente aqui as histórias de usuário que são relevantes para o projeto de sua solução. As Histórias de Usuário consistem em uma ferramenta poderosa para a compreensão e elicitação dos requisitos funcionais e não funcionais da sua aplicação. Se possível, agrupe as histórias de usuário por contexto, para facilitar consultas recorrentes à essa parte do documento.
-
 > **Links Úteis**:
 > - [Histórias de usuários com exemplos e template](https://www.atlassian.com/br/agile/project-management/user-stories)
 > - [Como escrever boas histórias de usuário (User Stories)](https://medium.com/vertice/como-escrever-boas-users-stories-hist%C3%B3rias-de-usu%C3%A1rios-b29c75043fac)
@@ -61,47 +59,32 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 
 |ID    | Descrição do Requisito  | Prioridade | 
 |------|-----------------------------------------|----| 
-|RF-001| A aplicação deve permitir que o usuário realize testes de autoavaliação.| ALTA |  
-|RF-002| A aplicação deve disponibilizar história inspiradoras de superação.     | MÉDIA | 
-|RF-003| A aplicação deve fornecer ou sugerir ferramentas ou métodos para bloquear ou restringir sites de apostas.| ALTA |
-|RF-004| A aplicação deve permitir que os familiares encontrem grupos de apoio através de fórum de suporte ou chat.| MÉDIA|
-|RF-005| A aplicação deve disponibilizar materiais educativos para profissionais da saúde, lista de recursos e contatos de apoio.| MÉDIA|
-|RF-006| Cadastro de Login e senha, Usuários poderão criar perfil para salvar progresso em autoavaliações e acompanhar recursos.| ALTA |
-### Requisitos não Funcionais
-
-|ID     | Descrição do Requisito  |Prioridade |
-|-------|-------------------------|----|
-|RNF-001| A aplicação deve ser responsiva | MÉDIA | 
-|RNF-002| A aplicação deve processar requisições do usuário em no máximo 3s |  BAIXA | 
+|RF-001| A aplicação deve permitir que o usuário veja os gastos acumulados e o valor economizado desde a última aposta.| ALTA |  
+|RF-002| A aplicação deve contar o tempo que o usuário está sem apostar, mostrando os dias sem jogar.  | ALTA | 
+|RF-003| A aplicação deve incluir um bloqueador próprio pra impedir o acesso a sites de apostas, com opção de ativar/desativar.| ALTA |
+|RF-004| A aplicação deve disponibilizar links pra sites de apoio externo, como o Jogadores Anônimos, pra quem busca suporte.| MÉDIA|
+|RF-005| A aplicação deve ter um chat simples onde os usuários possam trocar ideias e experiências sobre apostas online.| MÉDIA|
+### Requisitos não Funcionais 
 
 Com base nas Histórias de Usuário, enumere os requisitos da sua solução. Classifique esses requisitos em dois grupos:
 
-- [Requisitos Funcionais
- (RF)](https://pt.wikipedia.org/wiki/Requisito_funcional):
- correspondem a uma funcionalidade que deve estar presente na
-  plataforma (ex: cadastro de usuário).
-- [Requisitos Não Funcionais
-  (RNF)](https://pt.wikipedia.org/wiki/Requisito_n%C3%A3o_funcional):
-  correspondem a uma característica técnica, seja de usabilidade,
-  desempenho, confiabilidade, segurança ou outro (ex: suporte a
-  dispositivos iOS e Android).
-Lembre-se que cada requisito deve corresponder à uma e somente uma
-característica alvo da sua solução. Além disso, certifique-se de que
-todos os aspectos capturados nas Histórias de Usuário foram cobertos.
+| ID      | Descrição do Requisito                                                                 | Prioridade |
+|---------|---------------------------------------------------------------------------------------|------------|
+| RNF-001 | A aplicação deve garantir a segurança dos dados do usuário (ex.: gastos, tempo sem apostar) com uma opção de cadastro usando login e senha, pra evitar acesso não autorizado. | MÉDIA      |
+| RNF-002 | A aplicação deve usar criptografia básica (ex.: HTTPS) pra garantir que os dados inseridos sejam transmitidos com segurança. | ALTA       |
+| RNF-003 | O chat deve ter moderação simples (ex.: filtro de palavras) pra evitar mensagens inadequadas entre os usuários. | MÉDIA      |
 
 ## Restrições
 
 O projeto está restrito pelos itens apresentados na tabela a seguir.
 
-|ID| Restrição                                             |
-|--|-------------------------------------------------------|
-|01| O projeto deverá ser entregue até o final do semestre |
-|02|O desenvolvimento será realizado por uma equipe de 6 alunos.       |
-|03| Apenas ferramentas gratuitas ou de baixo custo serão utilizadas.    |
-|04| Não será desenvolvido um módulo de backend. |
-|05| O projeto se restringe à um auxílio e nada mais que isso. |
-|06| Não poderão ser feitos diagnósticos sobre os usuários |
-|07| Não serão feitas quaisquer afirmações sem respaldo teórico |
+| ID      | Restrição                                                                             |
+|---------|---------------------------------------------------------------------------------------|
+| 01      | O projeto deve ser entregue até o final do semestre letivo.                           |
+| 02      | O projeto deve ser desenvolvido por uma equipe de 6 alunos.                           |
+| 03      | A aplicação deve ser desenvolvida usando apenas ferramentas gratuitas ou de baixo custo (ex.: frameworks open-source). |
+| 04      | A aplicação não deve ter um módulo de backend, funcionando apenas com tecnologias front-end (ex.: JavaScript, HTML, CSS). |
+| 05      | A aplicação deve ser independente, sem depender de suporte externo constante pra funcionar. |
 
 Enumere as restrições à sua solução. Lembre-se de que as restrições geralmente limitam a solução candidata.
 
