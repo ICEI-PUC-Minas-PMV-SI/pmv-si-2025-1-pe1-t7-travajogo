@@ -58,7 +58,7 @@ SAMEER EL KHATIB, A. Diversão ou Armadilha? Um estudo exploratório das Apostas
 > - [Link](https://preprints.scielo.org/index.php/scielo/preprint/view/10133) - Acesso em 24 de Fevereiro de 2025
 
 BITTENCOURT Carla. Apostas on-line atraem crianças e adolescentes, apesar de ilegais. (2024) 
-> [Link](https://lunetas.com.br/apostas-on-line-atraem-criancas-e-adolescentes-apesar-de-ilegais/#:~:text=Portanto%2C%20a%20probabilidade%20do%20desenvolvimento,casos%20de%20depress%C3%A3o%20e%20suic%C3%ADdio) - Acesso em 24 de Fevereiro de 2025 
+> - [Link](https://lunetas.com.br/apostas-on-line-atraem-criancas-e-adolescentes-apesar-de-ilegais/#:~:text=Portanto%2C%20a%20probabilidade%20do%20desenvolvimento,casos%20de%20depress%C3%A3o%20e%20suic%C3%ADdio) - Acesso em 24 de Fevereiro de 2025 
 
 ZORZETTO, R; ORLANDI. A. Os efeitos nocivos dos jogos online. revista fasep. ed. 344. out. 2024. 
-> [Link](https://revistapesquisa.fapesp.br/wp-content/uploads/2024/09/012-021_capa-jogos_344.pdf) - Acesso em 25 de Fevereiro de 2025
+> - [Link](https://revistapesquisa.fapesp.br/wp-content/uploads/2024/09/012-021_capa-jogos_344.pdf) - Acesso em 25 de Fevereiro de 2025
