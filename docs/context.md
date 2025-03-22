@@ -40,9 +40,6 @@ do que oferecer controle, dificultando decisões conscientes e aumentando os ris
 O desenvolvimento desta aplicação web é justificada pela falta de soluções abrangentes e a abordagem do vício como um problema. O mercado de apostas vem sendo regulamentado desde 2018 no Brasil, e apesar de medidas que protegem o usuário, são ações insuficientes para lidar com os transtornos decorrentes da adição.
 O cenário agrava-se pela cultura da normalização do vício e sua expansão descontrolada, em razão principalmente da ampla propaganda de times de futebol, emissoras e influenciadores digitais que, em sua grande maioria, não educam o seu público sobre os riscos e danos da prática. Diante disso, o projeto traz uma abordagem educacional e clara sobre as apostas esportivas, conectando pessoas e direcionando o apoio adequado para elas.
 
-> **Links Úteis**:
-> - [Como montar a justificativa](https://guiadamonografia.com.br/como-montar-justificativa-do-tcc/)
-
 ## Público-Alvo
 
 **Pessoas que apostam online:** Quem usa sites de jogos de azar e quer uma forma prática de acompanhar seus gastos e tempo, pra ter mais controle sobre os hábitos de apostas.
