@@ -48,7 +48,11 @@ O grupo de trabalho pode fazer uso de questionários, entrevistas e dados estat�
 
 ## Público-Alvo
 
-O projeto é voltado a pessoas que se envolvem em apostas online, buscando entretenimento e possíveis ganhos financeiros, e, com essa prática acabam trazendo a si mesmos desafios financeiros e emocionais, afetando negativamente suas vidas pessoais e profissionais. E, com isso, conscientizar esses indivíduos sobre os problemas que as apostas online trazem e podem trazer a eles.
+**Pessoas que apostam online:** Quem usa sites de jogos de azar e quer uma forma prática de acompanhar seus gastos e tempo, pra ter mais controle sobre os hábitos de apostas.
+
+**Familiares de quem aposta:** Pessoas próximas, como irmãos ou pais, que querem ajudar quem aposta a controlar os gastos e entender melhor o impacto financeiro disso.
+
+**Profissionais da saúde:** Psicólogos e terapeutas que trabalham com jovens e podem usar a ferramenta pra orientar sobre os hábitos de apostas de forma mais prática.
 
 ## Referências
 
