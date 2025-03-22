@@ -31,9 +31,6 @@ do que oferecer controle, dificultando decisões conscientes e aumentando os ris
 **Conectar com apoio externo**: Disponibilizar contatos de grupos de apoio e instituições especializadas no tratamento da dependência em jogos de azar. Criar um espaço para facilitar o acesso a esses serviços, incluindo materiais educativos e relatos de pessoas que superaram o vício, promovendo um ambiente de acolhimento e motivação.
 
 **Criar um espaço de troca**: Desenvolver um fórum anônimo onde apostadores possam compartilhar suas experiências, desafios e conquistas no processo de redução ou abandono das apostas. Esse espaço servirá tanto como um meio de desabafo para aqueles que enfrentam dificuldades quanto como uma fonte de conscientização para novos apostadores, proporcionando um olhar realista sobre os impactos do vício em jogos de azar.
- 
-> **Links Úteis**:
-> - [Objetivo geral e objetivo específico: como fazer e quais verbos utilizar](https://blog.mettzer.com/diferenca-entre-objetivo-geral-e-objetivo-especifico/)
 
 ## Justificativa
 
