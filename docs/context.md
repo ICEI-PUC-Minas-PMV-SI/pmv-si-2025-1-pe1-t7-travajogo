@@ -37,11 +37,8 @@ do que oferecer controle, dificultando decisões conscientes e aumentando os ris
 
 ## Justificativa
 
-Descreva a importância ou a motivação para trabalhar com esta aplicação que você escolheu. Indique as razões pelas quais você escolheu seus objetivos específicos ou as razões para aprofundar em certos aspectos do software.
-
-Lembre-se de pesquisar e utilizar números que justifiquem por que é importante que tal problema seja resolvido ou que mostrem o impacto do problema na vida das pessoas.
-
-O grupo de trabalho pode fazer uso de questionários, entrevistas e dados estatísticos, que podem ser apresentados, com o objetivo de esclarecer detalhes do problema que será abordado pelo grupo.
+O desenvolvimento desta aplicação web é justificada pela falta de soluções abrangentes e a abordagem do vício como um problema. O mercado de apostas vem sendo regulamentado desde 2018 no Brasil, e apesar de medidas que protegem o usuário, são ações insuficientes para lidar com os transtornos decorrentes da adição.
+O cenário agrava-se pela cultura da normalização do vício e sua expansão descontrolada, em razão principalmente da ampla propaganda de times de futebol, emissoras e influenciadores digitais que, em sua grande maioria, não educam o seu público sobre os riscos e danos da prática. Diante disso, o projeto traz uma abordagem educacional e clara sobre as apostas esportivas, conectando pessoas e direcionando o apoio adequado para elas.
 
 > **Links Úteis**:
 > - [Como montar a justificativa](https://guiadamonografia.com.br/como-montar-justificativa-do-tcc/)
