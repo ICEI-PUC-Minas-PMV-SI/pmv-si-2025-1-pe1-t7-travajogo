@@ -96,8 +96,12 @@ O projeto está restrito pelos itens apresentados na tabela a seguir.
 |ID| Restrição                                             |
 |--|-------------------------------------------------------|
 |01| O projeto deverá ser entregue até o final do semestre |
-|02| Não pode ser desenvolvido um módulo de backend        |
-
+|02|O desenvolvimento será realizado por uma equipe de 6 alunos.       |
+|03| Apenas ferramentas gratuitas ou de baixo custo serão utilizadas.    |
+|04| Não será desenvolvido um módulo de backend. |
+|05| O projeto se restringe à um auxílio e nada mais que isso. |
+|06| Não poderão ser feitos diagnósticos sobre os usuários |
+|07| Não serão feitas quaisquer afirmações sem respaldo teórico |
 
 Enumere as restrições à sua solução. Lembre-se de que as restrições geralmente limitam a solução candidata.
 
