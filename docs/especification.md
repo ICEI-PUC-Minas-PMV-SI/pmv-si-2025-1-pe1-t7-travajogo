@@ -39,17 +39,15 @@ Mariana Rocha - A Psicóloga Especializada
 
 Com base na análise das personas forma identificadas as seguintes histórias de usuários:
 
-|EU COMO... `PERSONA`| QUERO/PRECISO ... `FUNCIONALIDADE` |PARA ... `MOTIVO/VALOR`                 |
-|--------------------|------------------------------------|----------------------------------------|
-|Usuário do sistema  | Registrar minhas tarefas           | Não esquecer de fazê-las               |
-|Administrador       | Alterar permissões                 | Permitir que possam administrar contas |
-
-> **Links Úteis**:
-> - [Histórias de usuários com exemplos e template](https://www.atlassian.com/br/agile/project-management/user-stories)
-> - [Como escrever boas histórias de usuário (User Stories)](https://medium.com/vertice/como-escrever-boas-users-stories-hist%C3%B3rias-de-usu%C3%A1rios-b29c75043fac)
-> - [User Stories: requisitos que humanos entendem](https://www.luiztools.com.br/post/user-stories-descricao-de-requisitos-que-humanos-entendem/)
-> - [Histórias de Usuários: mais exemplos](https://www.reqview.com/doc/user-stories-example.html)
-> - [9 Common User Story Mistakes](https://airfocus.com/blog/user-story-mistakes/)
+|EU COMO...`PERSONA`            | QUERO/PRECISO ... `FUNCIONALIDADE`                                         |PARA ... `MOTIVO/VALOR`                                                                     |
+|-------------------------------|----------------------------------------------------------------------------|--------------------------------------------------------------------------------------------|
+|Lucas Silva - Jogador          | Ver quanto já gastei e o tempo que tô sem aposta                           | Ter mais controle sobre meus hábitos e não gastar mais do que posso.                       |
+|Lucas Silva - Jogador          |Um chat simples pra trocar ideias com outros jogadores                      | Aprender com as experiências de quem também tá tentando controlar os hábitos de apostas.   |
+|Lucas Silva - Jogador          | Acessar ferramentas que me ajudem a bloquear sites de apostas              | Restringir o acesso às plataformas de apostas.                                             |
+|Carlos Mendes - Familiar       |Encontrar grupos de apoio para saber como ajudar meu filho                  |Aprender estratégias para lidar com a situação.                                             |
+|Carlos Mendes - Familiar       |Ler artigos educativos sobre os impactos das apostas                        |Entender melhor o vício e seus efeitos                                                      |
+|Mariana Rocha - Psicóloga      |Acessar materiais educativos para auxiliar meus pacientes                   |Oferecer suporte mais qualificado aos pacientes.                                            |
+|Mariana Rocha - Psicóloga      |Ter uma lista de contatos de instituições que oferecem suporte gratuito     |Indicar recursos de apoio para meus pacientes.                                              |
 
 ## Requisitos
 
@@ -87,10 +85,6 @@ O projeto está restrito pelos itens apresentados na tabela a seguir.
 | 05      | A aplicação deve ser independente, sem depender de suporte externo constante pra funcionar. |
 
 Enumere as restrições à sua solução. Lembre-se de que as restrições geralmente limitam a solução candidata.
-
-> **Links Úteis**:
-> - [O que são Requisitos Funcionais e Requisitos Não Funcionais?](https://codificar.com.br/requisitos-funcionais-nao-funcionais/)
-> - [O que são requisitos funcionais e requisitos não funcionais?](https://analisederequisitos.com.br/requisitos-funcionais-e-requisitos-nao-funcionais-o-que-sao/)
 
 ## Referências 
 
