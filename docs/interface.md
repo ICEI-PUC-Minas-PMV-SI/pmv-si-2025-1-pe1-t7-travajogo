@@ -1,38 +1,35 @@
+# Projeto de Interface – TravaJogo
 
-# Projeto de Interface
+Este documento apresenta uma visão geral da interação do usuário com a aplicação TravaJogo, por meio de fluxos de navegação e protótipos das principais telas do sistema. O objetivo é demonstrar como a interface foi pensada para atender aos requisitos funcionais, não funcionais e às histórias de usuário descritas na documentação de especificação.
 
-Visão geral da interação do usuário pelas telas do sistema e protótipo interativo das telas com as funcionalidades que fazem parte do sistema (wireframes).
+## Visão Geral
 
- Apresente as principais interfaces da plataforma. Discuta como ela foi elaborada de forma a atender os requisitos funcionais, não funcionais e histórias de usuário abordados nas <a href="2-Especificação do Projeto.md"> Documentação de Especificação</a>.
+TravaJogo é uma aplicação web voltada para o controle de hábitos relacionados a jogos de azar online. A plataforma reúne informações essenciais como tempo sem apostar, gastos acumulados e economia gerada, além de oferecer um bloqueador de acesso a sites de apostas.
+
+A interface foi desenvolvida com foco em:
+
+- **Simplicidade e objetividade:** para que qualquer usuário consiga visualizar seus dados com facilidade.
+- **Funcionalidade e controle:** com recursos que facilitam o acompanhamento e o bloqueio de comportamentos indesejados.
+- **Acessibilidade e responsividade:** garantindo o uso em diferentes dispositivos, especialmente celulares.
 
 ## User Flow
 
-![Exemplo de UserFlow](img/userflow.jpg)
+Abaixo, apresentamos o fluxo de navegação principal do usuário na plataforma:
 
-Fluxo de usuário (User Flow) é uma técnica que permite ao desenvolvedor mapear todo fluxo de telas do site ou app. Essa técnica funciona para alinhar os caminhos e as possíveis ações que o usuário pode fazer junto com os membros de sua equipe.
-
-> **Links Úteis**:
-> - [User Flow: O Quê É e Como Fazer?](https://medium.com/7bits/fluxo-de-usu%C3%A1rio-user-flow-o-que-%C3%A9-como-fazer-79d965872534)
-> - [User Flow vs Site Maps](http://designr.com.br/sitemap-e-user-flow-quais-as-diferencas-e-quando-usar-cada-um/)
-> - [Top 25 User Flow Tools & Templates for Smooth](https://www.mockplus.com/blog/post/user-flow-tools)
-
+![d20b8bc0-1949-4e8c-b961-ab02c2c32e68](https://github.com/user-attachments/assets/9ead25d8-610b-41e6-ab44-b2d805821f28)
 
 ## Wireframes
 
-São protótipos usados em design de interface para sugerir a estrutura de um site web e seu relacionamentos entre suas páginas. Um wireframe web é uma ilustração semelhante do layout de elementos fundamentais na interface e é fundamental sempre relacionar cada wireframe com o(s) requisito(s) que ele atende.
+Os wireframes a seguir representam visualmente as principais funcionalidades do sistema, permitindo uma visão inicial de como será a experiência do usuário:
 
-### Exemplo
+![TravaJogo (1)](https://github.com/user-attachments/assets/3754efc5-6380-4f06-a10b-1383ee6d447a)
 
-A tela inicial apresenta um menu lateral com as principais seções do portal, enquanto a navigation bar, ao topo, apresenta informações de envio de imagens ou navegação pela galeria de fotos. A área central apresenta a galeria de fotos na forma de uma grade. Nesta tela, são apresentados os seguintes requisitos
+## Links Úteis
 
-![Exemplo de Wireframe](img/wireframe-example.png)
-
- 
-> **Links Úteis**:
-> - [Protótipos vs Wireframes](https://www.nngroup.com/videos/prototypes-vs-wireframes-ux-projects/)
-> - [Ferramentas de Wireframes](https://rockcontent.com/blog/wireframes/)
-> - [MarvelApp](https://marvelapp.com/developers/documentation/tutorials/)
-> - [Figma](https://www.figma.com/)
-> - [Adobe XD](https://www.adobe.com/br/products/xd.html#scroll)
-> - [Axure](https://www.axure.com/edu) (Licença Educacional)
-> - [InvisionApp](https://www.invisionapp.com/) (Licença Educacional)
+- [Protótipos vs Wireframes](https://www.nngroup.com/videos/prototypes-vs-wireframes-ux-projects/)
+- [Ferramentas de Wireframes](https://rockcontent.com/blog/wireframes/)
+- [MarvelApp](https://marvelapp.com/developers/documentation/tutorials/)
+- [Figma](https://www.figma.com/)
+- [Adobe XD](https://www.adobe.com/br/products/xd.html#scroll)
+- [Axure (Licença Educacional)](https://www.axure.com/edu)
+- [InvisionApp (Licença Educacional)](https://www.invisionapp.com/)
