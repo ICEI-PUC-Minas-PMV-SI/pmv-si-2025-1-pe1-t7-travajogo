@@ -4,13 +4,15 @@ Este documento apresenta uma visão geral da interação do usuário com a aplic
 
 ## Visão Geral
 
-TravaJogo é uma aplicação web voltada para o controle de hábitos relacionados a jogos de azar online. A plataforma reúne informações essenciais como tempo sem apostar, gastos acumulados e economia gerada, além de oferecer um bloqueador de acesso a sites de apostas.
+O *TravaJogo* é uma aplicação web voltada pro controle de hábitos relacionados a jogos de azar online. A plataforma reúne informações como tempo sem apostar, gastos acumulados e economia gerada (RF-001, RF-002), além de oferecer um bloqueador de sites de apostas (RF-003), links pra sites externos (RF-004) e um chat simples pra trocar ideias (RF-005).
 
 A interface foi desenvolvida com foco em:
 
-- **Simplicidade e objetividade:** para que qualquer usuário consiga visualizar seus dados com facilidade.
-- **Funcionalidade e controle:** com recursos que facilitam o acompanhamento e o bloqueio de comportamentos indesejados.
-- **Acessibilidade e responsividade:** garantindo o uso em diferentes dispositivos, especialmente celulares.
+- **Simplicidade e objetividade**: A home tem um texto claro de boas-vindas e botões diretos, como "Comece a Monitorar", pra que qualquer usuário consiga visualizar seus dados com facilidade (ex.: Lucas consegue ver seus gastos e tempo sem apostar de forma rápida).  
+- **Funcionalidade e controle**: Recursos como o bloqueador de sites (pra Carlos limitar o acesso do irmão) e o chat (pra Lucas trocar ideias) são acessíveis direto na barra de navegação, sem complicação.  
+- **Acessibilidade e responsividade**: O layout foi pensado pra funcionar bem em diferentes dispositivos, como celulares, com seções que se empilham em telas menores e botões grandes pra facilitar o toque.
+
+Os protótipos das principais telas estão no wireframe disponível na documentação, que mostra o layout e a navegação.
 
 ## User Flow
 
