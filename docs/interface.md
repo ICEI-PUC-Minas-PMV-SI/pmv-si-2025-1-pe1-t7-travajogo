@@ -26,6 +26,8 @@ Os wireframes a seguir representam visualmente as principais funcionalidades do 
 
 ![TravaJogo (1)](https://github.com/user-attachments/assets/3754efc5-6380-4f06-a10b-1383ee6d447a)
 
+![travajogo-userflow-com-telas](https://github.com/user-attachments/assets/92f3f3c0-1c22-48e7-8cb1-7c6fb667744c)
+
 ## Links Úteis
 
 - [Protótipos vs Wireframes](https://www.nngroup.com/videos/prototypes-vs-wireframes-ux-projects/)
