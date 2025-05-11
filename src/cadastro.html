@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cadastro - TravaJogo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>TravaJogo</h1>
+    <div class="header-buttons">
+      <button class="btn">Tela Inicial</button>
+      <button class="btn">Login</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <form class="form-box">
+        <h2>Cadastro</h2>
+        <label for="nome">Nome Completo</label>
+        <input type="text" id="nome" placeholder="Pietro Schirano" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="pietro.schirano@gmail.com" required>
+
+        <label for="senha">Senha</label>
+        <input type="password" id="senha" placeholder="*****" required>
+
+        <label for="confirmar">Confirmar senha</label>
+        <input type="password" id="confirmar" placeholder="*****" required>
+      </form>
+
+      <div class="form-box">
+        <h2>Acompanhe seus hábitos</h2>
+
+        <label for="data">
+          Data de início da jornada (opcional):<br>
+          <small>→ “Quando você começou a tentar parar?”<br>
+          → Se preenchido, já começa o contador de dias sem jogar</small>
+        </label>
+        <input type="date" id="data">
+
+        <label for="gasto">
+          "Quanto você costuma gastar por mês com jogos de azar? (estimativa)"
+        </label>
+        <input type="text" id="gasto" value="R$ 1500,00">
+
+        <p class="small-note">
+          → *Essa informação é apenas para você. Ela ajudará a mostrar quanto está economizando ao longo da sua jornada.*
+        </p>
+      </div>
+    </div>
+
+    <div class="checkbox-container">
+      <input type="checkbox" id="contador" checked>
+      <label for="contador">"Desejo começar a contar meus dias longe dos jogos de azar."</label>
+    </div>
+
+    <div class="submit-container">
+      <button class="submit-btn">Criar minha conta</button>
+      <p class="login-link">Já tem uma conta? <a href="#">Faça Login!</a></p>
+    </div>
+  </main>
+
+  <footer>
+    <a href="#">Quem somos</a>
+    <a href="#">Links úteis</a>
+    <a href="#">Privacidade</a>
+    <a href="#">Termos de uso</a>
+    <a href="#">Contatos</a>
+  </footer>
+</body>
+</html>
