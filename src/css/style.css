@@ -1,0 +1,116 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fc;
+  color: #1c1c1c;
+}
+
+header {
+  background-color: #111;
+  color: #fff;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-buttons .btn {
+  margin-left: 10px;
+  background-color: #e1e8f0;
+  border: none;
+  padding: 8px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.container {
+  display: flex;
+  gap: 20px;
+  padding: 40px;
+  justify-content: center;
+}
+
+.form-box {
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.05);
+  width: 400px;
+}
+
+.form-box h2 {
+  margin-bottom: 15px;
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  margin: 10px 0 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
+.small-note {
+  font-size: 0.85em;
+  color: #666;
+  margin-top: 8px;
+}
+
+.checkbox-container {
+  text-align: center; 
+  margin-top: -20px;
+}
+
+.checkbox-container label {
+  margin-left: 6px;
+}
+
+.submit-container {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.submit-btn {
+  background-color: #0e1628;
+  color: #fff;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.login-link {
+  margin-top: 8px;
+  font-size: 0.9em;
+}
+
+.login-link a {
+  color: #000;
+  text-decoration: underline;
+}
+
+footer {
+  background: #fff;
+  border-top: 1px solid #ccc;
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  font-size: 0.9em;
+}
