@@ -4,50 +4,8 @@
 
 O site em HTML/CSS/JS é um projeto estático, logo pode ser utilizado tanto em servidores...
 
-## HTML PÁGINA AJUDA
-
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>TravaJogo</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <header class="topbar">
-    <h1>TravaJogo</h1>
-    <div class="buttons">
-      <button class="btn">Tela Inicial</button>
-      <button class="btn">Logout</button>
-    </div>
-  </header>
-
-  <main class="container">
-    <section class="card">
-      <h2>Procure Ajuda, Você Não Está Sozinho</h2>
-      <p>Se você sente que está perdendo o controle sobre seus hábitos de jogo, saiba que pedir ajuda é um passo de coragem — e não de fraqueza. Existem organizações sérias e dedicadas a apoiar pessoas que enfrentam dificuldades com jogos de aposta.</p>
-      <p>A recuperação começa com um passo. Clique nos links, conheça os recursos e permita-se receber ajuda. Você merece uma vida com mais equilíbrio, propósito e tranquilidade.</p>
-    </section>
-
-    <section class="card">
-      <h2>Links úteis</h2>
-      <p>🌐 <a href="#">Jogadores Anônimos - Brasil</a><br>
-      Uma comunidade de apoio com encontros presenciais e online em todo o Brasil. Aqui você encontrará pessoas que compreendem o que você está passando e podem te oferecer escuta e orientação.</p>
-
-      <p>🌐 <a href="#">Gamblers Anonymous - Internacional</a><br>
-      Um dos grupos de ajuda mais reconhecidos no mundo. Disponível em vários idiomas, oferece literatura de apoio, reuniões e recursos úteis para quem quer parar de apostar.</p>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <h2>Você não está sozinho!</h2>
-  </footer>
-</body>
-</html>
-
 ## Histórico de versões
 
-### [0.1.0] - 11/05/2025
+### [0.1.0] - DD/MM/AAAA
 #### Adicionado
 - Adicionado ...
