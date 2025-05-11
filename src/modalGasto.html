@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modal de Cadastro de Gasto</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=calendar_month">
+    <link rel="stylesheet" href="css/modalGastoStyle.css">
+</head>
+<body>
+    <div class="modal">
+        <h2 class="modal-title">Cadastro de Gasto</h2>
+        
+        <form>
+            <div class="form-group">
+                <label for="value">Valor</label>
+                <div class="input-with-prefix">
+                    <span class="input-prefix">R$</span>
+                    <input type="text" id="value" class="form-control form-control-prefixed" placeholder="0,00">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="date">Data</label>
+                <div class="date-input-container">
+                    <input type="text" id="date" class="form-control" placeholder="dd/mm/aaaa">
+                    <span class="material-symbols-outlined calendar-icon" id="calendar-toggle">calendar_month</span>
+                    
+                    <div class="calendar-dropdown" id="calendar">
+                        <div class="calendar-header">
+                            <div class="calendar-nav prev-month" id="prev-month">&lt;</div>
+                            <div class="month-year" id="month-year">Carregando...</div>
+                            <div class="calendar-nav next-month" id="next-month">&gt;</div>
+                        </div>
+                        
+                        <div class="weekdays">
+                            <div>Dom</div>
+                            <div>Seg</div>
+                            <div>Ter</div>
+                            <div>Qua</div>
+                            <div>Qui</div>
+                            <div>Sex</div>
+                            <div>Sáb</div>
+                        </div>
+                        
+                        <div class="days" id="calendar-days">
+                            </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="button-group">
+                <button type="button" class="btn btn-cancel">Cancelar</button>
+                <button type="button" class="btn btn-add">Adicionar</button>
+            </div>
+        </form>
+    </div>
+    <script src="js/modalGastoScript.js"></script>
+</body>
+</html>
