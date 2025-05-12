@@ -1,0 +1,48 @@
+:root {
+  --x-0f-17-2a: rgba(15, 23, 42, 1);
+  --slate-900: rgba(15, 23, 42, 1);
+  --body-medium-font-family: "Inter", Helvetica;
+  --body-medium-font-weight: 500;
+  --body-medium-font-size: 14px;
+  --body-medium-letter-spacing: 0px;
+  --body-medium-line-height: 24px;
+  --body-medium-font-style: normal;
+  --body-small-font-family: "Inter", Helvetica;
+  --body-small-font-weight: 400;
+  --body-small-font-size: 14px;
+  --body-small-letter-spacing: 0px;
+  --body-small-line-height: 139.9999976158142%;
+  --body-small-font-style: normal;
+  --h-4-font-family: "Inter", Helvetica;
+  --h-4-font-weight: 600;
+  --h-4-font-size: 20px;
+  --h-4-letter-spacing: -0.1px;
+  --h-4-line-height: 28px;
+  --h-4-font-style: normal;
+  --m3-body-large-font-family: "Roboto", Helvetica;
+  --m3-body-large-font-weight: 400;
+  --m3-body-large-font-size: 16px;
+  --m3-body-large-letter-spacing: 0.5px;
+  --m3-body-large-line-height: 24px;
+  --m3-body-large-font-style: normal;
+  --color-text-default-secondary: var(--color-primitives-gray-500);
+  --color-background-default-secondary: var(--color-primitives-gray-100);
+  --size-icon-large: 40px;
+  --size-radius-full: 9999px;
+  --size-radius-200: 8px;
+  --size-space-100: 4px;
+  --color-primitives-gray-500: rgba(117, 117, 117, 1);
+  --color-primitives-white-500: rgba(255, 255, 255, 0.7);
+  --color-primitives-gray-100: rgba(245, 245, 245, 1);
+  --color-primitives-gray-800: rgba(44, 44, 44, 1);
+}
+
+[data-color-mode="SDS-light"] {
+  --color-text-default-secondary: var(--color-primitives-gray-500);
+  --color-background-default-secondary: var(--color-primitives-gray-100);
+}
+
+[data-color-mode="SDS-dark"] {
+  --color-text-default-secondary: var(--color-primitives-white-500);
+  --color-background-default-secondary: var(--color-primitives-gray-800);
+}
