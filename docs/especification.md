@@ -53,16 +53,16 @@ Com base na análise das personas forma identificadas as seguintes histórias de
 
 As tabelas que se seguem apresentam os requisitos funcionais e não funcionais que detalham o escopo do projeto.
 
-### Requisitos Funcionais
+### Requisitos Funcionais (Atualizado)
 
-|ID    | Descrição do Requisito  | Prioridade | 
-|------|-----------------------------------------|----| 
-|RF-001| A aplicação deve permitir que o usuário veja os gastos acumulados e o valor economizado desde a última aposta.| ALTA |  
-|RF-002| A aplicação deve contar o tempo que o usuário está sem apostar, mostrando os dias sem jogar.  | ALTA | 
-|RF-003| A aplicação deve incluir um bloqueador próprio pra impedir o acesso a sites de apostas, com opção de ativar/desativar.| ALTA |
-|RF-004| A aplicação deve disponibilizar links pra sites de apoio externo, como o Jogadores Anônimos, pra quem busca suporte.| MÉDIA|
-|RF-005| A aplicação deve ter um chat simples onde os usuários possam trocar ideias e experiências sobre apostas online.| MÉDIA|
-### Requisitos não Funcionais 
+| ID      | Descrição do Requisito                                                                 | Prioridade |
+|---------|-----------------------------------------------------------------------------------------|------------|
+| RF-001  | A aplicação deve permitir que o usuário veja os gastos acumulados e o valor economizado desde a última aposta. | ALTA       |
+| RF-002  | A aplicação deve contar o tempo que o usuário está sem apostar, mostrando os dias sem jogar. | ALTA       |
+| RF-003  | A aplicação deve incluir um bloqueador próprio pra impedir o acesso a sites de apostas, com opção de ativar/desativar. | ALTA       |
+| RF-004  | A aplicação deve disponibilizar links pra sites de apoio externo, como o Jogadores Anônimos, pra quem busca suporte. | MÉDIA      |
+| RF-005  | A aplicação deve ter um chat simples onde os usuários possam trocar ideias e experiências sobre apostas online. | MÉDIA      |
+| RF-006  | A aplicação deve oferecer uma interface gráfica responsiva para as telas de usuário logado e deslogado, incluindo cabeçalho, seções principais e rodapé com botões de navegação e links úteis. | ALTA       |
 
 Com base nas Histórias de Usuário, enumere os requisitos da sua solução. Classifique esses requisitos em dois grupos:
 
