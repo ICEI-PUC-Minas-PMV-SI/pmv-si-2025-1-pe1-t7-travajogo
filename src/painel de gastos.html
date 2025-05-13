@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel de Gastos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+  <div class="bg-white p-8 rounded-md shadow-md w-full max-w-4xl">
+    <div class="flex justify-between items-center mb-6">
+      <div>
+        <h1 class="text-2xl font-bold text-gray-900">Painel de controle de gastos</h1>
+        <p class="text-gray-600">Acompanhe o quanto você já gastou até o momento.</p>
+      </div>
+      <div class="flex gap-4 items-center">
+
+        <button class="flex items-center gap-2 bg-gray-900 text-white px-4 py-2 rounded-md hover:bg-gray-800">
+          Home
+          <span>&#10140;</span>
+        </button>
+
+
+        <button class="flex items-center text-gray-700 hover:text-black text-xl font-bold group">
+          <div class="w-[6px] h-[30px] rounded-l-full bg-gray-700 group-hover:bg-black"></div>
+          <span class="ml-1">&#10140;</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="bg-gray-50 p-6 rounded-lg shadow-sm w-full max-w-md mx-auto">
+      <h2 class="text-gray-800 font-semibold mb-4">Calculadora de gastos</h2>
+      <ul class="space-y-2 text-gray-700">
+        <li class="flex justify-between">Saldo total: <span>R$ -2000,00</span></li>
+        <div class="border-t border-gray-200 my-2"></div>
+        <li class="flex justify-between">Gasto semanal: <span>R$ 300,00</span></li>
+        <li class="flex justify-between">Ganho bruto: <span>R$ 12,50</span></li>
+        <li class="flex justify-between">Receita semanal: <span>R$ -287,50</span></li>
+        <div class="border-t border-gray-200 my-2"></div>
+        <li class="flex justify-between">Gastos diários: <span>R$ 100,00</span></li>
+        <li class="flex justify-between">Ganho bruto diário: <span>R$ 2,50</span></li>
+        <li class="flex justify-between">Saldo diário: <span>R$ -97,50</span></li>
+      </ul>
+      <div class="mt-4 space-y-2">
+        <button class="flex items-center text-blue-600 hover:underline">
+          + Adicionar gasto
+        </button>
+        <button class="flex items-center text-blue-600 hover:underline">
+          + Adicionar ganho
+        </button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
