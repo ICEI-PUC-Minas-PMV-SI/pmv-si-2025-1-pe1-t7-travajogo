@@ -63,7 +63,7 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 | RF-004  | A aplicação deve disponibilizar links pra sites de apoio externo, como o Jogadores Anônimos, pra quem busca suporte. | MÉDIA      |
 | RF-005  | A aplicação deve ter um chat simples onde os usuários possam trocar ideias e experiências sobre apostas online. | MÉDIA      |
 | RF-006  | A aplicação deve oferecer uma interface gráfica responsiva para as telas de usuário logado e deslogado, incluindo cabeçalho, seções principais e rodapé com botões de navegação e links úteis. | ALTA       |
-| RF-007  | A aplicação deve permitir que o usuário cadastre gastos por meio de um modal no painel de gastos | ALTA       |
+| RF-007  | A aplicação deve permitir que o usuário cadastre gastos por meio de um modal no painel de gastos. | ALTA       |
 
 Com base nas Histórias de Usuário, enumere os requisitos da sua solução. Classifique esses requisitos em dois grupos:
 
