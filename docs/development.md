@@ -29,7 +29,7 @@ As tabelas que se seguem apresentam os requisitos funcionais e não-funcionais q
 |------|------------------------|------------|-----------------|
 |RF-001| A aplicação deve permitir que o usuário gerencie suas tarefas | João | index.html |
 |RF-002| A aplicação deve permitir a emissão de um relatório de tarefas realizadas no mês | Ana Paula | cadastro-noticia.html |
-|RF-005|A aplicação deve disponibilizar links para sites de apoio externo, como o Jogadores Anônimos, para quem busca suporte. | Wander Carolino | linksuteis.html |
+|RF-004|A aplicação deve disponibilizar links para sites de apoio externo, como o Jogadores Anônimos, para quem busca suporte. | Wander Carolino | linksuteis.html |
 |RF-006| A aplicação deve oferecer uma interface gráfica responsiva para as telas de usuário logado e deslogado, incluindo cabeçalho, seções principais e rodapé com botões de navegação e links úteis. | Fernando Jorge | login.html |
 | RF-007  | A aplicação deve permitir que o usuário cadastre gastos por meio de um modal no painel de gastos. | Vítor Moura | [cadastroGasto-modal.html](../src/cadastroGasto-modal.html) [cadastroGasto-modal.css](../src/css/cadastroGasto-modal.css) [painel-de-gastos.js](../src/js/painel-de-gastos.js) |
 
