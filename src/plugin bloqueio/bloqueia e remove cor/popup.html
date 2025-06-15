@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Apostas</title>
+    <style>
+        body { font-family: Arial, sans-serif; width: 300px; }
+        ul { list-style: none; padding: 0; max-height: 200px; overflow-y: auto; }
+        li { display: flex; align-items: center; justify-content: space-between; padding: 5px; border-bottom: 1px solid #ccc; }
+        button { margin-left: 5px; }
+        #siteForm { display: none; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h3>Gerenciar Sites</h3>
+    <button id="addSiteButton">Adicionar Site à Lista</button>
+    
+    <div id="siteForm">
+        <input type="text" id="siteUrl" placeholder="URL do site" readonly>
+        <select id="siteAction">
+            <option value="block">Bloquear</option>
+            <option value="grayscale">Remover Cores</option>
+        </select>
+        <button id="saveSite">Salvar</button>
+    </div>
+
+    <ul id="siteList"></ul>
+
+    <script src="popup.js"></script>
+</body>
+</html>
