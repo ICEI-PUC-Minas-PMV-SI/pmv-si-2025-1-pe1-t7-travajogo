@@ -1,61 +1,204 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modal de Cadastro de Gasto</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=calendar_month">
-    <link rel="stylesheet" href="css/cadastroGasto-modal.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel de Gastos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/cadastroGasto-modal.css">
+  <link rel="stylesheet" href="css/painel-gastos.css">
 </head>
-<body>
-    <div class="modal">
-        <h2 class="modal-title">Cadastro de Gasto</h2>
-        
-        <form>
-            <div class="form-group">
-                <label for="value">Valor</label>
-                <div class="input-with-prefix">
-                    <span class="input-prefix">R$</span>
-                    <input type="text" id="value" class="form-control form-control-prefixed" placeholder="0,00">
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <label for="date">Data</label>
-                <div class="date-input-container">
-                    <input type="text" id="date" class="form-control" placeholder="dd/mm/aaaa">
-                    <span class="material-symbols-outlined calendar-icon" id="calendar-toggle">calendar_month</span>
-                    
-                    <div class="calendar-dropdown" id="calendar">
-                        <div class="calendar-header">
-                            <div class="calendar-nav prev-month" id="prev-month">&lt;</div>
-                            <div class="month-year" id="month-year">Carregando...</div>
-                            <div class="calendar-nav next-month" id="next-month">&gt;</div>
-                        </div>
-                        
-                        <div class="weekdays">
-                            <div>Dom</div>
-                            <div>Seg</div>
-                            <div>Ter</div>
-                            <div>Qua</div>
-                            <div>Qui</div>
-                            <div>Sex</div>
-                            <div>Sáb</div>
-                        </div>
-                        
-                        <div class="days" id="calendar-days">
-                            </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="button-group">
-                <button type="button" class="btn btn-cancel">Cancelar</button>
-                <button type="button" class="btn btn-add">Adicionar</button>
-            </div>
-        </form>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+  <div class="header-frame bg-white shadow-sm p-4 flex justify-between items-center">
+    <div class="w-1/3"></div>
+    <div class="w-1/3 flex justify-center">
+      <h1 class="text-xl font-semibold text-gray-900">TravaJogo</h1>
     </div>
-    <script src="js/painel-de-gastos.js"></script>
+    <div class="w-1/3 flex justify-end gap-4">
+      <button style="background-color: #0f172a;" class="text-white px-4 py-2 rounded-md">
+        <a href="logged.html" class="link">Tela Inicial</a>
+      </button>
+      <button style="background-color: #0f172a;" class="text-white px-4 py-2 rounded-md">
+        <a href="index.html" class="link">Logout</a>
+      </button>
+    </div>
+  </div>
+
+  <div class="sobriety-tracker">
+    <div class="sobriety-content">
+      <div class="sobriety-header">
+        <h2>Seu Progresso Sem Apostas</h2>
+        <p>Continue firme na sua jornada!</p>
+      </div>
+      
+      <div class="timer-container">
+        <div class="timer-display">
+          <div class="time-unit">
+            <span class="time-value" id="days">00</span>
+            <span class="time-label">Dias</span>
+          </div>
+          <div class="time-divider">:</div>
+          <div class="time-unit">
+            <span class="time-value" id="hours">00</span>
+            <span class="time-label">Horas</span>
+          </div>
+          <div class="time-divider">:</div>
+          <div class="time-unit">
+            <span class="time-value" id="minutes">00</span>
+            <span class="time-label">Minutos</span>
+          </div>
+          <div class="time-divider">:</div>
+          <div class="time-unit">
+            <span class="time-value" id="seconds">00</span>
+            <span class="time-label">Segundos</span>
+          </div>
+        </div>
+        <div class="sobriety-date" id="sobriety-date">Carregando...</div>
+      </div>
+      
+      <div class="savings-container">
+        <div class="savings-box">
+          <h3>Economia Total</h3>
+          <div class="savings-amount">R$ 0,00</div>
+          <div class="savings-details">Você gastava em média R$ 50,00 por dia em apostas</div>
+        </div>
+        
+        <div class="savings-box">
+          <h3>Parabéns</h3>
+          <div class="trophy">🏆</div>
+          <div class="achievement">Carregando conquista...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex-1 flex items-center justify-center" style="padding-bottom: 30px;">
+    <div class="bg-white p-8 rounded-lg shadow-sm w-full max-w-4xl mx-auto ">
+      <div class="mb-6">
+        <h1 class="text-2xl font-bold text-gray-900">Painel de controle de gastos</h1>
+        <p class="text-gray-600">Acompanhe o quanto você já gastou até o momento.</p>
+      </div>
+
+      <div class="bg-gray-100 p-6 rounded-lg border-t">
+        <h2 class="text-gray-800 font-semibold mb-4">Calculadora de gastos</h2>
+        <ul class="space-y-2 text-gray-700">
+          <li class="flex justify-between">Saldo total: <span>R$ -2000,00</span></li>
+          <div class="border-t border-gray-400 my-2"></div>
+          
+          <li class="flex justify-between">
+            <div>Gasto semanal:</div>
+            <div class="text-right">
+              <div>R$ 300,00</div>
+              <div class="text-sm text-gray-500">08/05/2025 - 14/05/2025</div>
+            </div>
+          </li>
+          
+          <li class="flex justify-between">
+            <div>Ganho bruto:</div>
+            <div class="text-right">
+              <div>R$ 12,50</div>
+              <div class="text-sm text-gray-500">08/05/2025 - 14/05/2025</div>
+            </div>
+          </li>
+          
+          <li class="flex justify-between">
+            <div>Receita semanal:</div>
+            <div class="text-right">
+              <div>R$ -287,50</div>
+              <div class="text-sm text-gray-500">08/05/2025 - 14/05/2025</div>
+            </div>
+          </li>
+          
+          <div class="border-t border-gray-400 my-2"></div>
+          
+          <li class="flex justify-between">
+            <div>Gastos diários:</div>
+            <div class="text-right">
+              <div>R$ 100,00</div>
+              <div class="text-sm text-gray-500">13/05/2025</div>
+            </div>
+          </li>
+          
+          <li class="flex justify-between">
+            <div>Ganho bruto diário:</div>
+            <div class="text-right">
+              <div>R$ 2,50</div>
+              <div class="text-sm text-gray-500">13/05/2025</div>
+            </div>
+          </li>
+          
+          <li class="flex justify-between">
+            <div>Saldo diário:</div>
+            <div class="text-right">
+              <div>R$ -97,50</div>
+              <div class="text-sm text-gray-500">13/05/2025</div>
+            </div>
+          </li>
+        </ul>
+        <div class="mt-4 space-y-2">
+          <button id="btnAdicionarGasto" class="flex items-center text-blue-600 hover:underline">
+            + Adicionar gasto
+          </button>
+          <button id="btnAdicionarGanho" class="flex items-center text-blue-600 hover:underline">
+            + Adicionar ganho
+          </button>
+        </div>
+        <div class="mt-6 border-t border-gray-400 pt-4">
+          <h3 class="text-gray-800 font-semibold mb-3">Histórico</h3>
+          <ul class="space-y-3">
+            <li class="flex justify-between items-center bg-white p-3 rounded-md shadow-sm">
+              <div class="flex items-center">
+                <div class="bg-red-100 p-2 rounded-full mr-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-600" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+                <div>
+                  <div class="font-medium">Perda</div>
+                  <div class="text-sm text-gray-500">13/05/2025</div>
+                </div>
+              </div>
+              <span class="text-red-600 font-medium">- R$ 50,00</span>
+            </li>
+            
+            <li class="flex justify-between items-center bg-white p-3 rounded-md shadow-sm">
+              <div class="flex items-center">
+                <div class="bg-green-100 p-2 rounded-full mr-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-600" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+                <div>
+                  <div class="font-medium">Ganho</div>
+                  <div class="text-sm text-gray-500">12/05/2025</div>
+                </div>
+              </div>
+              <span class="text-green-600 font-medium">+ R$ 12,50</span>
+            </li>
+            
+            <li class="flex justify-between items-center bg-white p-3 rounded-md shadow-sm">
+              <div class="flex items-center">
+                <div class="bg-red-100 p-2 rounded-full mr-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-600" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+                <div>
+                  <div class="font-medium">Perda</div>
+                  <div class="text-sm text-gray-500">11/05/2025</div>
+                </div>
+              </div>
+              <span class="text-red-600 font-medium">- R$ 100,00</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Incluindo os scripts necessários -->
+  <script src="js/gastos-timer.js"></script>
+  <script src="js/painel-de-gastos.js"></script>
 </body>
 </html>
