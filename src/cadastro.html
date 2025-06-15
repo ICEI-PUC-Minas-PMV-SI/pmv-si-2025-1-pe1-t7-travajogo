@@ -10,8 +10,8 @@
   <header>
     <h1>TravaJogo</h1>
     <div class="header-buttons">
-      <button class="btn">Tela Inicial</button>
-      <button class="btn">Login</button>
+      <button class="btn" id="tela-inicial">Tela Inicial</button> <!-- Adicionado id -->
+      <button class="btn" id="login-btn">Login</button> <!-- Adicionado id -->
     </div>
   </header>
 
@@ -58,8 +58,9 @@
       <label for="contador">"Desejo começar a contar meus dias longe dos jogos de azar."</label>
     </div>
 
-    <div class="submit-container">
-      <button class="submit-btn">Criar minha conta</button>
+   <div class="submit-container">
+      <!-- Alterado para type="button" para evitar envio do formulário -->
+      <button type="button" class="submit-btn">Criar minha conta</button> 
       <p class="login-link">Já tem uma conta? <a href="#">Faça Login!</a></p>
     </div>
   </main>
@@ -71,5 +72,7 @@
     <a href="#">Termos de uso</a>
     <a href="#">Contatos</a>
   </footer>
+   <!-- Adicionando o link para o arquivo JS -->
+  <script src="js/cadastro.js"></script>
 </body>
 </html>

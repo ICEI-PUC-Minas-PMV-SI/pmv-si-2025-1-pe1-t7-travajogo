@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel de Gastos - TravaJogo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+  <div class="header-frame bg-white shadow-sm p-4 flex justify-between items-center">
+    <div class="w-1/3"></div>
+    <div class="w-1/3 flex justify-center">
+      <h1 class="text-xl font-semibold text-gray-900">TravaJogo</h1>
+    </div>
+    <div class="w-1/3 flex justify-end gap-4">
+      <button style="background-color: #0f172a;" class="text-white px-4 py-2 rounded-md hover:bg-gray-800 transition-colors">
+        Tela Inicial
+      </button>
+      <button style="background-color: #0f172a;" class="text-white px-4 py-2 rounded-md hover:bg-gray-800 transition-colors">
+        Logout
+      </button>
+    </div>
+  </div>
+
+  <div class="sobriety-tracker">
+    <div class="sobriety-content">
+      <div class="sobriety-header">
+        <h2>Seu Progresso Sem Apostas</h2>
+        <p>Continue firme na sua jornada!</p>
+      </div>
+      
+      <div class="timer-container">
+        <div class="timer-display">
+          <div class="time-unit">
+            <span class="time-value" id="days">0</span>
+            <span class="time-label">Dias</span>
+          </div>
+          <div class="time-divider">:</div>
+          <div class="time-unit">
+            <span class="time-value" id="hours">0</span>
+            <span class="time-label">Horas</span>
+          </div>
+          <div class="time-divider">:</div>
+          <div class="time-unit">
+            <span class="time-value" id="minutes">0</span>
+            <span class="time-label">Minutos</span>
+          </div>
+          <div class="time-divider">:</div>
+          <div class="time-unit">
+            <span class="time-value" id="seconds">0</span>
+            <span class="time-label">Segundos</span>
+          </div>
+        </div>
+        <div class="sobriety-date" id="sobrietyDate">Desde: <span id="startDate"></span></div>
+      </div>
+      
+      <div class="savings-container">
+        <div class="savings-box">
+          <h3>Economia Total</h3>
+          <div class="savings-amount" id="totalSavings">R$ 0,00</div>
+          <div class="savings-details">Você gastava em média R$ <span id="dailyAverage">50,00</span> por dia em apostas</div>
+        </div>
+        
+        <div class="savings-box">
+          <h3>Parabéns</h3>
+          <div class="trophy">🏆</div>
+          <div class="achievement" id="achievementText">Início da sua jornada!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex-1 flex items-center justify-center" style="padding-bottom: 30px;">
+    <div class="bg-white p-8 rounded-lg shadow-sm w-full max-w-4xl mx-auto fade-in">
+      <div class="mb-6">
+        <h1 class="text-2xl font-bold text-gray-900">Painel de controle de gastos</h1>
+        <p class="text-gray-600">Acompanhe o quanto você já gastou até o momento.</p>
+      </div>
+
+      <div class="bg-gray-100 p-6 rounded-lg border-t">
+        <h2 class="text-gray-800 font-semibold mb-4">Calculadora de gastos</h2>
+        <ul class="space-y-2 text-gray-700">
+          <li class="flex justify-between">
+            Saldo total: 
+            <span id="totalBalance" class="font-bold">R$ 0,00</span>
+          </li>
+          <div class="border-t border-gray-400 my-2"></div>
+          
+          <li class="flex justify-between">
+            <div>Gasto semanal:</div>
+            <div class="text-right">
+              <div id="weeklyExpense">R$ 0,00</div>
+              <div class="text-sm text-gray-500" id="weeklyPeriod"></div>
+            </div>
+          </li>
+          
+          <li class="flex justify-between">
+            <div>Ganho bruto:</div>
+            <div class="text-right">
+              <div id="weeklyGain">R$ 0,00</div>
+              <div class="text-sm text-gray-500" id="weeklyPeriodGain"></div>
+            </div>
+          </li>
+          
+          <li class="flex justify-between">
+            <div>Receita semanal:</div>
+            <div class="text-right">
+              <div id="weeklyRevenue">R$ 0,00</div>
+              <div class="text-sm text-gray-500" id="weeklyPeriodRevenue"></div>
+            </div>
+          </li>
+          
+          <div class="border-t border-gray-400 my-2"></div>
+          
+          <li class="flex justify-between">
+            <div>Gastos diários:</div>
+            <div class="text-right">
+              <div id="dailyExpense">R$ 0,00</div>
+              <div class="text-sm text-gray-500" id="dailyExpenseDate"></div>
+            </div>
+          </li>
+          
+          <li class="flex justify-between">
+            <div>Ganho bruto diário:</div>
+            <div class="text-right">
+              <div id="dailyGain">R$ 0,00</div>
+              <div class="text-sm text-gray-500" id="dailyGainDate"></div>
+            </div>
+          </li>
+          
+          <li class="flex justify-between">
+            <div>Saldo diário:</div>
+            <div class="text-right">
+              <div id="dailyBalance">R$ 0,00</div>
+              <div class="text-sm text-gray-500" id="dailyBalanceDate"></div>
+            </div>
+          </li>
+        </ul>
+        
+        <div class="mt-4 space-y-2">
+          <button id="btnAdicionarGasto" class="flex items-center text-blue-600 hover:underline transition-colors">
+            + Adicionar gasto
+          </button>
+          <button id="btnAdicionarGanho" class="flex items-center text-blue-600 hover:underline transition-colors">
+            + Adicionar ganho
+          </button>
+          <button id="btnDefinirDataInicio" class="flex items-center text-green-600 hover:underline transition-colors">
+            ⚙️ Definir data de início da sobriedade
+          </button>
+        </div>
+        
+        <div class="mt-6 border-t border-gray-400 pt-4">
+          <h3 class="text-gray-800 font-semibold mb-3">Histórico</h3>
+          <div id="historyContainer" class="space-y-3">
+            <div class="text-gray-500 text-center py-4">Nenhum registro encontrado</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal para adicionar gasto -->
+  <div id="modalGasto" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeGasto">&times;</span>
+      <h2 class="text-xl font-bold mb-4">Adicionar Gasto</h2>
+      <form id="formGasto">
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2">Valor:</label>
+          <input type="number" id="valorGasto" step="0.01" class="w-full px-3 py-2 border rounded-lg" required>
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2">Data:</label>
+          <input type="date" id="dataGasto" class="w-full px-3 py-2 border rounded-lg" required>
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2">Descrição:</label>
+          <input type="text" id="descricaoGasto" class="w-full px-3 py-2 border rounded-lg" placeholder="Ex: Aposta no jogo">
+        </div>
+        <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">
+          Adicionar Gasto
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal para adicionar ganho -->
+  <div id="modalGanho" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeGanho">&times;</span>
+      <h2 class="text-xl font-bold mb-4">Adicionar Ganho</h2>
+      <form id="formGanho">
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2">Valor:</label>
+          <input type="number" id="valorGanho" step="0.01" class="w-full px-3 py-2 border rounded-lg" required>
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2">Data:</label>
+          <input type="date" id="dataGanho" class="w-full px-3 py-2 border rounded-lg" required>
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2">Descrição:</label>
+          <input type="text" id="descricaoGanho" class="w-full px-3 py-2 border rounded-lg" placeholder="Ex: Ganho na aposta">
+        </div>
+        <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">
+          Adicionar Ganho
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal para definir data de início -->
+  <div id="modalDataInicio" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeDataInicio">&times;</span>
+      <h2 class="text-xl font-bold mb-4">Definir Data de Início da Sobriedade</h2>
+      <form id="formDataInicio">
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2">Data de início:</label>
+          <input type="date" id="dataInicioSobriedade" class="w-full px-3 py-2 border rounded-lg" required>
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2">Gasto médio diário (R$):</label>
+          <input type="number" id="gastoMedioDiario" step="0.01" class="w-full px-3 py-2 border rounded-lg" value="50.00" required>
+        </div>
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
+          Definir Data
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
