@@ -9,11 +9,11 @@
     <body>
         <header>
             <h1>TravaJogo</h1>
-            <a href="login.html" class="btn-primary">Login</a>
+            <div id="authButton"></div>
         </header>
         <main>
             <div class="section">
-                <h2>Bem-vindo ao TravaJogo!</h2>
+                <h2 id="welcomeMessage">Bem-vindo ao TravaJogo!</h2>
                 <p>
                     Controle seus hábitos de apostas com a nossa ferramenta. Uma
                     forma simples de monitorar gastos e tempo sem jogar.
@@ -26,10 +26,50 @@
                     Veja quanto tempo e dinheiro você economizou desde que
                     começou com a gente.
                 </p>
-                <a href="login.html" class="btn-primary">
+                <a href="login.html" class="btn-primary" id="actionLogin">
                     Cadastre-se ou faça login
+                </a>
+                <a
+                    href="painel de gastos.html"
+                    class="btn-primary"
+                    id="actionProgress"
+                >
+                    Ver meu progresso
                 </a>
             </div>
         </main>
+        <footer id="footer">
+            <h2>Você não está sozinho!</h2>
+            <a href="chat.html" class="btn-primary">Chat</a>
+            <a href="homepageforum.html" class="btn-primary">Fórum</a>
+            <a href="linksuteis.html" class="btn-primary">Links úteis</a>
+        </footer>
+
+        <script src="js/login.js"></script>
+        <script src="js/auth.js"></script>
+        <script>
+            const user = getLoggedInUser();
+            const welcomeMessage = document.getElementById("welcomeMessage");
+            const authButton = document.getElementById("authButton");
+            const actionLogin = document.getElementById("actionLogin");
+            const actionProgress = document.getElementById("actionProgress");
+            const footer = document.getElementById("footer");
+
+            if (user) {
+                welcomeMessage.textContent = `Bem-vindo, ${user.name}!`;
+                authButton.innerHTML =
+                    '<button class="btn-primary" onclick="logout()">Logout</button>';
+                actionLogin.style.display = "none";
+                actionProgress.style.display = "inline-block";
+                footer.style.display = "block";
+            } else {
+                welcomeMessage.textContent = "Bem-vindo ao TravaJogo!";
+                authButton.innerHTML =
+                    '<a class="btn-primary" href="login.html">Entrar</a>';
+                actionLogin.style.display = "inline-block";
+                actionProgress.style.display = "none";
+                footer.style.display = "none";
+            }
+        </script>
     </body>
 </html>
