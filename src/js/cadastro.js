@@ -75,4 +75,15 @@ document.addEventListener("DOMContentLoaded", function() {
   // Carrega os dados armazenados se já houver
   carregarDados();
 
+  // **Parte para navegação (botões "Tela Inicial" e "Login")**
+  // Navegar para a Tela Inicial  
+document.getElementById('tela-inicial').addEventListener('click', function() {
+  window.location.href = '#'; // Redirecionar para a tela inicial ou home
+});
+  
+ // Navegar para a Tela de Login
+document.getElementById('login-btn').addEventListener('click', function() {
+  window.location.href = '#'; // Redirecionar para a tela de login
+});
+
 });
