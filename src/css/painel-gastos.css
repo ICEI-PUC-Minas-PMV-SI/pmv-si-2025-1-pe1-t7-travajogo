@@ -1,10 +1,18 @@
 :root {
   --primary-color: #0f172a;
-  --success-color: #10b981;
-  --accent-color: #3b82f6;
+  --dark-color: #0f172a;
   --white-color: #ffffff;
   --light-gray: #f8f9fa;
   --border-color: #e2e8f0;
+  --success-color: #10b981;
+  --accent-color: #3b82f6;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
 }
 
 .sobriety-tracker {
@@ -162,38 +170,116 @@
   color: #fbbf24;
 }
 
+/* Estilos do Modal Unificado */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
 .modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+    background-color: var(--white-color);
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 500px;
+    padding: 24px;
+    position: relative;
+    z-index: 1001; /* Acima do overlay */
 }
 
-.modal-content {
-  background-color: white;
-  margin: 15% auto;
-  padding: 20px;
-  border-radius: 8px;
-  width: 90%;
-  max-width: 500px;
+.modal-title {
+    font-weight: 600;
+    font-size: 20px;
+    color: var(--dark-color);
+    margin-bottom: 24px;
+    text-align: center;
 }
 
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  cursor: pointer;
+.form-group {
+    margin-bottom: 20px;
 }
 
-.close:hover {
-  color: black;
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--dark-color);
+    font-weight: 500;
 }
 
+.form-control {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.input-with-prefix {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-prefix {
+    position: absolute;
+    left: 16px;
+    font-size: 16px;
+    color: var(--dark-color);
+    pointer-events: none;
+}
+
+.form-control-prefixed {
+    padding-left: 40px;
+}
+
+.form-control:focus {
+    border-color: var(--dark-color);
+}
+
+.button-group {
+    display: flex;
+    gap: 16px;
+    margin-top: 24px;
+}
+
+.btn {
+    flex: 1;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    transition: opacity 0.3s;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+.btn-cancel {
+    background-color: var(--white-color);
+    color: var(--dark-color);
+    border: 1px solid var(--border-color);
+}
+
+.btn-add {
+    background-color: var(--dark-color);
+    color: var(--white-color);
+    border: none;
+}
+
+/* Animações e Classes Utilitárias */
 .fade-in {
   animation: fadeIn 0.5s ease-in;
 }
@@ -214,21 +300,9 @@
 }
 
 @keyframes pulse {
-  0% { 
-    transform: scale(1); 
-  }
-  50% { 
-    transform: scale(1.05); 
-  }
-  100% { 
-    transform: scale(1); 
-  }
-}
-
-.notification {
-  opacity: 0;
-  transform: translateY(-20px);
-  transition: all 0.3s ease;
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
 }
 
 /* Media queries para responsividade */

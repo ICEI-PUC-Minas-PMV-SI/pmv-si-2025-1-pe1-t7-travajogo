@@ -33,7 +33,7 @@ As tabelas que se seguem apresentam os requisitos funcionais e não-funcionais q
 |RF-005|A aplicação deve ter um chat simples onde os usuários possam trocar ideias e experiências sobre apostas online. |Ygor Durães| chat.html |
 |RF-004|A aplicação deve disponibilizar links para sites de apoio externo, como o Jogadores Anônimos, para quem busca suporte. | Wander Carolino | linksuteis.html |
 |RF-006| A aplicação deve oferecer uma interface gráfica responsiva para as telas de usuário logado e deslogado, incluindo cabeçalho, seções principais e rodapé com botões de navegação e links úteis. | Fernando Jorge | login.html |
-| RF-007  | A aplicação deve fornecer um painel de controle de gastos, permitindo que o usuário cadastre sua data de início de sobriedade, podendo acompanhar seu tempo sem apostar e dinheiro já economizado. Também deve permitir o cadastro de gastos e ganhos através de um modal. | Vítor Moura e Igor Tessaro Kava | [cadastroGasto-modal.html](../src/cadastroGasto-modal.html) [cadastroGasto-modal.css](../src/css/cadastroGasto-modal.css) [painel-de-gastos.html](../src/painel-de-gastos.html) [painel-gastos.css](../src/css/painel-gastos.css) [painel-de-gastos.js](../src/js/painel-de-gastos.js) |
+| RF-007  | A aplicação deve fornecer um painel de controle de gastos, permitindo que o usuário cadastre sua data de início de sobriedade, podendo acompanhar seu tempo sem apostar e dinheiro já economizado. Também deve permitir o cadastro de gastos e ganhos através de um modal. | Vítor Moura e Igor Tessaro Kava | [painel-de-gastos.html](../src/painel-de-gastos.html) [painel-gastos.css](../src/css/painel-gastos.css) [painel-de-gastos.js](../src/js/painel-de-gastos.js) |
 
 
 ## Notícia

@@ -2,9 +2,10 @@ class PainelGastos {
   constructor() {
     this.transactions = JSON.parse(localStorage.getItem('transactions')) || [];
     this.sobrietyStartDate = localStorage.getItem('sobrietyStartDate') || null;
-    this.dailyAverageSpending = parseFloat(localStorage.getItem('dailyAverageSpending')) || 50.00;
+    this.dailyAverageSpending = parseFloat(localStorage.getItem('dailyAverageSpending')) || 0.00;
     this.timerInterval = null;
-    
+    this.currentModalMode = null;
+
     this.init();
   }
 
@@ -12,104 +13,122 @@ class PainelGastos {
     this.setupEventListeners();
     this.updateDisplay();
     this.startSobrietyTimer();
-    this.setDefaultDates();
   }
 
   setupEventListeners() {
-    // Botões para abrir modais
-    document.getElementById('btnAdicionarGasto').addEventListener('click', () => {
-      document.getElementById('modalGasto').style.display = 'block';
-    });
+    // Botões para abrir o modal
+    document.getElementById('btnAdicionarGasto').addEventListener('click', () => this.openModal('gasto'));
+    document.getElementById('btnAdicionarGanho').addEventListener('click', () => this.openModal('ganho'));
+    document.getElementById('btnDefinirDataInicio').addEventListener('click', () => this.openModal('dataInicio'));
+    document.getElementById('btnResetarDados').addEventListener('click', () => this.resetAllData());
 
-    document.getElementById('btnAdicionarGanho').addEventListener('click', () => {
-      document.getElementById('modalGanho').style.display = 'block';
-    });
-
-    document.getElementById('btnDefinirDataInicio').addEventListener('click', () => {
-      document.getElementById('modalDataInicio').style.display = 'block';
-      if (this.sobrietyStartDate) {
-        document.getElementById('dataInicioSobriedade').value = this.sobrietyStartDate;
-      }
-      document.getElementById('gastoMedioDiario').value = this.dailyAverageSpending.toFixed(2);
-    });
-
-    // Botões para fechar modais
-    document.getElementById('closeGasto').addEventListener('click', () => {
-      document.getElementById('modalGasto').style.display = 'none';
-    });
-
-    document.getElementById('closeGanho').addEventListener('click', () => {
-      document.getElementById('modalGanho').style.display = 'none';
-    });
-
-    document.getElementById('closeDataInicio').addEventListener('click', () => {
-      document.getElementById('modalDataInicio').style.display = 'none';
-    });
-
-    // Fechar modal clicando fora
-    window.addEventListener('click', (event) => {
-      if (event.target.classList.contains('modal')) {
-        event.target.style.display = 'none';
+    // Eventos do modal
+    document.getElementById('modal-btn-cancel').addEventListener('click', () => this.closeModal());
+    document.getElementById('gasto-modal-overlay').addEventListener('click', (event) => {
+      if (event.target.id === 'gasto-modal-overlay') {
+        this.closeModal();
       }
     });
 
-    // Formulários
-    document.getElementById('formGasto').addEventListener('submit', (e) => {
+    // Formulário e formatação de moeda
+    document.getElementById('modal-form').addEventListener('submit', (e) => {
       e.preventDefault();
-      this.addTransaction('expense');
+      this.handleFormSubmit();
     });
+    document.getElementById('modal-value').addEventListener('input', (e) => this.formatInputAsCurrency(e));
+  }
+  
+  openModal(mode) {
+    this.currentModalMode = mode;
+    const modalOverlay = document.getElementById('gasto-modal-overlay');
+    const modalTitle = document.getElementById('modal-title');
+    const form = document.getElementById('modal-form');
+    
+    const valueGroup = document.getElementById('valor-group');
+    const descriptionGroup = document.getElementById('descricao-group');
+    const dateGroup = document.getElementById('data-group');
+    const submitButton = document.getElementById('modal-btn-add');
 
-    document.getElementById('formGanho').addEventListener('submit', (e) => {
-      e.preventDefault();
-      this.addTransaction('income');
-    });
+    form.reset();
+    
+    // Reseta os labels para o padrão
+    valueGroup.querySelector('label').textContent = 'Valor';
+    dateGroup.querySelector('label').textContent = 'Data';
 
-    document.getElementById('formDataInicio').addEventListener('submit', (e) => {
-      e.preventDefault();
-      this.setSobrietyStartDate();
-    });
+    if (mode === 'gasto' || mode === 'ganho') {
+      modalTitle.textContent = mode === 'gasto' ? 'Cadastro de Gasto' : 'Cadastro de Ganho';
+      valueGroup.style.display = 'block';
+      descriptionGroup.style.display = 'block';
+      dateGroup.style.display = 'block';
+      document.getElementById('modal-value').placeholder = 'R$ 0,00';
+      submitButton.textContent = 'Adicionar';
+      document.getElementById('modal-date').value = new Date().toISOString().split('T')[0];
+
+    } else if (mode === 'dataInicio') {
+      modalTitle.textContent = 'Definir data de início da sobriedade';
+      valueGroup.style.display = 'block'; 
+      descriptionGroup.style.display = 'none';
+      dateGroup.style.display = 'block';
+
+      valueGroup.querySelector('label').textContent = 'Gasto médio diário que você tinha';
+      document.getElementById('modal-value').value = this.formatCurrency(this.dailyAverageSpending).replace('R$', '').trim();
+      
+      dateGroup.querySelector('label').textContent = 'Data de Início';
+      document.getElementById('modal-date').value = this.sobrietyStartDate || new Date().toISOString().split('T')[0];
+      
+      submitButton.textContent = 'Definir';
+    }
+
+    modalOverlay.style.display = 'flex';
   }
 
-  setDefaultDates() {
-    const today = new Date().toISOString().split('T')[0];
-    document.getElementById('dataGasto').value = today;
-    document.getElementById('dataGanho').value = today;
-    
-    if (!this.sobrietyStartDate) {
-      document.getElementById('dataInicioSobriedade').value = today;
+  closeModal() {
+    document.getElementById('gasto-modal-overlay').style.display = 'none';
+  }
+
+  handleFormSubmit() {
+    if (this.currentModalMode === 'gasto' || this.currentModalMode === 'ganho') {
+      this.addTransaction(this.currentModalMode);
+    } else if (this.currentModalMode === 'dataInicio') {
+      this.setSobrietyStartDate();
     }
   }
 
   addTransaction(type) {
-    const valor = parseFloat(document.getElementById(type === 'expense' ? 'valorGasto' : 'valorGanho').value);
-    const data = document.getElementById(type === 'expense' ? 'dataGasto' : 'dataGanho').value;
-    const descricao = document.getElementById(type === 'expense' ? 'descricaoGasto' : 'descricaoGanho').value || (type === 'expense' ? 'Gasto' : 'Ganho');
+    const valueText = document.getElementById('modal-value').value;
+    const value = parseFloat(valueText.replace(/[^\d]/g, '')) / 100;
+    const description = document.getElementById('modal-description').value;
+    const date = document.getElementById('modal-date').value;
+
+    if (isNaN(value) || value <= 0 || !description || !date) {
+      alert('Por favor, preencha todos os campos corretamente.');
+      return;
+    }
 
     const transaction = {
       id: Date.now(),
       type: type,
-      value: valor,
-      date: data,
-      description: descricao,
+      value: value,
+      date: date,
+      description: description,
       timestamp: new Date().toISOString()
     };
 
     this.transactions.push(transaction);
     this.saveData();
     this.updateDisplay();
-    
-    // Fechar modal e limpar formulário
-    document.getElementById(type === 'expense' ? 'modalGasto' : 'modalGanho').style.display = 'none';
-    document.getElementById(type === 'expense' ? 'formGasto' : 'formGanho').reset();
-    this.setDefaultDates();
-
-    // Feedback visual
-    this.showNotification(`${type === 'expense' ? 'Gasto' : 'Ganho'} adicionado com sucesso!`, type === 'expense' ? 'error' : 'success');
+    this.closeModal();
   }
 
   setSobrietyStartDate() {
-    const date = document.getElementById('dataInicioSobriedade').value;
-    const averageSpending = parseFloat(document.getElementById('gastoMedioDiario').value);
+    const date = document.getElementById('modal-date').value;
+    const averageSpendingText = document.getElementById('modal-value').value;
+    const averageSpending = parseFloat(averageSpendingText.replace(/[^\d]/g, '')) / 100;
+
+    if (!date || isNaN(averageSpending) || averageSpending < 0) {
+      alert('Por favor, preencha os campos corretamente.');
+      return;
+    }
     
     this.sobrietyStartDate = date;
     this.dailyAverageSpending = averageSpending;
@@ -117,22 +136,26 @@ class PainelGastos {
     localStorage.setItem('sobrietyStartDate', date);
     localStorage.setItem('dailyAverageSpending', averageSpending.toString());
     
-    document.getElementById('modalDataInicio').style.display = 'none';
     this.updateDisplay();
     this.startSobrietyTimer();
-    
-    this.showNotification('Data de início definida com sucesso!', 'success');
+    this.closeModal();
+  }
+  
+  resetAllData() {
+    const confirmation = confirm('Você tem certeza que deseja resetar todos os dados? Esta ação não pode ser desfeita.');
+    if (confirmation) {
+      localStorage.removeItem('transactions');
+      localStorage.removeItem('sobrietyStartDate');
+      localStorage.removeItem('dailyAverageSpending');
+      
+      location.reload();
+    }
   }
 
   startSobrietyTimer() {
     if (this.timerInterval) {
       clearInterval(this.timerInterval);
     }
-
-    if (!this.sobrietyStartDate) {
-      return;
-    }
-
     this.timerInterval = setInterval(() => {
       this.updateSobrietyTimer();
     }, 1000);
@@ -141,9 +164,31 @@ class PainelGastos {
   }
 
   updateSobrietyTimer() {
+    const trophyContainer = document.getElementById('trophyContainer');
+
+    // Se a data de início não foi definida, exibe o painel no modo de incentivo.
     if (!this.sobrietyStartDate) {
+      document.getElementById('days').textContent = '00';
+      document.getElementById('hours').textContent = '00';
+      document.getElementById('minutes').textContent = '00';
+      document.getElementById('seconds').textContent = '00';
       document.getElementById('startDate').textContent = 'Não definida';
-      return;
+      document.getElementById('totalSavings').textContent = this.formatCurrency(0);
+      document.getElementById('dailyAverage').textContent = this.dailyAverageSpending.toFixed(2).replace('.',',');
+      
+      // Muda para o modo de incentivo
+      document.getElementById('achievementTitle').textContent = 'Comece sua jornada!';
+      trophyContainer.textContent = '🌱';
+      trophyContainer.classList.remove('trophy'); // Remove animação de pulo
+      document.getElementById('achievementText').textContent = 'Defina uma data para começar.';
+      return; 
+    }
+    
+    // Restaura o modo de parabéns se a data estiver definida
+    document.getElementById('achievementTitle').textContent = 'Parabéns';
+    trophyContainer.textContent = '🏆';
+    if (!trophyContainer.classList.contains('trophy')) {
+        trophyContainer.classList.add('trophy');
     }
 
     const startDate = new Date(this.sobrietyStartDate + 'T00:00:00');
@@ -151,10 +196,11 @@ class PainelGastos {
     const diff = now - startDate;
 
     if (diff < 0) {
-      document.getElementById('days').textContent = '0';
-      document.getElementById('hours').textContent = '0';
-      document.getElementById('minutes').textContent = '0';
-      document.getElementById('seconds').textContent = '0';
+      document.getElementById('days').textContent = '00';
+      document.getElementById('hours').textContent = '00';
+      document.getElementById('minutes').textContent = '00';
+      document.getElementById('seconds').textContent = '00';
+      document.getElementById('achievementText').textContent = 'Sua jornada começa em breve!';
       return;
     }
 
@@ -168,35 +214,32 @@ class PainelGastos {
     document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
     document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
 
-    // Update start date display
-    document.getElementById('startDate').textContent = new Date(startDate).toLocaleDateString('pt-BR');
-
-    // Calculate total savings
+    document.getElementById('startDate').textContent = startDate.toLocaleDateString('pt-BR');
+    
     const totalSavings = days * this.dailyAverageSpending;
     document.getElementById('totalSavings').textContent = this.formatCurrency(totalSavings);
-    document.getElementById('dailyAverage').textContent = this.dailyAverageSpending.toFixed(2);
+    document.getElementById('dailyAverage').textContent = this.dailyAverageSpending.toFixed(2).replace('.',',');
 
-    // Update achievement
     this.updateAchievement(days);
   }
 
   updateAchievement(days) {
-    let achievementText = 'Início da sua jornada!';
+    let achievementText = 'Parabéns por começar sua jornada! 🌱';
     
     if (days >= 365) {
       achievementText = 'Mais de 1 ano sem apostar! 🎉';
     } else if (days >= 180) {
       achievementText = 'Mais de 6 meses sem apostar! 🎊';
     } else if (days >= 90) {
-      achievementText = 'Mais de 3 meses sem apostar! 🏅';
+      achievementText = 'Mais de 3 meses sem apostar! 🏆';
     } else if (days >= 60) {
-      achievementText = 'Mais de 2 meses sem apostar! ⭐';
+      achievementText = 'Mais de 2 meses sem apostar! 🎯';
     } else if (days >= 30) {
       achievementText = 'Mais de 1 mês sem apostar! 🌟';
     } else if (days >= 7) {
-      achievementText = 'Uma semana sem apostar! 💪';
+      achievementText = 'Mais de 1 semana sem apostar! 💪';
     } else if (days >= 1) {
-      achievementText = `${days} dia${days > 1 ? 's' : ''} sem apostar! 🚀`;
+      achievementText = `${days} ${days === 1 ? 'dia' : 'dias'} sem apostar! 🚀`;
     }
 
     document.getElementById('achievementText').textContent = achievementText;
@@ -205,13 +248,13 @@ class PainelGastos {
   updateDisplay() {
     this.updateFinancialSummary();
     this.updateHistory();
+    this.updateSobrietyTimer();
   }
 
   updateFinancialSummary() {
     const now = new Date();
     const today = now.toISOString().split('T')[0];
     
-    // Get current week
     const startOfWeek = new Date(now);
     startOfWeek.setDate(now.getDate() - now.getDay());
     startOfWeek.setHours(0, 0, 0, 0);
@@ -220,7 +263,6 @@ class PainelGastos {
     endOfWeek.setDate(startOfWeek.getDate() + 6);
     endOfWeek.setHours(23, 59, 59, 999);
 
-    // Calculate totals
     let totalBalance = 0;
     let weeklyExpense = 0;
     let weeklyGain = 0;
@@ -229,22 +271,20 @@ class PainelGastos {
 
     this.transactions.forEach(transaction => {
       const transactionDate = new Date(transaction.date + 'T00:00:00');
-      const value = transaction.type === 'expense' ? -transaction.value : transaction.value;
+      const value = transaction.type === 'gasto' ? -transaction.value : transaction.value;
       
       totalBalance += value;
 
-      // Weekly calculations
       if (transactionDate >= startOfWeek && transactionDate <= endOfWeek) {
-        if (transaction.type === 'expense') {
+        if (transaction.type === 'gasto') {
           weeklyExpense += transaction.value;
         } else {
           weeklyGain += transaction.value;
         }
       }
 
-      // Daily calculations (today)
       if (transaction.date === today) {
-        if (transaction.type === 'expense') {
+        if (transaction.type === 'gasto') {
           dailyExpense += transaction.value;
         } else {
           dailyGain += transaction.value;
@@ -252,7 +292,6 @@ class PainelGastos {
       }
     });
 
-    // Update display
     document.getElementById('totalBalance').textContent = this.formatCurrency(totalBalance);
     document.getElementById('totalBalance').className = totalBalance >= 0 ? 'font-bold text-green-600' : 'font-bold text-red-600';
 
@@ -264,7 +303,6 @@ class PainelGastos {
     document.getElementById('dailyGain').textContent = this.formatCurrency(dailyGain);
     document.getElementById('dailyBalance').textContent = this.formatCurrency(dailyGain - dailyExpense);
 
-    // Update date displays
     const weekPeriod = `${startOfWeek.toLocaleDateString('pt-BR')} - ${endOfWeek.toLocaleDateString('pt-BR')}`;
     document.getElementById('weeklyPeriod').textContent = weekPeriod;
     document.getElementById('weeklyPeriodGain').textContent = weekPeriod;
@@ -284,210 +322,55 @@ class PainelGastos {
       return;
     }
 
-    // Sort transactions by date (most recent first)
-    const sortedTransactions = [...this.transactions].sort((a, b) => {
-      return new Date(b.date) - new Date(a.date) || new Date(b.timestamp) - new Date(a.timestamp);
-    });
+    const sortedTransactions = [...this.transactions].sort((a, b) => new Date(b.date) - new Date(a.date) || new Date(b.timestamp) - new Date(a.timestamp));
 
     historyContainer.innerHTML = sortedTransactions.map(transaction => {
-      const isExpense = transaction.type === 'expense';
-      const iconColor = isExpense ? 'red' : 'green';
+      const isExpense = transaction.type === 'gasto';
       const textColor = isExpense ? 'text-red-600' : 'text-green-600';
-      const bgColor = isExpense ? 'bg-red-100' : 'bg-green-100';
       const sign = isExpense ? '-' : '+';
-      
-      const icon = isExpense 
-        ? `<path fill-rule="evenodd" d="M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z" clip-rule="evenodd" />`
-        : `<path fill-rule="evenodd" d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd" />`;
+      const dateFormatted = new Date(transaction.date + 'T00:00:00').toLocaleDateString('pt-BR');
 
       return `
-        <li class="flex justify-between items-center bg-white p-3 rounded-md shadow-sm hover:shadow-md transition-shadow fade-in">
-          <div class="flex items-center">
-            <div class="${bgColor} p-2 rounded-full mr-3">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-${iconColor}-600" viewBox="0 0 20 20" fill="currentColor">
-                ${icon}
-              </svg>
-            </div>
-            <div>
-              <div class="font-medium">${transaction.description}</div>
-              <div class="text-sm text-gray-500">${new Date(transaction.date).toLocaleDateString('pt-BR')}</div>
-            </div>
+        <div class="flex justify-between items-center bg-white p-3 rounded-md shadow-sm">
+          <div>
+            <div class="font-medium">${transaction.description}</div>
+            <div class="text-sm text-gray-500">${dateFormatted}</div>
           </div>
-          <div class="flex items-center gap-2">
-            <span class="${textColor} font-medium">${sign} ${this.formatCurrency(transaction.value)}</span>
-            <button onclick="painelGastos.deleteTransaction(${transaction.id})" class="text-red-400 hover:text-red-600 text-sm">
-              ✕
-            </button>
-          </div>
-        </li>
+          <div class="${textColor} font-medium">${sign} ${this.formatCurrency(transaction.value)}</div>
+        </div>
       `;
     }).join('');
   }
 
-  deleteTransaction(id) {
-    if (confirm('Tem certeza que deseja excluir este registro?')) {
-      this.transactions = this.transactions.filter(t => t.id !== id);
-      this.saveData();
-      this.updateDisplay();
-      this.showNotification('Registro excluído com sucesso!', 'success');
+  formatInputAsCurrency(event) {
+    const input = event.target;
+    let value = input.value.replace(/\D/g, '');
+    
+    if (value === '') {
+        input.value = '';
+        return;
     }
+    
+    value = (parseInt(value, 10) / 100).toFixed(2);
+    
+    input.value = new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+    }).format(value);
   }
 
   formatCurrency(value) {
     return new Intl.NumberFormat('pt-BR', {
       style: 'currency',
       currency: 'BRL'
-    }).format(Math.abs(value));
+    }).format(value);
   }
 
   saveData() {
-    try {
-      localStorage.setItem('transactions', JSON.stringify(this.transactions));
-    } catch (error) {
-      console.error('Erro ao salvar dados:', error);
-      this.showNotification('Erro ao salvar dados', 'error');
-    }
-  }
-
-  showNotification(message, type = 'success') {
-    const notification = document.createElement('div');
-    notification.className = `fixed top-4 right-4 p-4 rounded-lg text-white z-50 transition-all duration-300 ${
-      type === 'success' ? 'bg-green-500' : 'bg-red-500'
-    }`;
-    notification.textContent = message;
-    
-    document.body.appendChild(notification);
-    
-    // Fade in
-    setTimeout(() => {
-      notification.style.opacity = '1';
-      notification.style.transform = 'translateY(0)';
-    }, 100);
-    
-    // Fade out and remove
-    setTimeout(() => {
-      notification.style.opacity = '0';
-      notification.style.transform = 'translateY(-20px)';
-      setTimeout(() => {
-        document.body.removeChild(notification);
-      }, 300);
-    }, 3000);
-  }
-
-  // Método para exportar dados (funcionalidade extra)
-  exportData() {
-    const data = {
-      transactions: this.transactions,
-      sobrietyStartDate: this.sobrietyStartDate,
-      dailyAverageSpending: this.dailyAverageSpending,
-      exportDate: new Date().toISOString()
-    };
-    
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `travajogo_backup_${new Date().toISOString().split('T')[0]}.json`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-    
-    this.showNotification('Dados exportados com sucesso!', 'success');
-  }
-
-  // Método para importar dados (funcionalidade extra)
-  importData(event) {
-    const file = event.target.files[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      try {
-        const data = JSON.parse(e.target.result);
-        
-        if (data.transactions && Array.isArray(data.transactions)) {
-          this.transactions = data.transactions;
-        }
-        
-        if (data.sobrietyStartDate) {
-          this.sobrietyStartDate = data.sobrietyStartDate;
-          localStorage.setItem('sobrietyStartDate', data.sobrietyStartDate);
-        }
-        
-        if (data.dailyAverageSpending) {
-          this.dailyAverageSpending = data.dailyAverageSpending;
-          localStorage.setItem('dailyAverageSpending', data.dailyAverageSpending.toString());
-        }
-        
-        this.saveData();
-        this.updateDisplay();
-        this.startSobrietyTimer();
-        
-        this.showNotification('Dados importados com sucesso!', 'success');
-      } catch (error) {
-        console.error('Erro ao importar dados:', error);
-        this.showNotification('Erro ao importar dados', 'error');
-      }
-    };
-    reader.readAsText(file);
-  }
-
-  // Método para resetar todos os dados
-  resetAllData() {
-    if (confirm('ATENÇÃO: Esta ação irá apagar todos os seus dados. Tem certeza que deseja continuar?')) {
-      if (confirm('Esta ação não pode ser desfeita. Confirma novamente?')) {
-        this.transactions = [];
-        this.sobrietyStartDate = null;
-        this.dailyAverageSpending = 50.00;
-        
-        localStorage.removeItem('transactions');
-        localStorage.removeItem('sobrietyStartDate');
-        localStorage.removeItem('dailyAverageSpending');
-        
-        this.updateDisplay();
-        this.startSobrietyTimer();
-        
-        this.showNotification('Todos os dados foram resetados', 'success');
-      }
-    }
+    localStorage.setItem('transactions', JSON.stringify(this.transactions));
   }
 }
 
-// Inicializar a aplicação
-let painelGastos;
-
 document.addEventListener('DOMContentLoaded', () => {
-  painelGastos = new PainelGastos();
-  
-  // Adicionar botões extras para funcionalidades avançadas
-  const extraButtons = document.createElement('div');
-  extraButtons.className = 'mt-4 space-y-2 border-t pt-4';
-  extraButtons.innerHTML = `
-    <div class="flex flex-wrap gap-2">
-      <button onclick="painelGastos.exportData()" class="text-blue-600 hover:underline text-sm">
-        📥 Exportar dados
-      </button>
-      <label class="text-blue-600 hover:underline text-sm cursor-pointer">
-        📤 Importar dados
-        <input type="file" accept=".json" onchange="painelGastos.importData(event)" style="display: none;">
-      </label>
-      <button onclick="painelGastos.resetAllData()" class="text-red-600 hover:underline text-sm">
-        🗑️ Resetar tudo
-      </button>
-    </div>
-  `;
-  
-  document.querySelector('.mt-4.space-y-2').appendChild(extraButtons);
+  new PainelGastos();
 });
-
-// Adicionar estilos para as notificações
-const notificationStyles = document.createElement('style');
-notificationStyles.textContent = `
-  .notification {
-    opacity: 0;
-    transform: translateY(-20px);
-    transition: all 0.3s ease;
-  }
-`;
-document.head.appendChild(notificationStyles);
