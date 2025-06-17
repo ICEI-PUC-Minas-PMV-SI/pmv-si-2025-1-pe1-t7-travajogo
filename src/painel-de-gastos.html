@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Painel de Gastos - TravaJogo</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/painel-de-gastos.js"></script>
+  <script src="js/auth.js"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=calendar_month">
   <link rel="stylesheet" href="css/painel-gastos.css">
@@ -20,7 +22,7 @@
         <a href="index.html" class="link">Tela Inicial</a>
       </button>
       <button style="background-color: #0f172a;" class="text-white px-4 py-2 rounded-md">
-        <a href="index.html" class="link">Logout</a>
+        <a onclick="logout()" href="index.html" class="link">Logout</a>
       </button>
     </div>
   </div>
@@ -193,6 +195,5 @@
     </div>
   </div>
   
-  <script src="js/painel-de-gastos.js"></script>
 </body>
 </html>
