@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Alerta de sucesso e redirecionamento ou atualização da página
     alert('Cadastro realizado com sucesso!');
-    window.location.href = '../login.html'; // Substitua por uma URL de tela inicial ou login
+    window.location.href = '/login.html'; // Substitua por uma URL de tela inicial ou login
   }
 
   // Adiciona o evento de clique no botão "Criar minha conta"
