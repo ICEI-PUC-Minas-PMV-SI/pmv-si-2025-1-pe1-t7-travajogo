@@ -88,6 +88,26 @@ document.addEventListener("DOMContentLoaded", function() {
   // Carrega os dados armazenados se já houver
  // carregarDados();
 
+  // Formatação de valor como moeda BRL
+  function formatarMoeda(valor) {
+    return valor.replace(/\D/g, "") // Remove tudo o que não for número
+                .replace(/(\d)(\d{8})$/, "$1.$2") // Adiciona ponto de milhar
+                .replace(/(\d)(\d{5})$/, "$1.$2") // Adiciona ponto de milhar
+                .replace(/(\d)(\d{2})$/, "$1,$2") // Adiciona vírgula para centavos
+                .replace(/^(\d{1,3})(\d{3})/, "$1.$2"); // Adiciona ponto no início
+  }
+
+  // Evento para formatar enquanto o usuário digita
+  gastoInput.addEventListener('input', function(e) {
+    let valor = e.target.value;
+
+    // Aplica a formatação da moeda BRL
+    valor = formatarMoeda(valor);
+    
+    // Adiciona "R$" ao valor
+    gastoInput.value = "R$ " + valor;
+  });
+
   // **Parte para navegação (botões "Tela Inicial" e "Login")**
   // Navegar para a Tela Inicial  
 document.getElementById('tela-inicial').addEventListener('click', function() {
