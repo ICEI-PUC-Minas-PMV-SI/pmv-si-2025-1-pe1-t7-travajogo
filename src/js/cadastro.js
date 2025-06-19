@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   // Função para carregar os dados se já existirem no localStorage (para um futuro login ou redirecionamento)
-  function carregarDados() {
+  /*function carregarDados() {
     const usuarioStored = localStorage.getItem('users');
     if (usuarioStored) {
       const users = JSON.parse(usuarioStored);
@@ -86,8 +86,9 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   // Carrega os dados armazenados se já houver
- // carregarDados();
-
+ carregarDados();
+*/
+  
   // Formatação de valor como moeda BRL
   function formatarMoeda(valor) {
     return valor.replace(/\D/g, "") // Remove tudo o que não for número
