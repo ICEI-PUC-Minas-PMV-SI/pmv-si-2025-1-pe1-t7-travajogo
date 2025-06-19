@@ -52,6 +52,15 @@ document.addEventListener("DOMContentLoaded", function() {
     // Salva o array de usuários no localStorage
     localStorage.setItem('users', JSON.stringify(users));
 
+    // Limpa os campos após o cadastro
+  nomeInput.value = '';
+  emailInput.value = '';
+  senhaInput.value = '';
+  confirmarInput.value = '';
+  dataInput.value = '';
+  gastoInput.value = '';
+  contadorInput.checked = false;
+    
     // Alerta de sucesso e redirecionamento ou atualização da página
     alert('Cadastro realizado com sucesso!');
     window.location.href = 'login.html'; // Substitua por uma URL de tela inicial ou login
@@ -77,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   // Carrega os dados armazenados se já houver
-  carregarDados();
+ // carregarDados();
 
   // **Parte para navegação (botões "Tela Inicial" e "Login")**
   // Navegar para a Tela Inicial  
