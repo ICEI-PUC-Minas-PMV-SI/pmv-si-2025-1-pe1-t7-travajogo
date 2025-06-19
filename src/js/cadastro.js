@@ -36,17 +36,17 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // Cria um objeto com os dados do formulário
-    const usuario = {
-      nome: nomeInput.value,
+    const users = {
+      name: nomeInput.value,
       email: emailInput.value,
-      senha: senhaInput.value,
+      password: senhaInput.value,
       dataInicio: dataInput.value || null, // Pode ser null se não informado
       gasto: gastoInput.value,
       contadorAtivo: contadorInput.checked
     };
 
     // Salva no localStorage (usa uma chave única, como "usuario" ou pode adicionar verificações adicionais)
-    localStorage.setItem('usuario', JSON.stringify(usuario));
+    localStorage.setItem('users', JSON.stringify(users));
 
     // Alerta de sucesso e redirecionamento ou atualização da página
     alert('Cadastro realizado com sucesso!');
@@ -61,14 +61,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Função para carregar os dados se já existirem no localStorage (para um futuro login ou redirecionamento)
   function carregarDados() {
-    const usuarioStored = localStorage.getItem('usuario');
+    const usuarioStored = localStorage.getItem('users');
     if (usuarioStored) {
-      const usuario = JSON.parse(usuarioStored);
-      nomeInput.value = usuario.nome;
-      emailInput.value = usuario.email;
-      gastoInput.value = usuario.gasto;
-      dataInput.value = usuario.dataInicio || '';
-      contadorInput.checked = usuario.contadorAtivo;
+      const users = JSON.parse(usuarioStored);
+      nomeInput.value = users.nome;
+      emailInput.value = users.email;
+      gastoInput.value = users.gasto;
+      dataInput.value = users.dataInicio || '';
+      contadorInput.checked = users.contadorAtivo;
     }
   }
 
