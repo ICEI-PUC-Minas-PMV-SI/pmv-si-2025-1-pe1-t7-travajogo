@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // Cria um objeto com os dados do formulário
-    const users = {
+    const novoUsuario = {
       name: nomeInput.value,
       email: emailInput.value,
       password: senhaInput.value,
@@ -44,8 +44,12 @@ document.addEventListener("DOMContentLoaded", function() {
       gasto: gastoInput.value,
       contadorAtivo: contadorInput.checked
     };
+    // Recupera os usuários existentes do localStorage
+    let users = JSON.parse(localStorage.getItem('users')) || [];
 
-    // Salva no localStorage (usa uma chave única, como "usuario" ou pode adicionar verificações adicionais)
+    // Adiciona o novo usuário ao array de usuários
+    users.push(novoUsuario);
+    // Salva o array de usuários no localStorage
     localStorage.setItem('users', JSON.stringify(users));
 
     // Alerta de sucesso e redirecionamento ou atualização da página
@@ -64,11 +68,11 @@ document.addEventListener("DOMContentLoaded", function() {
     const usuarioStored = localStorage.getItem('users');
     if (usuarioStored) {
       const users = JSON.parse(usuarioStored);
-      nomeInput.value = users.nome;
-      emailInput.value = users.email;
-      gastoInput.value = users.gasto;
-      dataInput.value = users.dataInicio || '';
-      contadorInput.checked = users.contadorAtivo;
+      nomeInput.value = users[0].nome; // Acesse o primeiro usuário da lista
+      emailInput.value = users[0].email;
+      gastoInput.value = users[0].gasto;
+      dataInput.value = users[0].dataInicio || '';
+      contadorInput.checked = users[0].contadorAtivo;
     }
   }
 
