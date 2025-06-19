@@ -78,12 +78,12 @@ document.addEventListener("DOMContentLoaded", function() {
   // **Parte para navegação (botões "Tela Inicial" e "Login")**
   // Navegar para a Tela Inicial  
 document.getElementById('tela-inicial').addEventListener('click', function() {
-  window.location.href = '../index.html'; // Redirecionar para a tela inicial ou home
+  window.location.href = '/index.html'; // Redirecionar para a tela inicial ou home
 });
   
  // Navegar para a Tela de Login
 document.getElementById('login-btn').addEventListener('click', function() {
-  window.location.href = '../login.html'; // Redirecionar para a tela de login
+  window.location.href = '/login.html'; // Redirecionar para a tela de login
 });
 
 });
