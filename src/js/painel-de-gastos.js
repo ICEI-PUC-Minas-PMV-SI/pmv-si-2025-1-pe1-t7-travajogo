@@ -22,6 +22,11 @@ class PainelGastos {
     document.getElementById('btnDefinirDataInicio').addEventListener('click', () => this.openModal('dataInicio'));
     document.getElementById('btnResetarDados').addEventListener('click', () => this.resetAllData());
 
+    // Import/Export Buttons
+    document.getElementById('btnExportData').addEventListener('click', () => this.showExportOptions());
+    document.getElementById('btnImportData').addEventListener('click', () => document.getElementById('importFileInput').click());
+    document.getElementById('importFileInput').addEventListener('change', (event) => this.handleImportFile(event));
+
     // Eventos do modal
     document.getElementById('modal-btn-cancel').addEventListener('click', () => this.closeModal());
     document.getElementById('gasto-modal-overlay').addEventListener('click', (event) => {
@@ -65,13 +70,15 @@ class PainelGastos {
       document.getElementById('modal-date').value = new Date().toISOString().split('T')[0];
 
     } else if (mode === 'dataInicio') {
-      modalTitle.textContent = 'Definir data de início da sobriedade';
+      modalTitle.textContent = 'Definir data de início e média de gastos';
       valueGroup.style.display = 'block'; 
       descriptionGroup.style.display = 'none';
       dateGroup.style.display = 'block';
 
       valueGroup.querySelector('label').textContent = 'Gasto médio diário que você tinha';
-      document.getElementById('modal-value').value = this.formatCurrency(this.dailyAverageSpending).replace('R$', '').trim();
+      // MODIFICADO: Garante que o valor seja exibido no formato de moeda ou vazio, e define o placeholder.
+      document.getElementById('modal-value').value = this.dailyAverageSpending > 0 ? this.formatCurrency(this.dailyAverageSpending) : '';
+      document.getElementById('modal-value').placeholder = 'R$ 0,00';
       
       dateGroup.querySelector('label').textContent = 'Data de Início';
       document.getElementById('modal-date').value = this.sobrietyStartDate || new Date().toISOString().split('T')[0];
@@ -368,6 +375,170 @@ class PainelGastos {
 
   saveData() {
     localStorage.setItem('transactions', JSON.stringify(this.transactions));
+  }
+
+  showExportOptions() {
+    const format = prompt('Qual formato você deseja exportar? Digite "csv" ou "xlsx".');
+    if (format && format.toLowerCase() === 'csv') {
+      this.exportDataToCsv();
+    } else if (format && format.toLowerCase() === 'xlsx') {
+      this.exportDataToXlsx();
+    } else if (format) {
+      alert('Formato inválido. Por favor, digite "csv" ou "xlsx".');
+    }
+  }
+
+  exportDataToCsv() {
+    if (this.transactions.length === 0) {
+      alert('Não há dados para exportar.');
+      return;
+    }
+
+    const header = ["Tipo", "Valor", "Data", "Descrição", "Timestamp"];
+    const rows = this.transactions.map(t => [
+      t.type,
+      t.value.toFixed(2).replace('.', ','),
+      t.date,
+      t.description.replace(/"/g, '""'),
+      t.timestamp
+    ]);
+
+    let csvContent = header.join(";") + "\n";
+    rows.forEach(row => {
+      csvContent += row.map(field => `"${field}"`).join(";") + "\n";
+    });
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.setAttribute('download', 'gastos_travajogo.csv');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+  exportDataToXlsx() {
+    if (this.transactions.length === 0) {
+      alert('Não há dados para exportar.');
+      return;
+    }
+
+    const data = this.transactions.map(t => ({
+      Tipo: t.type,
+      Valor: t.value,
+      Data: t.date,
+      Descrição: t.description,
+      Timestamp: t.timestamp
+    }));
+
+    const ws = XLSX.utils.json_to_sheet(data);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Gastos TravaJogo");
+    XLSX.writeFile(wb, "gastos_travajogo.xlsx");
+  }
+
+  handleImportFile(event) {
+    const file = event.target.files[0];
+    if (!file) {
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const fileContent = e.target.result;
+      if (file.name.endsWith('.csv')) {
+        this.importDataFromCsv(fileContent);
+      } else if (file.name.endsWith('.xlsx')) {
+        this.importDataFromXlsx(fileContent);
+      } else {
+        alert('Formato de arquivo não suportado. Por favor, importe .csv ou .xlsx.');
+      }
+      // Clear the input to allow re-importing the same file
+      event.target.value = ''; 
+    };
+
+    reader.onerror = () => {
+      alert('Erro ao ler o arquivo.');
+    };
+
+    if (file.name.endsWith('.csv')) {
+      reader.readAsText(file);
+    } else if (file.name.endsWith('.xlsx')) {
+      reader.readAsArrayBuffer(file);
+    }
+  }
+
+  importDataFromCsv(csvContent) {
+    const lines = csvContent.split('\n').filter(line => line.trim() !== '');
+    if (lines.length <= 1) {
+      alert('O arquivo CSV está vazio ou não contém dados válidos.');
+      return;
+    }
+
+    const header = lines[0].split(';').map(h => h.trim().replace(/"/g, ''));
+    const newTransactions = [];
+
+    for (let i = 1; i < lines.length; i++) {
+      const values = lines[i].split(';').map(v => v.trim().replace(/"/g, ''));
+      if (values.length !== header.length) {
+        console.warn(`Linha mal formatada ignorada: ${lines[i]}`);
+        continue;
+      }
+
+      const transaction = {};
+      header.forEach((key, index) => {
+        let value = values[index];
+        if (key === 'Valor') {
+          transaction[key.toLowerCase()] = parseFloat(value.replace(',', '.'));
+        }else {
+          transaction[key.toLowerCase()] = value;
+        }
+      });
+      if (!transaction.type || !transaction.value || !transaction.date) {
+        console.warn(`Transação inválida ignorada: ${JSON.stringify(transaction)}`);
+        continue;
+      }
+      newTransactions.push(transaction);
+    }
+
+    this.transactions = this.transactions.concat(newTransactions);
+    this.saveData();
+    this.updateDisplay();
+    alert(`Dados importados com sucesso: ${newTransactions.length} registros adicionados.`);
+  }
+
+  importDataFromXlsx(arrayBuffer) {
+    const workbook = XLSX.read(arrayBuffer, { type: 'array' });
+    const sheetName = workbook.SheetNames[0];
+    const worksheet = workbook.Sheets[sheetName];
+    const jsonData = XLSX.utils.sheet_to_json(worksheet);
+
+    if (jsonData.length === 0) {
+      alert('O arquivo XLSX está vazio ou não contém dados válidos.');
+      return;
+    }
+
+    const newTransactions = [];
+    jsonData.forEach(row => {
+      const transaction = {
+        type: row.Tipo,
+        value: row.Valor,
+        date: row.Data,
+        description: row.Descrição,
+        timestamp: row.Timestamp || new Date().toISOString()
+      };
+
+      if (!transaction.type || typeof transaction.value !== 'number' || !transaction.date) {
+        console.warn(`Transação inválida no XLSX ignorada: ${JSON.stringify(row)}`);
+        return;
+      }
+      newTransactions.push(transaction);
+    });
+
+    this.transactions = this.transactions.concat(newTransactions);
+    this.saveData();
+    this.updateDisplay();
+    alert(`Dados importados com sucesso: ${newTransactions.length} registros adicionados.`);
   }
 }
 

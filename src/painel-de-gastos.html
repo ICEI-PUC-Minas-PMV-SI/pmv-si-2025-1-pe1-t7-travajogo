@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Painel de Gastos - TravaJogo</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
   <script src="js/painel-de-gastos.js"></script>
   <script src="js/auth.js"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
@@ -32,6 +33,11 @@
       <div class="sobriety-header">
         <h2>Seu Progresso Sem Apostas</h2>
         <p>Continue firme na sua jornada!</p>
+        <div class="mt-5 text-center">
+          <button id="btnDefinirDataInicio" class="btn-custom btn-sobriety-set">
+            Definir data de início e média de gastos
+          </button>
+        </div>
       </div>
       
       <div class="timer-container">
@@ -142,19 +148,17 @@
           </li>
         </ul>
         
-        <div class="mt-4 space-y-2">
-          <button id="btnAdicionarGasto" class="flex items-center text-blue-600 hover:underline transition-colors">
-            + Adicionar gasto
-          </button>
-          <button id="btnAdicionarGanho" class="flex items-center text-blue-600 hover:underline transition-colors">
-            + Adicionar ganho
-          </button>
-          <button id="btnDefinirDataInicio" class="flex items-center text-green-600 hover:underline transition-colors">
-            ⚙️ Definir data de início da sobriedade
-          </button>
-           <button id="btnResetarDados" class="flex items-center text-red-600 hover:underline transition-colors">
-            🗑️ Resetar todos os dados
-          </button>
+        <div class="mt-6">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+            <button id="btnAdicionarGasto" class="btn-custom btn-expense w-full">Adicionar gasto</button>
+            <button id="btnAdicionarGanho" class="btn-custom btn-gain w-full">Adicionar ganho</button>
+            <button id="btnImportData" class="btn-custom btn-import w-full">Importar dados</button>
+            <button id="btnExportData" class="btn-custom btn-export w-full">Exportar dados</button>
+          </div>
+          <div class="flex justify-center">
+            <button id="btnResetarDados" class="btn-custom btn-reset-data">Resetar todos os dados</button>
+          </div>
+          <input type="file" id="importFileInput" accept=".csv, .xlsx" style="display: none;">
         </div>
         
         <div class="mt-6 border-t border-gray-400 pt-4">

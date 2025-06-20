@@ -6,6 +6,10 @@
   --border-color: #e2e8f0;
   --success-color: #10b981;
   --accent-color: #3b82f6;
+  --expense-color: #ef4444; /* Red */
+  --gain-color: #22c55e;    /* Green */
+  --info-color: #3b82f6;    /* Blue */
+  --warning-color: #f59e0b; /* Yellow/Orange */
 }
 
 * {
@@ -169,6 +173,67 @@
   font-weight: 600;
   color: #fbbf24;
 }
+
+/* Estilos dos novos botões */
+.btn-custom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s, opacity 0.3s;
+  text-decoration: none;
+}
+
+.btn-custom:hover {
+  opacity: 0.9;
+}
+
+.btn-expense {
+  background-color: var(--expense-color);
+  color: var(--white-color);
+  border: 1px solid var(--expense-color);
+}
+
+.btn-gain {
+  background-color: var(--gain-color);
+  color: var(--white-color);
+  border: 1px solid var(--gain-color);
+}
+
+.btn-sobriety-set {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: var(--white-color);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  font-weight: 600;
+  padding: 10px 20px;
+  transition: background-color 0.3s, transform 0.3s;
+  position: relative;
+  left: 280px;
+}
+.btn-sobriety-set:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+  transform: scale(1.03);
+}
+
+.btn-reset-data {
+  background-color: var(--expense-color);
+  color: var(--white-color);
+  border: 1px solid var(--expense-color);
+  min-width: 200px; /* Para manter uma largura razoável */
+}
+
+.btn-import,
+.btn-export {
+  background-color: var(--info-color);
+  color: var(--white-color);
+  border: 1px solid var(--info-color);
+}
+
 
 /* Estilos do Modal Unificado */
 .modal-overlay {
