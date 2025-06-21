@@ -78,7 +78,7 @@
     
     loadConversations();
     
-    fetch('chat.json')
+    fetch('js/chat.json')
       .then(response => response.json())
       .then(data => {
         const userList = document.getElementById('user-list');
