@@ -13,6 +13,7 @@ As tabelas que se seguem apresentam os requisitos funcionais e não-funcionais q
 |RF-004|A aplicação deve disponibilizar links para sites de apoio externo, como o Jogadores Anônimos, para quem busca suporte. | Wander Carolino | linksuteis.html |
 |RF-005| A aplicação deve disponibilizar uma interface visual adaptável para as páginas de acesso e autenticação. | Jessica Santos | login.html |
 | RF-006  | A aplicação deve fornecer um painel de controle de gastos, permitindo que o usuário cadastre sua data de início de sobriedade, podendo acompanhar seu tempo sem apostar e dinheiro já economizado. Também deve permitir o cadastro de gastos e ganhos através de um modal. | Vítor Moura e Igor Tessaro Kava | [painel-de-gastos.html](../src/painel-de-gastos.html) [painel-gastos.css](../src/css/painel-gastos.css) [painel-de-gastos.js](../src/js/painel-de-gastos.js) |
+|RF-007|A aplicação deve ter um sistema de criação de usuário e senha com armazenamento local de login senha e outras variáveis. |Daniel Augusto de Mello| [cadastro.html](../src/cadastro.html) |
 
 
 ## Notícia
