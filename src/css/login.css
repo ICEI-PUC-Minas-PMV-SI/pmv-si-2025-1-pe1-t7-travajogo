@@ -1,109 +1,95 @@
+* {
+    font-family: "Inter", sans-serif;
+}
+
 body {
-    overflow: hidden;
-  }
-  
-  .sidebar {
-    height: 100%;
-    border-right: 1px solid #dee2e6;
-    background-color: #f8f9fa;
-  }
-  
-  .list-group-item {
-    border-left: none;
-    border-right: none;
-    padding: 15px;
-  }
-  
-  .list-group-item.active {
-    background-color: #e9ecef;
-    color: #212529;
-    border-color: #dee2e6;
-  }
-  
-  .main-chat {
-    height: 100%;
-  }
-  
-  .initial-message {
-    color: #6c757d;
-    margin-top: 30vh;
-  }
-  
-  #messages-area {
+    margin: 0;
+    padding: none;
+    border: none;
+}
+
+.Screen {
     display: flex;
     flex-direction: column;
-    cursor: pointer;
-  }
-  
-  .message {
-    max-width: 75%;
-    margin-bottom: 10px;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.Navbar {
     display: flex;
-    cursor: default;
-  }
-  
-  .message-content {
-    border-radius: 18px;
-    display: inline-block;
-    word-break: break-word;
-  }
-  
-  .incoming {
-    align-self: flex-start;
-  }
-  
-  .incoming .message-content {
-    background-color: #f1f0f0;
-    color: #333;
-  }
-  
-  .outgoing {
-    align-self: flex-end;
-    justify-content: flex-end;
+    justify-content: center;
+    align-items: center;
     width: 100%;
-  }
-  
-  .outgoing .message-content {
-    background-color: #212529;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.LoginArea {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.Login {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 480px;
+    height: 378px;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+}
+
+.LoginItems {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 32px 48px 16px 48px;
+}
+
+.semibold {
+    font-family: sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.label {
+    font-family: sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.passwordLabel {
+    display: flex;
+    align-items: space-between;
+    justify-content: space-between;
+}
+
+.input {
+    width: 383px;
+    height: 32px;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+}
+
+.button {
+    width: 383px;
+    height: 40px;
+    background-color: #0f172a;
     color: white;
-  }
-  
-  #message-input {
-    background-color: #f8f9fa;
-  }
-  
-  #message-text {
-    border-radius: 20px;
-    padding: 10px 15px;
-  }
-  
-  #send-button {
-    border-radius: 50%;
-    width: 38px;
-    height: 38px;
-    padding: 0;
+}
+
+.link {
+    font-family: sans-serif;
+    font-size: 14px;
+    color: #0f172a;
+    font-style: none;
+}
+
+.signUp {
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 10px;
-  }
-  
-  .back-button-container {
-    background-color: #f8f9fa;
-  }
-  
-  @media (max-width: 767.98px) {
-    .sidebar {
-      height: auto;
-      max-height: 40vh;
-      overflow-y: auto;
-    }
-    
-    .main-chat {
-      height: 60vh;
-    }
-    
-    .initial-message {
-      margin-top: 10vh;
-    }
-  }
+}
