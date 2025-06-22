@@ -61,15 +61,25 @@ Preencha a tabela com o plano dos testes. Para cada Caso de Teste (CT), associe 
 
 Esta seção deve apresentar o relatório com as evidências dos testes de software realizados no sistema pela equipe, baseado no plano de testes pré-definido. Documente cada caso de teste apresentando um vídeo ou animação que comprove o funcionamento da funcionalidade. Veja os exemplos a seguir.
 
-|*Caso de Teste*                                 |*CT01 - Criar conta parte 1*                                         |
+|*Caso de Teste*                                 |*CT01 - Acessar página inicial sem estar logado*                                         |
 |---|---|
-|Requisito Associado | RF-001 - A aplicação deve permitir que os usuários criem uma conta e gerenciem seu cadastro|
-|Link do vídeo do teste realizado: | https://1drv.ms/u/s!AhD2JqpOUvJChapRtRSQ9vPzbNLwGA?e=mxZs6t| 
+|Requisito Associado | RF-001 - A aplicação deve oferecer uma interface gráfica responsiva para as telas de usuário logado e deslogado, incluindo cabeçalho, seções principais e rodapé com botões de navegação e links úteis.|
+|Captura de tela: |<img width="1280" alt="Captura de Tela 2025-06-22 às 19 55 54" src="https://github.com/user-attachments/assets/1beb2135-66ce-476b-85a6-fb09393ecd48" />| 
 
-|*Caso de Teste*                                 |*CT02 - Criar conta parte 2*                                        |
+|*Caso de Teste*                                 |*CT02 - Login com erro*                                         |
 |---|---|
-|Requisito Associado | RF-001 - A aplicação deve permitir que os usuários criem uma conta e gerenciem seu cadastro|
-|Link do vídeo do teste realizado: | https://1drv.ms/v/s!AhD2JqpOUvJChapQ8CPXL-TI_A7iVg?e=spD3Ar | 
+|Requisito Associado | RF-005 - A aplicação deve disponibilizar uma interface visual adaptável para as páginas de acesso e autenticação.|
+|Captura de tela: |<img width="1280" alt="Captura de Tela 2025-06-22 às 20 04 20" src="https://github.com/user-attachments/assets/52a6ce2e-9897-478b-9f6b-25b1a61445b4" />| 
+
+|*Caso de Teste*                                 |*CT03 - Login com sucesso*                                         |
+|---|---|
+|Requisito Associado | RF-005 - A aplicação deve disponibilizar uma interface visual adaptável para as páginas de acesso e autenticação.|
+|Captura de tela: |<img width="1280" alt="Captura de Tela 2025-06-22 às 20 07 47" src="https://github.com/user-attachments/assets/765b90e8-39fa-47e6-92af-67b7cc0377ec" />| 
+
+|*Caso de Teste*                                 |*CT04 - Acessar página inicial logado*                                         |
+|---|---|
+|Requisito Associado | RF-001 - A aplicação deve oferecer uma interface gráfica responsiva para as telas de usuário logado e deslogado, incluindo cabeçalho, seções principais e rodapé com botões de navegação e links úteis.|
+|Captura de tela: |<img width="1280" alt="Captura de Tela 2025-06-22 às 20 07 47" src="https://github.com/user-attachments/assets/863c4bf6-751d-408a-8b6b-d0f1f66ac47f" />| 
 
 
 ## Avaliação dos Testes de Software
