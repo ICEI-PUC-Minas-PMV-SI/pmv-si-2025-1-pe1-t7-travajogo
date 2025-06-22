@@ -1,83 +1,85 @@
 body {
     overflow: hidden;
-  }
-  
-  .sidebar {
-    height: 100%;
+}
+
+.sidebar {
+    height: 100%; 
     border-right: 1px solid #dee2e6;
     background-color: #f8f9fa;
-  }
-  
-  .list-group-item {
+    display: flex; 
+    flex-direction: column; 
+}
+
+.list-group-item {
     border-left: none;
     border-right: none;
     padding: 15px;
-  }
-  
-  .list-group-item.active {
+}
+
+.list-group-item.active {
     background-color: #e9ecef;
-    color: #212529;
+    color: #000000;
     border-color: #dee2e6;
-  }
-  
-  .main-chat {
+}
+
+.main-chat {
     height: 100%;
-  }
-  
-  .initial-message {
-    color: #6c757d;
+}
+
+.initial-message {
+    color: #000000;
     margin-top: 30vh;
-  }
-  
-  #messages-area {
+}
+
+#messages-area {
     display: flex;
     flex-direction: column;
     cursor: pointer;
-  }
-  
-  .message {
+}
+
+.message {
     max-width: 75%;
     margin-bottom: 10px;
     display: flex;
     cursor: default;
-  }
-  
-  .message-content {
+}
+
+.message-content {
     border-radius: 18px;
     display: inline-block;
     word-break: break-word;
-  }
-  
-  .incoming {
+}
+
+.incoming {
     align-self: flex-start;
-  }
-  
-  .incoming .message-content {
+}
+
+.incoming .message-content {
     background-color: #f1f0f0;
-    color: #333;
-  }
-  
-  .outgoing {
+    color: #000000;
+}
+
+.outgoing {
     align-self: flex-end;
     justify-content: flex-end;
     width: 100%;
-  }
-  
-  .outgoing .message-content {
-    background-color: #212529;
+}
+
+.outgoing .message-content {
+    background-color: #000000;
     color: white;
-  }
-  
-  #message-input {
+}
+
+#message-input {
     background-color: #f8f9fa;
-  }
-  
-  #message-text {
+}
+
+#message-text {
     border-radius: 20px;
     padding: 10px 15px;
-  }
-  
-  #send-button {
+}
+
+#send-button {
     border-radius: 50%;
     width: 38px;
     height: 38px;
@@ -86,24 +88,29 @@ body {
     align-items: center;
     justify-content: center;
     margin-left: 10px;
-  }
-  
-  .back-button-container {
+}
+
+.back-button-container {
     background-color: #f8f9fa;
-  }
-  
-  @media (max-width: 767.98px) {
+}
+
+.back-button-container a {
+    margin-top: 5px;
+}
+
+/* Responsividade */
+@media (max-width: 767.98px) {
     .sidebar {
-      height: auto;
-      max-height: 40vh;
-      overflow-y: auto;
+        height: auto;
+        max-height: 40vh;
+        overflow-y: auto;
     }
-    
+
     .main-chat {
-      height: 60vh;
+        height: 60vh;
     }
-    
+
     .initial-message {
-      margin-top: 10vh;
+        margin-top: 10vh;
     }
-  }
+}
