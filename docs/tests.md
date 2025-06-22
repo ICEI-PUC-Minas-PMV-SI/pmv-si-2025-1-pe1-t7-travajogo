@@ -22,24 +22,40 @@ Nesta seção o grupo deverá documentar os testes de software que verificam a c
 
 ## Plano de Testes de Software
 
-Preencha a tabela com o plano dos testes. Para cada Caso de Teste (CT), associe qual o Requisito Funcional ou não funcional que ele está verificando. Associe também a página (ou artefato) onde o teste será realizado e descreva o cenário do teste. Veja a tabela de exemplo.
+Preencha a tabela com o plano dos testes. Para cada Caso de Teste (CT), associe qual o Requisito Funcional ou não funcional que ele está verificando. Associe também a página (ou artefato) onde o teste será realizado e descreva o cenário do teste.
 
 
-**Caso de Teste** | **CT01 - Criar conta parte 1**
+**Caso de Teste** | **CT01 - Acessar página inicial sem estar logado**
  :--------------: | ------------
-**Procedimento**  | 1) Acesse o endereço www.teste.com.br <br> 2) Clique em criar conta <br> 2) Preencha todos os campos do formulário <br> 3) Clique no botão "Continuar".
+**Procedimento**  | 1) Acessar index.html
 **Requisitos associados** | RF-001
-**Resultado esperado** | Prosseguir para a parte 2 do cadastro
-**Dados de entrada** | Inserção de dados válidos no formulário de cadastro
-**Resultado obtido** | Sucesso
+**Resultado esperado** | Página genérica apresentando o bloqueador e oferecendo opção de cadastro/login
+**Dados de entrada** | Nenhum
+**Resultado obtido** | Página retornada com sucesso
 
-**Caso de Teste** | **CT02 - Criar conta parte 2**
+**Caso de Teste** | **CT02 - Login com erro**
  :--------------: | ------------
-**Procedimento**  | 1) Preencha todos os campos do formulário <br> 2) Clique no botão "Criar conta" <br> 
+**Procedimento**  | 1) Acessar login.html <br> 2) Informar um usuário e senha quaisquer que não estejam cadastrados <br> 3) Clicar no botão de Login
+**Requisitos associados** | RF-005
+**Resultado esperado** | Página de login com uma mensagem de erro em vermelho "Usuário não encontrado."
+**Dados de entrada** | Quaisquer usuário e senha
+**Resultado obtido** | Página com mensagem de erro
+
+**Caso de Teste** | **CT03 - Login com sucesso**
+ :--------------: | ------------
+**Procedimento**  | 1) Acessar login.html <br> 2) Informar um usuário e senha que esteja cadastrado <br> 3) Clicar no botão de Login
+**Requisitos associados** | RF-005
+**Resultado esperado** | Redirecionamento para página inicial
+**Dados de entrada** | Usuário e senha válidos
+**Resultado obtido** | Página inicial informando o nome do usuário
+
+**Caso de Teste** | **CT04 - Acessar página inicial logado**
+ :--------------: | ------------
+**Procedimento**  | 1) Acessar index.html
 **Requisitos associados** | RF-001
-**Resultado esperado** | Usuário cadastrado
-**Dados de entrada** | Inserção de dados válidos no formulário de cadastro
-**Resultado obtido** | Sucesso
+**Resultado esperado** | Página que dá boas-vindas ao usuário, apresenta o bloqueador, permite direcionar para ver o progresso (tempo e dinheiro poupados) e acessar o chat, fórum ou links úteis
+**Dados de entrada** | Nenhum
+**Resultado obtido** | Página inicial para usuário logado
 
 ## Registro dos Testes de Software
 
