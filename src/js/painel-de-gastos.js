@@ -1,8 +1,23 @@
 class PainelGastos {
   constructor() {
-    this.transactions = JSON.parse(localStorage.getItem('transactions')) || [];
-    this.sobrietyStartDate = localStorage.getItem('sobrietyStartDate') || null;
-    this.dailyAverageSpending = parseFloat(localStorage.getItem('dailyAverageSpending')) || 0.00;
+    // Pega o usuário logado do auth.js
+    this.user = getLoggedInUser();
+    if (!this.user) {
+      // Redireciona se, por algum motivo, o usuário não estiver logado
+      window.location.href = 'login.html';
+      return;
+    }
+
+    // Define uma chave única de armazenamento para o usuário logado
+    this.userDataKey = `userData_${this.user.email}`;
+    
+    // Carrega os dados do usuário a partir da chave única
+    const userData = JSON.parse(localStorage.getItem(this.userDataKey)) || {};
+
+    this.transactions = userData.transactions || [];
+    this.sobrietyStartDate = userData.sobrietyStartDate || null;
+    this.dailyAverageSpending = parseFloat(userData.dailyAverageSpending) || 0.00;
+    
     this.timerInterval = null;
     this.currentModalMode = null;
 
@@ -10,24 +25,32 @@ class PainelGastos {
   }
 
   init() {
+    this.displayUserName();
     this.setupEventListeners();
     this.updateDisplay();
     this.startSobrietyTimer();
   }
 
+  // Exibe o nome do usuário no painel
+  displayUserName() {
+    const userNameDisplay = document.getElementById('userNameDisplay');
+    if (userNameDisplay && this.user && this.user.name) {
+      const firstName = this.user.name.split(' ')[0]; // Pega o primeiro nome
+      userNameDisplay.textContent = `Olá, ${firstName}`;
+    }
+  }
+
+  // Configura os event listeners para os botões
   setupEventListeners() {
-    // Botões para abrir o modal
     document.getElementById('btnAdicionarGasto').addEventListener('click', () => this.openModal('gasto'));
     document.getElementById('btnAdicionarGanho').addEventListener('click', () => this.openModal('ganho'));
     document.getElementById('btnDefinirDataInicio').addEventListener('click', () => this.openModal('dataInicio'));
-    document.getElementById('btnResetarDados').addEventListener('click', () => this.resetAllData());
+    document.getElementById('btnResetarDados').addEventListener('click', () => this.resetUserData());
 
-    // Import/Export Buttons
     document.getElementById('btnExportData').addEventListener('click', () => this.showExportOptions());
     document.getElementById('btnImportData').addEventListener('click', () => document.getElementById('importFileInput').click());
     document.getElementById('importFileInput').addEventListener('change', (event) => this.handleImportFile(event));
 
-    // Eventos do modal
     document.getElementById('modal-btn-cancel').addEventListener('click', () => this.closeModal());
     document.getElementById('gasto-modal-overlay').addEventListener('click', (event) => {
       if (event.target.id === 'gasto-modal-overlay') {
@@ -35,7 +58,6 @@ class PainelGastos {
       }
     });
 
-    // Formulário e formatação de moeda
     document.getElementById('modal-form').addEventListener('submit', (e) => {
       e.preventDefault();
       this.handleFormSubmit();
@@ -43,6 +65,86 @@ class PainelGastos {
     document.getElementById('modal-value').addEventListener('input', (e) => this.formatInputAsCurrency(e));
   }
   
+  // Salva os dados do usuário no localStorage usando a chave específica do usuário
+  saveData() {
+    const userData = {
+      transactions: this.transactions,
+      sobrietyStartDate: this.sobrietyStartDate,
+      dailyAverageSpending: this.dailyAverageSpending,
+    };
+    localStorage.setItem(this.userDataKey, JSON.stringify(userData));
+  }
+
+  // Lida com o envio do formulário do modal
+  handleFormSubmit() {
+    if (this.currentModalMode === 'gasto' || this.currentModalMode === 'ganho') {
+      this.addTransaction(this.currentModalMode);
+    } else if (this.currentModalMode === 'dataInicio') {
+      this.setSobrietyStartDate();
+    }
+  }
+
+  // Adiciona uma nova transação (gasto ou ganho)
+  addTransaction(type) {
+    const valueText = document.getElementById('modal-value').value;
+    const value = parseFloat(valueText.replace(/[^\d]/g, '')) / 100;
+    const description = document.getElementById('modal-description').value;
+    const date = document.getElementById('modal-date').value;
+
+    if (isNaN(value) || value <= 0 || !description || !date) {
+      alert('Por favor, preencha todos os campos corretamente.');
+      return;
+    }
+
+    const transaction = {
+      id: Date.now(),
+      type: type,
+      value: value,
+      date: date,
+      description: description,
+      timestamp: new Date().toISOString()
+    };
+
+    this.transactions.push(transaction);
+    this.saveData(); // Salva os dados após a nova transação
+    this.updateDisplay();
+    this.closeModal();
+  }
+
+  // Define ou atualiza a data de início da sobriedade e a média de gastos
+  setSobrietyStartDate() {
+    const date = document.getElementById('modal-date').value;
+    const averageSpendingText = document.getElementById('modal-value').value;
+    const averageSpending = parseFloat(averageSpendingText.replace(/[^\d]/g, '')) / 100;
+
+    if (!date || isNaN(averageSpending) || averageSpending < 0) {
+      alert('Por favor, preencha os campos corretamente.');
+      return;
+    }
+    
+    this.sobrietyStartDate = date;
+    this.dailyAverageSpending = averageSpending;
+    
+    this.saveData(); // Salva os dados após a alteração
+    
+    this.updateDisplay();
+    this.startSobrietyTimer();
+    this.closeModal();
+  }
+  
+  // Reseta os dados apenas do usuário logado
+  resetUserData() {
+    const confirmation = confirm('Você tem certeza que deseja resetar seus dados de progresso e transações? Esta ação não pode ser desfeita.');
+    if (confirmation) {
+      // Remove os dados específicos do usuário
+      localStorage.removeItem(this.userDataKey);
+      
+      // Recarrega a página para refletir o estado inicial
+      location.reload();
+    }
+  }
+  
+  // Abre o modal em diferentes modos
   openModal(mode) {
     this.currentModalMode = mode;
     const modalOverlay = document.getElementById('gasto-modal-overlay');
@@ -76,7 +178,6 @@ class PainelGastos {
       dateGroup.style.display = 'block';
 
       valueGroup.querySelector('label').textContent = 'Gasto médio diário que você tinha';
-      // MODIFICADO: Garante que o valor seja exibido no formato de moeda ou vazio, e define o placeholder.
       document.getElementById('modal-value').value = this.dailyAverageSpending > 0 ? this.formatCurrency(this.dailyAverageSpending) : '';
       document.getElementById('modal-value').placeholder = 'R$ 0,00';
       
@@ -89,76 +190,12 @@ class PainelGastos {
     modalOverlay.style.display = 'flex';
   }
 
+  // Fecha o modal
   closeModal() {
     document.getElementById('gasto-modal-overlay').style.display = 'none';
   }
-
-  handleFormSubmit() {
-    if (this.currentModalMode === 'gasto' || this.currentModalMode === 'ganho') {
-      this.addTransaction(this.currentModalMode);
-    } else if (this.currentModalMode === 'dataInicio') {
-      this.setSobrietyStartDate();
-    }
-  }
-
-  addTransaction(type) {
-    const valueText = document.getElementById('modal-value').value;
-    const value = parseFloat(valueText.replace(/[^\d]/g, '')) / 100;
-    const description = document.getElementById('modal-description').value;
-    const date = document.getElementById('modal-date').value;
-
-    if (isNaN(value) || value <= 0 || !description || !date) {
-      alert('Por favor, preencha todos os campos corretamente.');
-      return;
-    }
-
-    const transaction = {
-      id: Date.now(),
-      type: type,
-      value: value,
-      date: date,
-      description: description,
-      timestamp: new Date().toISOString()
-    };
-
-    this.transactions.push(transaction);
-    this.saveData();
-    this.updateDisplay();
-    this.closeModal();
-  }
-
-  setSobrietyStartDate() {
-    const date = document.getElementById('modal-date').value;
-    const averageSpendingText = document.getElementById('modal-value').value;
-    const averageSpending = parseFloat(averageSpendingText.replace(/[^\d]/g, '')) / 100;
-
-    if (!date || isNaN(averageSpending) || averageSpending < 0) {
-      alert('Por favor, preencha os campos corretamente.');
-      return;
-    }
-    
-    this.sobrietyStartDate = date;
-    this.dailyAverageSpending = averageSpending;
-    
-    localStorage.setItem('sobrietyStartDate', date);
-    localStorage.setItem('dailyAverageSpending', averageSpending.toString());
-    
-    this.updateDisplay();
-    this.startSobrietyTimer();
-    this.closeModal();
-  }
   
-  resetAllData() {
-    const confirmation = confirm('Você tem certeza que deseja resetar todos os dados? Esta ação não pode ser desfeita.');
-    if (confirmation) {
-      localStorage.removeItem('transactions');
-      localStorage.removeItem('sobrietyStartDate');
-      localStorage.removeItem('dailyAverageSpending');
-      
-      location.reload();
-    }
-  }
-
+  // Inicia o contador de sobriedade
   startSobrietyTimer() {
     if (this.timerInterval) {
       clearInterval(this.timerInterval);
@@ -170,10 +207,13 @@ class PainelGastos {
     this.updateSobrietyTimer();
   }
 
+  // Atualiza o contador de sobriedade, a economia e a média de gasto diário
   updateSobrietyTimer() {
     const trophyContainer = document.getElementById('trophyContainer');
 
-    // Se a data de início não foi definida, exibe o painel no modo de incentivo.
+    // Exibe a média de gastos diários recuperada do cadastro
+    document.getElementById('dailyAverage').textContent = this.dailyAverageSpending.toFixed(2).replace('.',',');
+
     if (!this.sobrietyStartDate) {
       document.getElementById('days').textContent = '00';
       document.getElementById('hours').textContent = '00';
@@ -181,17 +221,14 @@ class PainelGastos {
       document.getElementById('seconds').textContent = '00';
       document.getElementById('startDate').textContent = 'Não definida';
       document.getElementById('totalSavings').textContent = this.formatCurrency(0);
-      document.getElementById('dailyAverage').textContent = this.dailyAverageSpending.toFixed(2).replace('.',',');
       
-      // Muda para o modo de incentivo
       document.getElementById('achievementTitle').textContent = 'Comece sua jornada!';
       trophyContainer.textContent = '🌱';
-      trophyContainer.classList.remove('trophy'); // Remove animação de pulo
+      trophyContainer.classList.remove('trophy');
       document.getElementById('achievementText').textContent = 'Defina uma data para começar.';
       return; 
     }
     
-    // Restaura o modo de parabéns se a data estiver definida
     document.getElementById('achievementTitle').textContent = 'Parabéns';
     trophyContainer.textContent = '🏆';
     if (!trophyContainer.classList.contains('trophy')) {
@@ -225,8 +262,7 @@ class PainelGastos {
     
     const totalSavings = days * this.dailyAverageSpending;
     document.getElementById('totalSavings').textContent = this.formatCurrency(totalSavings);
-    document.getElementById('dailyAverage').textContent = this.dailyAverageSpending.toFixed(2).replace('.',',');
-
+    
     this.updateAchievement(days);
   }
 
@@ -256,6 +292,14 @@ class PainelGastos {
     this.updateFinancialSummary();
     this.updateHistory();
     this.updateSobrietyTimer();
+    
+    // Controla a visibilidade do botão de definir data de início
+    const btnDefinirData = document.getElementById('btnDefinirDataInicio');
+    if (this.sobrietyStartDate) {
+      btnDefinirData.style.display = 'none';
+    } else {
+      btnDefinirData.style.display = 'inline-block';
+    }
   }
 
   updateFinancialSummary() {
@@ -373,10 +417,6 @@ class PainelGastos {
     }).format(value);
   }
 
-  saveData() {
-    localStorage.setItem('transactions', JSON.stringify(this.transactions));
-  }
-
   showExportOptions() {
     const format = prompt('Qual formato você deseja exportar? Digite "csv" ou "xlsx".');
     if (format && format.toLowerCase() === 'csv') {
@@ -453,7 +493,6 @@ class PainelGastos {
       } else {
         alert('Formato de arquivo não suportado. Por favor, importe .csv ou .xlsx.');
       }
-      // Clear the input to allow re-importing the same file
       event.target.value = ''; 
     };
 

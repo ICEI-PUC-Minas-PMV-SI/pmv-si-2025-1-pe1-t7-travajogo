@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Função para verificar se todos os campos obrigatórios estão preenchidos
   function validarCampos() {
-    return nomeInput.value !== '' && emailInput.value !== '' && senhaInput.value !== '' && confirmarInput.value !== '';
+    return nomeInput.value.trim() !== '' && emailInput.value.trim() !== '' && senhaInput.value.trim() !== '' && confirmarInput.value.trim() !== '';
   }
 
   // Função para salvar os dados no localStorage
@@ -34,35 +34,53 @@ document.addEventListener("DOMContentLoaded", function() {
       alert('As senhas não coincidem. Tente novamente.');
       return;
     }
-
+    
     // Cria um objeto com os dados do formulário
     const novoUsuario = {
       name: nomeInput.value,
       email: emailInput.value,
       password: senhaInput.value,
-      dataInicio: dataInput.value || null, // Pode ser null se não informado
-      gasto: gastoInput.value,
-      contadorAtivo: contadorInput.checked
     };
+
     // Recupera os usuários existentes do localStorage
     let users = JSON.parse(localStorage.getItem('users')) || [];
 
-    // Adiciona o novo usuário ao array de usuários
+    // Verifica se o email já foi cadastrado
+    if (users.some(user => user.email === novoUsuario.email)) {
+        alert('Este endereço de e-mail já está em uso. Por favor, utilize outro.');
+        return;
+    }
+
     users.push(novoUsuario);
     // Salva o array de usuários no localStorage
     localStorage.setItem('users', JSON.stringify(users));
 
+    // Remove todos os caracteres não numéricos e converte para o valor correto, para salvar valor
+    // no campo de gasto médio diário caso preenchido ao cadastrar
+    const gastoValorLimpo = gastoInput.value.replace(/[^\d]/g, '');
+    const gastoNumerico = parseFloat(gastoValorLimpo) / 100 || 0.0;
+
+    // Cria o objeto de dados inicial para o painel do usuário com o valor correto
+    const initialUserData = {
+      transactions: [],
+      sobrietyStartDate: dataInput.value || null,
+      dailyAverageSpending: gastoNumerico // Agora 'gastoNumerico' terá o valor correto
+    };
+
+    // Salva os dados iniciais com uma chave única baseada no email do usuário
+    localStorage.setItem(`userData_${novoUsuario.email}`, JSON.stringify(initialUserData));
+
     // Limpa os campos após o cadastro
-  nomeInput.value = '';
-  emailInput.value = '';
-  senhaInput.value = '';
-  confirmarInput.value = '';
-  dataInput.value = '';
-  gastoInput.value = '';
-  contadorInput.checked = false;
+    nomeInput.value = '';
+    emailInput.value = '';
+    senhaInput.value = '';
+    confirmarInput.value = '';
+    dataInput.value = '';
+    gastoInput.value = 'R$ 0,00';
+    contadorInput.checked = true;
     
     // Alerta de sucesso e redirecionamento ou atualização da página
-    alert('Cadastro realizado com sucesso!');
+    alert('Cadastro realizado com sucesso! Você será redirecionado para a tela de login.');
     window.location.href = 'login.html'; // Substitua por uma URL de tela inicial ou login
   }
 
@@ -71,53 +89,25 @@ document.addEventListener("DOMContentLoaded", function() {
     event.preventDefault(); // Evita o comportamento padrão de submit do formulário
     salvarCadastro();
   });
-
-  // Função para carregar os dados se já existirem no localStorage (para um futuro login ou redirecionamento)
-  /*function carregarDados() {
-    const usuarioStored = localStorage.getItem('users');
-    if (usuarioStored) {
-      const users = JSON.parse(usuarioStored);
-      nomeInput.value = users[0].nome; // Acesse o primeiro usuário da lista
-      emailInput.value = users[0].email;
-      gastoInput.value = users[0].gasto;
-      dataInput.value = users[0].dataInicio || '';
-      contadorInput.checked = users[0].contadorAtivo;
-    }
-  }
-
-  // Carrega os dados armazenados se já houver
- carregarDados();
-*/
   
-  // Formatação de valor como moeda BRL
-  function formatarMoeda(valor) {
-    return valor.replace(/\D/g, "") // Remove tudo o que não for número
-                .replace(/(\d)(\d{8})$/, "$1.$2") // Adiciona ponto de milhar
-                .replace(/(\d)(\d{5})$/, "$1.$2") // Adiciona ponto de milhar
-                .replace(/(\d)(\d{2})$/, "$1,$2") // Adiciona vírgula para centavos
-                .replace(/^(\d{1,3})(\d{3})/, "$1.$2"); // Adiciona ponto no início
-  }
-
-  // Evento para formatar enquanto o usuário digita
-  gastoInput.addEventListener('input', function(e) {
-    let valor = e.target.value;
-
-    // Aplica a formatação da moeda BRL
-    valor = formatarMoeda(valor);
-    
-    // Adiciona "R$" ao valor
-    gastoInput.value = "R$ " + valor;
+  gastoInput.addEventListener('input', (e) => {
+    let value = e.target.value.replace(/\D/g, '');
+    if (value === '') {
+      e.target.value = 'R$ 0,00';
+      return;
+    }
+    value = (parseInt(value, 10) / 100).toFixed(2);
+    e.target.value = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
   });
-
+  
   // **Parte para navegação (botões "Tela Inicial" e "Login")**
   // Navegar para a Tela Inicial  
-document.getElementById('tela-inicial').addEventListener('click', function() {
-  window.location.href = 'index.html'; // Redirecionar para a tela inicial ou home
-});
+  document.getElementById('tela-inicial').addEventListener('click', function() {
+    window.location.href = 'index.html'; // Redirecionar para a tela inicial ou home
+  });
   
  // Navegar para a Tela de Login
-document.getElementById('login-btn').addEventListener('click', function() {
-  window.location.href = 'login.html'; // Redirecionar para a tela de login
-});
-
+  document.getElementById('login-btn').addEventListener('click', function() {
+    window.location.href = 'login.html'; // Redirecionar para a tela de login
+  });
 });
