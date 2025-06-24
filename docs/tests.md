@@ -59,11 +59,11 @@ Preencha a tabela com o plano dos testes. Para cada Caso de Teste (CT), associe 
 
 **Caso de Teste** | **CT05 - Acessar página de Chat**
  :--------------: | ------------
-**Procedimento**  | 1) Acessar chat.html
+**Procedimento**  | 1) Acessar chat.html <br> 2) Selecionar um usuário <br> 3) Enviar uma mensagem ao usuário 
 **Requisitos associados** | RF-003
 **Resultado esperado** | Página que permite o contato com outros usuários através de mensagens de texto (se trata de uma simulação devido nossas limitações)
 **Dados de entrada** | Mensagens de texto
-**Resultado obtido** | "Teste"
+**Resultado obtido** | A mensagem "Teste" enviada pelo outro usuário
 
 ## Registro dos Testes de Software
 
