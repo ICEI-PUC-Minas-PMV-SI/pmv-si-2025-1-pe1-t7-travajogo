@@ -57,6 +57,14 @@ Preencha a tabela com o plano dos testes. Para cada Caso de Teste (CT), associe 
 **Dados de entrada** | Nenhum
 **Resultado obtido** | Página inicial para usuário logado
 
+**Caso de Teste** | **CT05 - Acessar página de Chat**
+ :--------------: | ------------
+**Procedimento**  | 1) Acessar chat.html
+**Requisitos associados** | RF-003
+**Resultado esperado** | Página que permite o contato com outros usuários através de mensagens de texto (se trata de uma simulação devido nossas limitações)
+**Dados de entrada** | Mensagens de texto
+**Resultado obtido** | "Teste"
+
 ## Registro dos Testes de Software
 
 Esta seção deve apresentar o relatório com as evidências dos testes de software realizados no sistema pela equipe, baseado no plano de testes pré-definido. Documente cada caso de teste apresentando um vídeo ou animação que comprove o funcionamento da funcionalidade. Veja os exemplos a seguir.
@@ -81,6 +89,9 @@ Esta seção deve apresentar o relatório com as evidências dos testes de softw
 |Requisito Associado | RF-001 - A aplicação deve oferecer uma interface gráfica responsiva para as telas de usuário logado e deslogado, incluindo cabeçalho, seções principais e rodapé com botões de navegação e links úteis.|
 |Captura de tela: |<img width="1280" alt="Captura de Tela 2025-06-22 às 20 07 47" src="https://github.com/user-attachments/assets/863c4bf6-751d-408a-8b6b-d0f1f66ac47f" />| 
 
+|*Caso de Teste*                                 |*CT05 - Acessar página de chat e simular uma conversa*                                         |
+|---|---|
+|Requisito Associado | RF-003 - A aplicação deve ter um chat simples onde os usuários possam trocar ideias e experiências sobre apostas online.|
 
 ## Avaliação dos Testes de Software
 
