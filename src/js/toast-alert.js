@@ -28,6 +28,7 @@ function showConfirm(message) {
         const cancelBtn = document.getElementById('toast-cancel');
 
         messageEl.innerHTML = `<strong>TravaJogo</strong><br>${message}`;
+        confirmBtn.style.display = 'inline-block';
         cancelBtn.style.display = 'inline-block';
         toast.style.display = 'block';
 
@@ -47,5 +48,9 @@ function showConfirm(message) {
 
         confirmBtn.addEventListener('click', confirmHandler);
         cancelBtn.addEventListener('click', cancelHandler);
+
+        setTimeout(() => {
+            toast.style.display = 'none';
+        }, 5000);
     });
 }
