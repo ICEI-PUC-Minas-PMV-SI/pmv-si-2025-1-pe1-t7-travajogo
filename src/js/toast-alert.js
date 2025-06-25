@@ -11,7 +11,14 @@ function showAlert(message) {
         cancelBtn.style.display = 'none';
         toast.style.display = 'block';
 
+        const autoDismiss = setTimeout(() => {
+            toast.style.display = 'none';
+            resolve(true);
+            confirmBtn.removeEventListener('click', handler);
+        }, 2500);
+
         const handler = () => {
+            clearTimeout(autoDismiss);
             toast.style.display = 'none';
             resolve(true);
             confirmBtn.removeEventListener('click', handler);

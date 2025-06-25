@@ -566,7 +566,7 @@ class PainelGastos {
     this.transactions = this.transactions.concat(newTransactions);
     this.saveData();
     this.updateDisplay();
-    alert(`Dados importados com sucesso: ${newTransactions.length} registros adicionados.`);
+    showAlert(`Dados importados com sucesso: ${newTransactions.length} registros adicionados.`);
   }
 }
 
