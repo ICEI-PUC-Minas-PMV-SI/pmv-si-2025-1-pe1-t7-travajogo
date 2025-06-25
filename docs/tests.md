@@ -65,6 +65,46 @@ Preencha a tabela com o plano dos testes. Para cada Caso de Teste (CT), associe 
 **Dados de entrada** | Mensagens de texto
 **Resultado obtido** | A mensagem "Teste" enviada pelo outro usuário
 
+**Caso de Teste** | **CT06 - Definir data de início de jornada**
+ :--------------: | ------------
+**Procedimento**  | 1) Acessar painel-de-gastos.html com usuário logado <br> 2) Clicar no botão "Definir início da jornada" <br> 3) Completar com as informações necessárias <br> 4) Clicar no botão definir
+**Requisitos associados** | RF-006
+**Resultado esperado** | Página atualiza com as informações inseridas pelo usuário sobre seu progresso sem apostas
+**Dados de entrada** | Valor monetário sobre gasto médio diário com apostas e data de início de sobriedade
+**Resultado obtido** | Painel atualizou com os dados inseridos pelo usuário
+
+**Caso de Teste** | **CT07 - Redefinir data de início de jornada**
+ :--------------: | ------------
+**Procedimento**  | 1) Acessar painel-de-gastos.html com usuário logado <br> 2) Clicar no botão "Redefinir jornada" <br> 3) Clicar no botão OK na mensagem que aparece
+**Requisitos associados** | RF-006
+**Resultado esperado** | Página atualiza com progresso sem apostas do usuário zerado
+**Dados de entrada** | Nenhum
+**Resultado obtido** | Apenas o painel de progresso sem apostas resetou por completo
+
+**Caso de Teste** | **CT08 - Adicionar ganho/gasto**
+ :--------------: | ------------
+**Procedimento**  | 1) Acessar painel-de-gastos.html com usuário logado <br> 2) Clicar no botão "Adicionar gasto" ou no botão "Adicionar ganho" <br> 3) Completar com as informações necessárias <br> 4) Clicar no botão "Adicionar"
+**Requisitos associados** | RF-006
+**Resultado esperado** | Página atualiza com as informações inseridas pelo usuário em seu Histórico
+**Dados de entrada** | Valor monetário, data, descrição e checkbox se é aposta ou não
+**Resultado obtido** | Histórico atualizou com os dados inseridos pelo usuário
+
+**Caso de Teste** | **CT09 - Importar/Exportar histórico**
+ :--------------: | ------------
+**Procedimento**  | 1) Acessar painel-de-gastos.html com usuário logado<br> 2) Clicar no botão "Importar histórico (xlsx)" ou "Exportar histórico" <br> 3) Selecionar arquivo a ser importado - deve seguir padrão definido anteriormente - ou se for exportar, selecionar a pastar e nomear o arquivo
+**Requisitos associados** | RF-006
+**Resultado esperado** | Página atualiza com as informações do histórico se for importado - caso for exportado, arquivo é exportado para a máquina do usuário
+**Dados de entrada** | Nenhum
+**Resultado obtido** | Histórico atualizou com os dados importados quando o arquivo seguiu o padrão - Arquivo xlsx foi exportado com sucesso quando selecionada essa opção
+
+**Caso de Teste** | **CT10 - Redefinir todos os dados**
+ :--------------: | ------------
+**Procedimento**  | 1) Acessar painel-de-gastos.html com usuário logado <br> 2) Clicar no botão "Redefinir todos os dados" <br> 3) Clicar no botão OK na mensagem que aparece
+**Requisitos associados** | RF-006
+**Resultado esperado** | Página atualiza com todos os dados zerados
+**Dados de entrada** | Nenhum
+**Resultado obtido** | Todos os dados da página foram resetados
+
 ## Registro dos Testes de Software
 
 Esta seção deve apresentar o relatório com as evidências dos testes de software realizados no sistema pela equipe, baseado no plano de testes pré-definido. Documente cada caso de teste apresentando um vídeo ou animação que comprove o funcionamento da funcionalidade. Veja os exemplos a seguir.
