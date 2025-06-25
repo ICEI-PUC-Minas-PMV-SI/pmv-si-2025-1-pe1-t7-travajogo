@@ -131,7 +131,32 @@ Esta seção deve apresentar o relatório com as evidências dos testes de softw
 
 |*Caso de Teste*                                 |*CT05 - Acessar página de chat e simular uma conversa*                                         |
 |---|---|
-|Requisito Associado | RF-003 - A aplicação deve ter um chat simples onde os usuários possam trocar ideias e experiências sobre apostas online.|
+|Requisito Associado | RF-003 - A aplicação deve ter um chat simples onde os usuários possam trocar ideias e experiências sobre apostas online.| 
+
+|*Caso de Teste*                                 |*CT06 - Acessar página inicial logado*                                         |
+|---|---|
+|Requisito Associado | RF-006 - A aplicação deve fornecer um painel de controle de gastos, permitindo que o usuário cadastre sua data de início de sobriedade, podendo acompanhar seu tempo sem apostar e dinheiro já economizado. Também deve permitir o cadastro de gastos e ganhos através de um modal.|
+|Captura de tela: ||  
+
+|*Caso de Teste*                                 |*CT07 - Redefinir data de início de jornada logado*                                         |
+|---|---|
+|Requisito Associado | RF-006 - A aplicação deve fornecer um painel de controle de gastos, permitindo que o usuário cadastre sua data de início de sobriedade, podendo acompanhar seu tempo sem apostar e dinheiro já economizado. Também deve permitir o cadastro de gastos e ganhos através de um modal.|
+|Captura de tela: ||  
+
+|*Caso de Teste*                                 |*CT08 - Adicionar ganho/gasto logado*                                         |
+|---|---|
+|Requisito Associado | RF-006 - A aplicação deve fornecer um painel de controle de gastos, permitindo que o usuário cadastre sua data de início de sobriedade, podendo acompanhar seu tempo sem apostar e dinheiro já economizado. Também deve permitir o cadastro de gastos e ganhos através de um modal.|
+|Captura de tela: || 
+
+|*Caso de Teste*                                 |*CT09 - Importar/Exportar histórico logado*                                         |
+|---|---|
+|Requisito Associado | RF-006 - A aplicação deve fornecer um painel de controle de gastos, permitindo que o usuário cadastre sua data de início de sobriedade, podendo acompanhar seu tempo sem apostar e dinheiro já economizado. Também deve permitir o cadastro de gastos e ganhos através de um modal.|
+|Captura de tela: || 
+
+|*Caso de Teste*                                 |*CT10 - Redefinir todos os dados logado*                                         |
+|---|---|
+|Requisito Associado | RF-006 - A aplicação deve fornecer um painel de controle de gastos, permitindo que o usuário cadastre sua data de início de sobriedade, podendo acompanhar seu tempo sem apostar e dinheiro já economizado. Também deve permitir o cadastro de gastos e ganhos através de um modal.|
+|Captura de tela: || 
 
 ## Avaliação dos Testes de Software
 
