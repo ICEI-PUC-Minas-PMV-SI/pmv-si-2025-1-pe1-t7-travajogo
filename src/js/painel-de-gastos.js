@@ -511,8 +511,8 @@ class PainelGastos {
 
     const ws = XLSX.utils.json_to_sheet(data);
     const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, "Gastos TravaJogo");
-    XLSX.writeFile(wb, "gastos_travajogo.xlsx");
+    XLSX.utils.book_append_sheet(wb, ws, "TravaJogo - Histórico");
+    XLSX.writeFile(wb, "historico_travajogo.xlsx");
   }
 
   handleImportFile(event) {
