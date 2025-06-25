@@ -101,7 +101,7 @@ class PainelGastos {
     const isBet = isBetRadio ? isBetRadio.value : null; // Valor é "Sim" ou "Não"
 
     if (isNaN(value) || value <= 0 || !description || !date || !isBet) {
-      alert('Por favor, preencha todos os campos obrigatórios.');
+      showAlert('Por favor, preencha todos os campos obrigatórios.');
       return;
     }
 
@@ -196,11 +196,11 @@ class PainelGastos {
       dateGroup.style.display = 'block';
       apostaGroup.style.display = 'none';
 
-      valueGroup.querySelector('label').textContent = 'Gasto médio diário';
+      valueGroup.querySelector('label').textContent = 'Gasto médio diário com apostas';
       document.getElementById('modal-value').value = this.dailyAverageSpending > 0 ? this.formatCurrency(this.dailyAverageSpending) : '';
       document.getElementById('modal-value').placeholder = 'R$ 0,00';
       
-      dateGroup.querySelector('label').textContent = 'Data de Início';
+      dateGroup.querySelector('label').textContent = 'Data de início da parada';
       document.getElementById('modal-date').value = this.sobrietyStartDate || localDate; // CORREÇÃO: Usa data local
       
       submitButton.textContent = 'Definir';
@@ -566,7 +566,10 @@ class PainelGastos {
     this.transactions = this.transactions.concat(newTransactions);
     this.saveData();
     this.updateDisplay();
-    showAlert(`Dados importados com sucesso: ${newTransactions.length} registros adicionados.`);
+    if (newTransactions.length == 0) 
+      showAlert(`Não foi possível ler o arquivo. Nenhum dado importado.`);
+    else 
+      showAlert(`Dados importados com sucesso: ${newTransactions.length} registros adicionados.`);
   }
 }
 

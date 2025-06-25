@@ -8,23 +8,15 @@ function showAlert(message) {
         const cancelBtn = document.getElementById('toast-cancel');
 
         messageEl.innerHTML = `<strong>TravaJogo</strong><br>${message}`;
+        
+        confirmBtn.style.display = 'none';
         cancelBtn.style.display = 'none';
         toast.style.display = 'block';
 
-        const autoDismiss = setTimeout(() => {
+        setTimeout(() => {
             toast.style.display = 'none';
             resolve(true);
-            confirmBtn.removeEventListener('click', handler);
-        }, 2500);
-
-        const handler = () => {
-            clearTimeout(autoDismiss);
-            toast.style.display = 'none';
-            resolve(true);
-            confirmBtn.removeEventListener('click', handler);
-        };
-
-        confirmBtn.addEventListener('click', handler);
+        }, 3000);
     });
 }
 
