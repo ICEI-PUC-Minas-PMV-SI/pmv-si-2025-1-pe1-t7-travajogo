@@ -15,7 +15,7 @@ function initializeUsers() {
     const initialUsers = [
       {
         name: "Jessica Santos",
-        email: "jeehgasai@gmail.com",
+        email: "jeehgasai@email.com",
         password: "teste@123",
       },
     ];
