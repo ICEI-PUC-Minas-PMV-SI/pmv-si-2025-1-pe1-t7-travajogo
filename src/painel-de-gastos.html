@@ -10,6 +10,15 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" />
   <link rel="stylesheet" href="css/painel-gastos.css">
 </head>
+
+<div id="custom-toast" style="display:none; position:fixed; bottom:20px; right:20px; background:#0f172a; color:white; padding:15px; border-radius:8px; z-index:1000; box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+    <div id="toast-message"></div>
+    <div style="margin-top:10px; text-align:right;">
+        <button id="toast-confirm" style="background:#10b981; border:none; color:white; padding:5px 15px; border-radius:4px; margin-right:5px; cursor:pointer;">OK</button>
+        <button id="toast-cancel" style="background:#ef4444; border:none; color:white; padding:5px 15px; border-radius:4px; cursor:pointer; display:none;">Cancelar</button>
+    </div>
+</div>
+
 <body class="bg-gray-100 min-h-screen flex flex-col">
 
   <script src="js/auth.js"></script>
@@ -309,5 +318,6 @@
   </div>
   
   <script src="js/painel-de-gastos.js"></script>
+  <script src="js/toast-alert.js"></script>
 </body>
 </html>

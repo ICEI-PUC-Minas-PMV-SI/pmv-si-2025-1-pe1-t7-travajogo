@@ -26,7 +26,7 @@ class PainelGastos {
 
   init() {
     this.displayUserName();
-    this.initializeFilters(); // NOVO: Inicia os filtros do histórico
+    this.initializeFilters(); // Inicia os filtros do histórico
     this.setupEventListeners();
     this.updateDisplay();
     this.startSobrietyTimer();
@@ -98,7 +98,7 @@ class PainelGastos {
     const description = document.getElementById('modal-description').value;
     const date = document.getElementById('modal-date').value;
     const isBetRadio = document.querySelector('input[name="is_bet"]:checked');
-    const isBet = isBetRadio ? isBetRadio.value : null; // Valor agora é "Sim" ou "Não"
+    const isBet = isBetRadio ? isBetRadio.value : null; // Valor é "Sim" ou "Não"
 
     if (isNaN(value) || value <= 0 || !description || !date || !isBet) {
       alert('Por favor, preencha todos os campos obrigatórios.');
@@ -112,7 +112,7 @@ class PainelGastos {
       date: date,
       description: description,
       isBet: isBet, // Armazena "Sim" ou "Não"
-      timestamp: new Date().toISOString() // Mantido para ordenação interna
+      timestamp: new Date().toISOString()
     };
 
     this.transactions.push(transaction);
@@ -121,8 +121,8 @@ class PainelGastos {
     this.closeModal();
   }
   
-  deleteTransaction(transactionId) {
-    const confirmation = confirm('Tem certeza que deseja excluir esta transação?');
+  async deleteTransaction(transactionId) {
+    const confirmation = await showConfirm('Tem certeza que deseja excluir esta transação?');
     if (confirmation) {
       this.transactions = this.transactions.filter(t => t.id !== transactionId);
       this.saveData();
@@ -150,8 +150,8 @@ class PainelGastos {
     this.closeModal();
   }
   
-  resetUserData() {
-    const confirmation = confirm('Você tem certeza que deseja resetar seus dados de progresso e histórico? Esta ação não pode ser desfeita.');
+  async resetUserData() {
+    const confirmation = await showConfirm('Você tem certeza que deseja resetar seus dados de progresso e histórico? Esta ação não pode ser desfeita.');
     if (confirmation) {
       localStorage.removeItem(this.userDataKey);
       location.reload();
@@ -176,7 +176,7 @@ class PainelGastos {
     valueGroup.querySelector('label').innerHTML = 'Valor <span class="required-asterisk">*</span>';
     dateGroup.querySelector('label').innerHTML = 'Data <span class="required-asterisk">*</span>';
     
-    const localDate = this.getLocalDateAsString(); // CORREÇÃO: Pega a data local correta
+    const localDate = this.getLocalDateAsString(); // Pega a data local correta
 
     if (mode === 'gasto' || mode === 'ganho') {
       modalTitle.textContent = mode === 'gasto' ? 'Cadastro de Gasto' : 'Cadastro de Ganho';
@@ -186,7 +186,7 @@ class PainelGastos {
       apostaGroup.style.display = 'block';
       document.getElementById('modal-value').placeholder = 'R$ 0,00';
       submitButton.textContent = 'Adicionar';
-      document.getElementById('modal-date').value = localDate; // CORREÇÃO: Usa data local
+      document.getElementById('modal-date').value = localDate; // Usa data local
       document.getElementById('aposta-nao').checked = true;
 
     } else if (mode === 'dataInicio') {
@@ -243,14 +243,14 @@ class PainelGastos {
       trophyContainer.classList.remove('trophy');
       document.getElementById('achievementText').textContent = 'Defina uma data para começar.';
 
-      // MUDANÇA 1: Altera o texto e a cor do contador quando não há data
+      //Altera o texto e a cor do contador quando não há data
       sobrietySubheading.innerHTML = 'Inicie sua jornada e veja a mudança acontecer! 💪';
       timeValueElements.forEach(el => el.classList.add('time-value-zero'));
       
       return; 
     }
     
-    // MUDANÇA 1: Reverte as alterações quando a data é definida
+    // Reverte as alterações quando a data é definida
     sobrietySubheading.innerHTML = 'Continue firme na sua jornada de superação!';
     timeValueElements.forEach(el => el.classList.remove('time-value-zero'));
 
@@ -305,8 +305,8 @@ class PainelGastos {
     document.getElementById('achievementText').textContent = achievementText;
   }
 
-  resetSobrietyProgress() {
-    const ok = confirm(
+  async resetSobrietyProgress() {
+    const ok = await showConfirm(
       'Você tem certeza que deseja redefinir sua jornada? Isso vai apagar seu progresso sem apostas.'
     );
     if (!ok) return;
@@ -335,9 +335,7 @@ class PainelGastos {
 
   updateFinancialSummary() {
     const now = new Date();
-    // **CORREÇÃO PRINCIPAL AQUI**
     // Usa a função auxiliar para obter a data local no formato YYYY-MM-DD
-    // Em vez de now.toISOString().split('T')[0] que retornava a data em UTC.
     const today = this.getLocalDateAsString(now);
 
     const startOfWeek = new Date(now);
@@ -397,7 +395,7 @@ class PainelGastos {
     document.getElementById('dailyBalanceDate').textContent = todayFormatted;
   }
 
-  // NOVO: Define as datas padrão para os filtros do histórico.
+  // Define as datas padrão para os filtros do histórico.
   initializeFilters() {
     const endDateInput = document.getElementById('filterEndDate');
     const startDateInput = document.getElementById('filterStartDate');
@@ -411,7 +409,7 @@ class PainelGastos {
     startDateInput.value = this.getLocalDateAsString(thirtyDaysAgo);
   }
 
-  // ATUALIZADO: A função de histórico agora filtra os resultados.
+  // A função de histórico agora filtra os resultados.
   updateHistory() {
     const historyContainer = document.getElementById('historyContainer');
     
@@ -452,7 +450,7 @@ class PainelGastos {
       const textColor = isExpense ? 'text-red-600' : 'text-green-600';
       const sign = isExpense ? '-' : '+';
       const dateFormatted = new Date(transaction.date + 'T00:00:00').toLocaleDateString('pt-BR');
-      const betTag = transaction.isBet === 'Sim' ? '<span class="bet-tag">(Aposta)</span>' : ''; // Lógica atualizada para "Sim"
+      const betTag = transaction.isBet === 'Sim' ? '<span class="bet-tag">(Aposta)</span>' : '';
 
       return `
         <div class="flex justify-between items-center bg-white p-3 rounded-md shadow-sm">

@@ -70,14 +70,14 @@
   font-size: 2.5rem;
   font-weight: 700;
   line-height: 1;
-  background-color: var(--white-color); /* Alterado */
-  color: var(--accent-color); /* Alterado */
+  background-color: var(--white-color);
+  color: var(--accent-color);
   border-radius: 8px;
   padding: 0.75rem 0.5rem;
   min-width: 70px;
   margin-bottom: 0.5rem;
-  border: 1px solid #e5e7eb; /* Alterado */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Alterado */
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   transition: transform 0.3s ease, color 0.3s ease;
 }
 
@@ -92,7 +92,7 @@
 .time-label {
   font-size: 0.8rem;
   text-transform: uppercase;
-  color: #6b7280; /* Alterado */
+  color: #6b7280;
   letter-spacing: 1px;
 }
 
@@ -101,12 +101,12 @@
   font-weight: 700;
   align-self: flex-start;
   padding-top: 0.75rem;
-  color: #d1d5db; /* Alterado */
+  color: #d1d5db;
 }
 
 .sobriety-date {
   font-size: 1rem;
-  color: #6b7280; /* Alterado */
+  color: #6b7280;
   font-style: italic;
 }
 
@@ -117,12 +117,12 @@
 }
 
 .savings-box {
-  background-color: #f9fafb; /* Alterado */
+  background-color: #f9fafb;
   border-radius: 12px;
   padding: 1.5rem;
   text-align: center;
   transition: transform 0.3s ease;
-  border: 1px solid var(--border-color); /* Alterado */
+  border: 1px solid var(--border-color);
 }
 
 .savings-box:hover {
@@ -133,7 +133,7 @@
 .savings-box h3 {
   font-size: 1.2rem;
   margin-bottom: 0.75rem;
-  color: var(--dark-color); /* Alterado */
+  color: var(--dark-color);
 }
 
 .savings-amount {
@@ -145,7 +145,7 @@
 
 .savings-details {
   font-size: 0.9rem;
-  color: #6b7280; /* Alterado */
+  color: #6b7280;
 }
 
 .trophy {
@@ -205,15 +205,15 @@
 }
 
 .btn-sobriety-set {
-  background-color: var(--accent-color); /* Alterado */
-  color: var(--white-color); /* Alterado */
-  border: none; /* Alterado */
+  background-color: var(--accent-color);
+  color: var(--white-color);
+  border: none;
   font-weight: 600;
-  padding: 12px 24px; /* Aumentado */
+  padding: 12px 24px;
 }
 
 .btn-sobriety-set:hover {
-  background-color: #60a5fa; /* Alterado */
+  background-color: #60a5fa;
   transform: scale(1.03);
 }
 
@@ -226,7 +226,7 @@
   transition: transform 0.3s ease;
 }
 .btn-sobriety-reset:hover {
-  background-color: #dc2626; /* vermelho um pouco mais escuro */
+  background-color: #dc2626;
   transform: scale(1.03);
 }
 
@@ -244,7 +244,6 @@
   border: 1px solid var(--info-color);
 }
 
-/* --- ESTILOS DA SEÇÃO DE PROMOÇÃO --- */
 .extension-promo-banner {
   display: flex;
   align-items: center;
@@ -279,7 +278,7 @@
   border-color: #2563eb;
 }
 
-/* --- ESTILOS DO MODAL UNIFICADO (SEM ALTERAÇÃO) --- */
+/* --- ESTILOS DO MODAL UNIFICADO --- */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -375,18 +374,17 @@
   font-weight: bold;
 }
 
-/* Estilos modernos para os radio buttons */
 .radio-group {
   display: flex;
   align-items: center;
-  gap: 32px; /* Aumentei o espaçamento entre as opções */
+  gap: 32px;
   padding: 8px 0;
 }
 
 .radio-option {
   display: flex;
   align-items: center;
-  gap: 8px; /* Diminuí o espaçamento entre checkbox e texto */
+  gap: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
