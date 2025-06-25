@@ -91,7 +91,7 @@ Preencha a tabela com o plano dos testes. Para cada Caso de Teste (CT), associe 
 
 **Caso de Teste** | **CT09 - Importar/Exportar histórico**
  :--------------: | ------------
-**Procedimento**  | 1) Acessar painel-de-gastos.html com usuário logado<br> 2) Clicar no botão "Importar histórico (xlsx)" ou "Exportar histórico" <br> 3) Selecionar arquivo a ser importado - deve seguir padrão definido anteriormente - ou se for exportar, selecionar a pastar e nomear o arquivo
+**Procedimento**  | 1) Acessar painel-de-gastos.html com usuário logado<br> 2) Clicar no botão "Importar histórico (xlsx)" ou "Exportar histórico" <br> 3) Selecionar arquivo a ser importado - deve seguir padrão definido anteriormente - ou se for exportar, o histórico é baixado para a pasta padrão de downloads definida no navegador
 **Requisitos associados** | RF-006
 **Resultado esperado** | Página atualiza com as informações do histórico se for importado - caso for exportado, arquivo é exportado para a máquina do usuário
 **Dados de entrada** | Nenhum
@@ -133,30 +133,30 @@ Esta seção deve apresentar o relatório com as evidências dos testes de softw
 |---|---|
 |Requisito Associado | RF-003 - A aplicação deve ter um chat simples onde os usuários possam trocar ideias e experiências sobre apostas online.| 
 
-|*Caso de Teste*                                 |*CT06 - Acessar página inicial logado*                                         |
+|*Caso de Teste*                                 |*CT06 - Definir data de início de jornada*                                         |
 |---|---|
 |Requisito Associado | RF-006 - A aplicação deve fornecer um painel de controle de gastos, permitindo que o usuário cadastre sua data de início de sobriedade, podendo acompanhar seu tempo sem apostar e dinheiro já economizado. Também deve permitir o cadastro de gastos e ganhos através de um modal.|
-|Captura de tela: ||  
+|Capturas de tela: |![image](https://github.com/user-attachments/assets/636f3e68-89ef-4f53-998a-1cc1a9f67336) ![image](https://github.com/user-attachments/assets/b4890406-78a4-4580-9be1-26c21607892f)|  
 
 |*Caso de Teste*                                 |*CT07 - Redefinir data de início de jornada logado*                                         |
 |---|---|
 |Requisito Associado | RF-006 - A aplicação deve fornecer um painel de controle de gastos, permitindo que o usuário cadastre sua data de início de sobriedade, podendo acompanhar seu tempo sem apostar e dinheiro já economizado. Também deve permitir o cadastro de gastos e ganhos através de um modal.|
-|Captura de tela: ||  
+|Captura de tela: |![image](https://github.com/user-attachments/assets/fcba6e5e-f5d7-497c-bb9d-9656cdb9997f)|  
 
-|*Caso de Teste*                                 |*CT08 - Adicionar ganho/gasto logado*                                         |
+|*Caso de Teste*                                 |*CT08 - Adicionar ganho/gasto*                                         |
 |---|---|
 |Requisito Associado | RF-006 - A aplicação deve fornecer um painel de controle de gastos, permitindo que o usuário cadastre sua data de início de sobriedade, podendo acompanhar seu tempo sem apostar e dinheiro já economizado. Também deve permitir o cadastro de gastos e ganhos através de um modal.|
-|Captura de tela: || 
+|Capturas de tela: |![image](https://github.com/user-attachments/assets/739843e1-53e1-4bf9-92b0-fdacb523166a) ![image](https://github.com/user-attachments/assets/ef217808-ef03-4b38-9901-f1241bb1e38a)| 
 
-|*Caso de Teste*                                 |*CT09 - Importar/Exportar histórico logado*                                         |
+|*Caso de Teste*                                 |*CT09 - Importar/Exportar histórico*                                         |
 |---|---|
 |Requisito Associado | RF-006 - A aplicação deve fornecer um painel de controle de gastos, permitindo que o usuário cadastre sua data de início de sobriedade, podendo acompanhar seu tempo sem apostar e dinheiro já economizado. Também deve permitir o cadastro de gastos e ganhos através de um modal.|
-|Captura de tela: || 
+|Capturas de tela: |![image](https://github.com/user-attachments/assets/c0a8c329-cd59-4803-bf35-510bafdd71fa) ![image](https://github.com/user-attachments/assets/444c7520-9cec-442d-8c69-9f36af8cefa9)| 
 
-|*Caso de Teste*                                 |*CT10 - Redefinir todos os dados logado*                                         |
+|*Caso de Teste*                                 |*CT10 - Redefinir todos os dados*                                         |
 |---|---|
 |Requisito Associado | RF-006 - A aplicação deve fornecer um painel de controle de gastos, permitindo que o usuário cadastre sua data de início de sobriedade, podendo acompanhar seu tempo sem apostar e dinheiro já economizado. Também deve permitir o cadastro de gastos e ganhos através de um modal.|
-|Captura de tela: || 
+|Captura de tela: |![image](https://github.com/user-attachments/assets/e054e796-7c61-40f5-84b0-af65b00dcf6e)| 
 
 ## Avaliação dos Testes de Software
 
