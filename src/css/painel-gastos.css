@@ -6,10 +6,10 @@
   --border-color: #e2e8f0;
   --success-color: #10b981;
   --accent-color: #3b82f6;
-  --expense-color: #ef4444; /* Red */
-  --gain-color: #22c55e;    /* Green */
-  --info-color: #3b82f6;    /* Blue */
-  --warning-color: #f59e0b; /* Yellow/Orange */
+  --expense-color: #ef4444; 
+  --gain-color: #22c55e;   
+  --info-color: #3b82f6;    
+  --warning-color: #f59e0b; 
 }
 
 * {
@@ -17,17 +17,6 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Inter', sans-serif;
-}
-
-.sobriety-tracker {
-  background: var(--primary-color);
-  padding: 2rem 1rem;
-  margin: 2rem auto;
-  width: 100%;
-  max-width: 1000px;
-  border-radius: 16px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  color: var(--white-color);
 }
 
 .sobriety-content {
@@ -41,22 +30,24 @@
 }
 
 .sobriety-header h2 {
-  font-size: 1.8rem;
+  font-size: 1.75rem; 
   font-weight: 700;
   margin-bottom: 0.5rem;
+  color: var(--dark-color);
 }
 
 .sobriety-header p {
   font-size: 1rem;
-  opacity: 0.8;
+  color: #4b5563; 
 }
 
 .timer-container {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: #f9fafb; 
   border-radius: 12px;
   padding: 1.5rem;
   margin-bottom: 2rem;
   text-align: center;
+  border: 1px solid var(--border-color); 
 }
 
 .timer-display {
@@ -79,24 +70,29 @@
   font-size: 2.5rem;
   font-weight: 700;
   line-height: 1;
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: var(--white-color); /* Alterado */
+  color: var(--accent-color); /* Alterado */
   border-radius: 8px;
   padding: 0.75rem 0.5rem;
   min-width: 70px;
   margin-bottom: 0.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+  border: 1px solid #e5e7eb; /* Alterado */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Alterado */
+  transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .time-value:hover {
   transform: scale(1.05);
 }
 
+.time-value.time-value-zero {
+  color: var(--expense-color);
+}
+
 .time-label {
   font-size: 0.8rem;
   text-transform: uppercase;
-  opacity: 0.7;
+  color: #6b7280; /* Alterado */
   letter-spacing: 1px;
 }
 
@@ -105,11 +101,12 @@
   font-weight: 700;
   align-self: flex-start;
   padding-top: 0.75rem;
+  color: #d1d5db; /* Alterado */
 }
 
 .sobriety-date {
   font-size: 1rem;
-  opacity: 0.8;
+  color: #6b7280; /* Alterado */
   font-style: italic;
 }
 
@@ -120,23 +117,23 @@
 }
 
 .savings-box {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: #f9fafb; /* Alterado */
   border-radius: 12px;
   padding: 1.5rem;
   text-align: center;
   transition: transform 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-color); /* Alterado */
 }
 
 .savings-box:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.08); /* Suavizado */
 }
 
 .savings-box h3 {
   font-size: 1.2rem;
   margin-bottom: 0.75rem;
-  opacity: 0.9;
+  color: var(--dark-color); /* Alterado */
 }
 
 .savings-amount {
@@ -148,7 +145,7 @@
 
 .savings-details {
   font-size: 0.9rem;
-  opacity: 0.7;
+  color: #6b7280; /* Alterado */
 }
 
 .trophy {
@@ -174,23 +171,25 @@
   color: #fbbf24;
 }
 
-/* Estilos dos novos botões */
+/* --- ESTILOS DOS BOTÕES (ATUALIZADO) --- */
 .btn-custom {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 10px 15px;
   border-radius: 8px;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 15px;
   cursor: pointer;
   text-align: center;
-  transition: background-color 0.3s, color 0.3s, border-color 0.3s, opacity 0.3s;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s, opacity 0.3s, transform 0.3s;
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .btn-custom:hover {
   opacity: 0.9;
+  transform: translateY(-1px);
 }
 
 .btn-expense {
@@ -206,15 +205,28 @@
 }
 
 .btn-sobriety-set {
-  background-color: rgba(255, 255, 255, 0.15);
-  color: var(--white-color);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  background-color: var(--accent-color); /* Alterado */
+  color: var(--white-color); /* Alterado */
+  border: none; /* Alterado */
   font-weight: 600;
-  padding: 10px 20px;
-  transition: background-color 0.3s, transform 0.3s;
+  padding: 12px 24px; /* Aumentado */
 }
+
 .btn-sobriety-set:hover {
-  background-color: rgba(255, 255, 255, 0.25);
+  background-color: #60a5fa; /* Alterado */
+  transform: scale(1.03);
+}
+
+.btn-sobriety-reset {
+  background-color: var(--expense-color);
+  color: var(--white-color);
+  border: none;
+  font-weight: 600;
+  padding: 12px 24px;
+  transition: transform 0.3s ease;
+}
+.btn-sobriety-reset:hover {
+  background-color: #dc2626; /* vermelho um pouco mais escuro */
   transform: scale(1.03);
 }
 
@@ -222,7 +234,7 @@
   background-color: var(--expense-color);
   color: var(--white-color);
   border: 1px solid var(--expense-color);
-  min-width: 200px; /* Para manter uma largura razoável */
+  padding: 10px 20px;
 }
 
 .btn-import,
@@ -232,8 +244,42 @@
   border: 1px solid var(--info-color);
 }
 
+/* --- ESTILOS DA SEÇÃO DE PROMOÇÃO --- */
+.extension-promo-banner {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  background-color: var(--light-gray);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+}
 
-/* Estilos do Modal Unificado */
+.promo-icon .material-symbols-outlined {
+  font-size: 48px;
+  color: var(--accent-color);
+}
+
+.promo-text {
+  flex: 1;
+  min-width: 250px;
+}
+
+.btn-promo {
+  background-color: var(--accent-color);
+  color: var(--white-color);
+  border-color: var(--accent-color);
+  font-weight: 600;
+  padding: 12px 24px;
+}
+
+.btn-promo:hover {
+  background-color: #2563eb;
+  border-color: #2563eb;
+}
+
+/* --- ESTILOS DO MODAL UNIFICADO (SEM ALTERAÇÃO) --- */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -255,7 +301,7 @@
     max-width: 500px;
     padding: 24px;
     position: relative;
-    z-index: 1001; /* Acima do overlay */
+    z-index: 1001;
 }
 
 .modal-title {
@@ -285,24 +331,6 @@
     font-size: 16px;
     outline: none;
     transition: border-color 0.3s;
-}
-
-.input-with-prefix {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-
-.input-prefix {
-    position: absolute;
-    left: 16px;
-    font-size: 16px;
-    color: var(--dark-color);
-    pointer-events: none;
-}
-
-.form-control-prefixed {
-    padding-left: 40px;
 }
 
 .form-control:focus {
@@ -342,30 +370,102 @@
     border: none;
 }
 
-/* Animações e Classes Utilitárias */
-.fade-in {
-  animation: fadeIn 0.5s ease-in;
+.required-asterisk {
+  color: var(--expense-color);
+  font-weight: bold;
 }
 
-@keyframes fadeIn {
-  from { 
-    opacity: 0; 
-    transform: translateY(20px); 
-  }
-  to { 
-    opacity: 1; 
-    transform: translateY(0); 
-  }
+/* Estilos modernos para os radio buttons */
+.radio-group {
+  display: flex;
+  align-items: center;
+  gap: 32px; /* Aumentei o espaçamento entre as opções */
+  padding: 8px 0;
 }
 
-.pulse {
-  animation: pulse 2s infinite;
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Diminuí o espaçamento entre checkbox e texto */
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
+.radio-option:hover {
+  transform: translateY(-1px);
+}
+
+.radio-option input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  appearance: none;
+  border: 2px solid var(--border-color);
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: var(--white-color);
+}
+
+.radio-option input[type="radio"]:hover {
+  border-color: var(--info-color);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.radio-option input[type="radio"]:checked {
+  border-color: var(--info-color);
+  background-color: var(--info-color);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.radio-option input[type="radio"]:checked::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.radio-option label {
+  font-weight: 500;
+  color: var(--dark-color);
+  cursor: pointer;
+  user-select: none;
+  margin: 0;
+  font-size: 14px;
+}
+
+.radio-option input[type="radio"]:checked + label {
+  color: var(--info-color);
+  font-weight: 600;
+}
+
+.bet-tag {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--expense-color);
+  margin-left: 8px;
+}
+
+.btn-delete-transaction {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  color: #6b7280;
+}
+
+.btn-delete-transaction:hover {
+  background-color: #fee2e2;
+  color: var(--expense-color);
+  transform: scale(1.1);
 }
 
 /* Media queries para responsividade */
@@ -373,21 +473,22 @@
   .timer-display {
     gap: 0.25rem;
   }
-  
   .time-unit {
     min-width: 60px;
   }
-  
   .time-value {
     font-size: 1.8rem;
     min-width: 50px;
   }
-  
   .time-divider {
     font-size: 1.5rem;
   }
-  
   .savings-amount {
     font-size: 1.5rem;
+  }
+  .extension-promo-banner {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
   }
 }

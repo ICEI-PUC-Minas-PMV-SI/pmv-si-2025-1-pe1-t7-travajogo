@@ -26,6 +26,7 @@ class PainelGastos {
 
   init() {
     this.displayUserName();
+    this.initializeFilters(); // NOVO: Inicia os filtros do histórico
     this.setupEventListeners();
     this.updateDisplay();
     this.startSobrietyTimer();
@@ -40,16 +41,20 @@ class PainelGastos {
     }
   }
 
-  // Configura os event listeners para os botões
+  // Configura os event listeners para os botões e filtros
   setupEventListeners() {
+    document.getElementById('btnDefinirDataInicio').addEventListener('click', () => this.openModal('dataInicio'));
+     document.getElementById('btnRedefinirJornada').addEventListener('click', () => this.resetSobrietyProgress());
+
     document.getElementById('btnAdicionarGasto').addEventListener('click', () => this.openModal('gasto'));
     document.getElementById('btnAdicionarGanho').addEventListener('click', () => this.openModal('ganho'));
-    document.getElementById('btnDefinirDataInicio').addEventListener('click', () => this.openModal('dataInicio'));
-    document.getElementById('btnResetarDados').addEventListener('click', () => this.resetUserData());
-
-    document.getElementById('btnExportData').addEventListener('click', () => this.showExportOptions());
+    document.getElementById('btnExportData').addEventListener('click', () => this.exportDataToXlsx()); // Alterado para chamar diretamente a função XLSX
     document.getElementById('btnImportData').addEventListener('click', () => document.getElementById('importFileInput').click());
     document.getElementById('importFileInput').addEventListener('change', (event) => this.handleImportFile(event));
+    
+    document.getElementById('filterStartDate').addEventListener('change', () => this.updateHistory());
+    document.getElementById('filterEndDate').addEventListener('change', () => this.updateHistory());
+    document.getElementById('filterAposta').addEventListener('change', () => this.updateHistory());
 
     document.getElementById('modal-btn-cancel').addEventListener('click', () => this.closeModal());
     document.getElementById('gasto-modal-overlay').addEventListener('click', (event) => {
@@ -63,6 +68,8 @@ class PainelGastos {
       this.handleFormSubmit();
     });
     document.getElementById('modal-value').addEventListener('input', (e) => this.formatInputAsCurrency(e));
+
+    document.getElementById('btnResetarDados').addEventListener('click', () => this.resetUserData());
   }
   
   // Salva os dados do usuário no localStorage usando a chave específica do usuário
@@ -90,9 +97,11 @@ class PainelGastos {
     const value = parseFloat(valueText.replace(/[^\d]/g, '')) / 100;
     const description = document.getElementById('modal-description').value;
     const date = document.getElementById('modal-date').value;
+    const isBetRadio = document.querySelector('input[name="is_bet"]:checked');
+    const isBet = isBetRadio ? isBetRadio.value : null; // Valor agora é "Sim" ou "Não"
 
-    if (isNaN(value) || value <= 0 || !description || !date) {
-      alert('Por favor, preencha todos os campos corretamente.');
+    if (isNaN(value) || value <= 0 || !description || !date || !isBet) {
+      alert('Por favor, preencha todos os campos obrigatórios.');
       return;
     }
 
@@ -102,44 +111,49 @@ class PainelGastos {
       value: value,
       date: date,
       description: description,
-      timestamp: new Date().toISOString()
+      isBet: isBet, // Armazena "Sim" ou "Não"
+      timestamp: new Date().toISOString() // Mantido para ordenação interna
     };
 
     this.transactions.push(transaction);
-    this.saveData(); // Salva os dados após a nova transação
+    this.saveData();
     this.updateDisplay();
     this.closeModal();
   }
+  
+  deleteTransaction(transactionId) {
+    const confirmation = confirm('Tem certeza que deseja excluir esta transação?');
+    if (confirmation) {
+      this.transactions = this.transactions.filter(t => t.id !== transactionId);
+      this.saveData();
+      this.updateDisplay();
+    }
+  }
 
-  // Define ou atualiza a data de início da sobriedade e a média de gastos
   setSobrietyStartDate() {
     const date = document.getElementById('modal-date').value;
     const averageSpendingText = document.getElementById('modal-value').value;
     const averageSpending = parseFloat(averageSpendingText.replace(/[^\d]/g, '')) / 100;
 
     if (!date || isNaN(averageSpending) || averageSpending < 0) {
-      alert('Por favor, preencha os campos corretamente.');
+      alert('Por favor, preencha todos os campos corretamente.');
       return;
     }
     
     this.sobrietyStartDate = date;
     this.dailyAverageSpending = averageSpending;
     
-    this.saveData(); // Salva os dados após a alteração
+    this.saveData();
     
     this.updateDisplay();
     this.startSobrietyTimer();
     this.closeModal();
   }
   
-  // Reseta os dados apenas do usuário logado
   resetUserData() {
-    const confirmation = confirm('Você tem certeza que deseja resetar seus dados de progresso e transações? Esta ação não pode ser desfeita.');
+    const confirmation = confirm('Você tem certeza que deseja resetar seus dados de progresso e histórico? Esta ação não pode ser desfeita.');
     if (confirmation) {
-      // Remove os dados específicos do usuário
       localStorage.removeItem(this.userDataKey);
-      
-      // Recarrega a página para refletir o estado inicial
       location.reload();
     }
   }
@@ -154,35 +168,40 @@ class PainelGastos {
     const valueGroup = document.getElementById('valor-group');
     const descriptionGroup = document.getElementById('descricao-group');
     const dateGroup = document.getElementById('data-group');
+    const apostaGroup = document.getElementById('aposta-group');
     const submitButton = document.getElementById('modal-btn-add');
 
     form.reset();
     
-    // Reseta os labels para o padrão
-    valueGroup.querySelector('label').textContent = 'Valor';
-    dateGroup.querySelector('label').textContent = 'Data';
+    valueGroup.querySelector('label').innerHTML = 'Valor <span class="required-asterisk">*</span>';
+    dateGroup.querySelector('label').innerHTML = 'Data <span class="required-asterisk">*</span>';
+    
+    const localDate = this.getLocalDateAsString(); // CORREÇÃO: Pega a data local correta
 
     if (mode === 'gasto' || mode === 'ganho') {
       modalTitle.textContent = mode === 'gasto' ? 'Cadastro de Gasto' : 'Cadastro de Ganho';
       valueGroup.style.display = 'block';
       descriptionGroup.style.display = 'block';
       dateGroup.style.display = 'block';
+      apostaGroup.style.display = 'block';
       document.getElementById('modal-value').placeholder = 'R$ 0,00';
       submitButton.textContent = 'Adicionar';
-      document.getElementById('modal-date').value = new Date().toISOString().split('T')[0];
+      document.getElementById('modal-date').value = localDate; // CORREÇÃO: Usa data local
+      document.getElementById('aposta-nao').checked = true;
 
     } else if (mode === 'dataInicio') {
-      modalTitle.textContent = 'Definir data de início e média de gastos';
+      modalTitle.textContent = 'Inicie sua Jornada!';
       valueGroup.style.display = 'block'; 
       descriptionGroup.style.display = 'none';
       dateGroup.style.display = 'block';
+      apostaGroup.style.display = 'none';
 
-      valueGroup.querySelector('label').textContent = 'Gasto médio diário que você tinha';
+      valueGroup.querySelector('label').textContent = 'Gasto médio diário';
       document.getElementById('modal-value').value = this.dailyAverageSpending > 0 ? this.formatCurrency(this.dailyAverageSpending) : '';
       document.getElementById('modal-value').placeholder = 'R$ 0,00';
       
       dateGroup.querySelector('label').textContent = 'Data de Início';
-      document.getElementById('modal-date').value = this.sobrietyStartDate || new Date().toISOString().split('T')[0];
+      document.getElementById('modal-date').value = this.sobrietyStartDate || localDate; // CORREÇÃO: Usa data local
       
       submitButton.textContent = 'Definir';
     }
@@ -190,12 +209,10 @@ class PainelGastos {
     modalOverlay.style.display = 'flex';
   }
 
-  // Fecha o modal
   closeModal() {
     document.getElementById('gasto-modal-overlay').style.display = 'none';
   }
   
-  // Inicia o contador de sobriedade
   startSobrietyTimer() {
     if (this.timerInterval) {
       clearInterval(this.timerInterval);
@@ -203,15 +220,14 @@ class PainelGastos {
     this.timerInterval = setInterval(() => {
       this.updateSobrietyTimer();
     }, 1000);
-
     this.updateSobrietyTimer();
   }
 
-  // Atualiza o contador de sobriedade, a economia e a média de gasto diário
   updateSobrietyTimer() {
     const trophyContainer = document.getElementById('trophyContainer');
-
-    // Exibe a média de gastos diários recuperada do cadastro
+    const sobrietySubheading = document.getElementById('sobrietySubheading');
+    const timeValueElements = document.querySelectorAll('.time-value');
+    
     document.getElementById('dailyAverage').textContent = this.dailyAverageSpending.toFixed(2).replace('.',',');
 
     if (!this.sobrietyStartDate) {
@@ -219,16 +235,25 @@ class PainelGastos {
       document.getElementById('hours').textContent = '00';
       document.getElementById('minutes').textContent = '00';
       document.getElementById('seconds').textContent = '00';
-      document.getElementById('startDate').textContent = 'Não definida';
+      document.getElementById('startDate').textContent = 'Data não definida';
       document.getElementById('totalSavings').textContent = this.formatCurrency(0);
       
       document.getElementById('achievementTitle').textContent = 'Comece sua jornada!';
       trophyContainer.textContent = '🌱';
       trophyContainer.classList.remove('trophy');
       document.getElementById('achievementText').textContent = 'Defina uma data para começar.';
+
+      // MUDANÇA 1: Altera o texto e a cor do contador quando não há data
+      sobrietySubheading.innerHTML = 'Inicie sua jornada e veja a mudança acontecer! 💪';
+      timeValueElements.forEach(el => el.classList.add('time-value-zero'));
+      
       return; 
     }
     
+    // MUDANÇA 1: Reverte as alterações quando a data é definida
+    sobrietySubheading.innerHTML = 'Continue firme na sua jornada de superação!';
+    timeValueElements.forEach(el => el.classList.remove('time-value-zero'));
+
     document.getElementById('achievementTitle').textContent = 'Parabéns';
     trophyContainer.textContent = '🏆';
     if (!trophyContainer.classList.contains('trophy')) {
@@ -269,192 +294,205 @@ class PainelGastos {
   updateAchievement(days) {
     let achievementText = 'Parabéns por começar sua jornada! 🌱';
     
-    if (days >= 365) {
-      achievementText = 'Mais de 1 ano sem apostar! 🎉';
-    } else if (days >= 180) {
-      achievementText = 'Mais de 6 meses sem apostar! 🎊';
-    } else if (days >= 90) {
-      achievementText = 'Mais de 3 meses sem apostar! 🏆';
-    } else if (days >= 60) {
-      achievementText = 'Mais de 2 meses sem apostar! 🎯';
-    } else if (days >= 30) {
-      achievementText = 'Mais de 1 mês sem apostar! 🌟';
-    } else if (days >= 7) {
-      achievementText = 'Mais de 1 semana sem apostar! 💪';
-    } else if (days >= 1) {
-      achievementText = `${days} ${days === 1 ? 'dia' : 'dias'} sem apostar! 🚀`;
-    }
+    if (days >= 365) achievementText = 'Mais de 1 ano sem apostar! 🎉';
+    else if (days >= 180) achievementText = 'Mais de 6 meses sem apostar! 🎊';
+    else if (days >= 90) achievementText = 'Mais de 3 meses sem apostar! 🏆';
+    else if (days >= 60) achievementText = 'Mais de 2 meses sem apostar! 🎯';
+    else if (days >= 30) achievementText = 'Mais de 1 mês sem apostar! 🌟';
+    else if (days >= 7) achievementText = 'Mais de 1 semana sem apostar! 💪';
+    else if (days >= 1) achievementText = `${days} ${days === 1 ? 'dia' : 'dias'} sem apostar! 🚀`;
 
     document.getElementById('achievementText').textContent = achievementText;
+  }
+
+  resetSobrietyProgress() {
+    const ok = confirm(
+      'Você tem certeza que deseja redefinir sua jornada? Isso vai apagar seu progresso sem apostas.'
+    );
+    if (!ok) return;
+    this.sobrietyStartDate = null;
+    this.dailyAverageSpending = 0;
+    this.saveData();
+    this.updateDisplay();
   }
 
   updateDisplay() {
     this.updateFinancialSummary();
     this.updateHistory();
     this.updateSobrietyTimer();
-    
-    // Controla a visibilidade do botão de definir data de início
-    const btnDefinirData = document.getElementById('btnDefinirDataInicio');
+
+    const btnDef = document.getElementById('btnDefinirDataInicio');
+    const btnRedef = document.getElementById('btnRedefinirJornada');
+
     if (this.sobrietyStartDate) {
-      btnDefinirData.style.display = 'none';
+      btnDef.style.display = 'none';
+      btnRedef.style.display = 'inline-block';
     } else {
-      btnDefinirData.style.display = 'inline-block';
+      btnDef.style.display = 'inline-block';
+      btnRedef.style.display = 'none';
     }
   }
 
   updateFinancialSummary() {
     const now = new Date();
-    const today = now.toISOString().split('T')[0];
-    
+    // **CORREÇÃO PRINCIPAL AQUI**
+    // Usa a função auxiliar para obter a data local no formato YYYY-MM-DD
+    // Em vez de now.toISOString().split('T')[0] que retornava a data em UTC.
+    const today = this.getLocalDateAsString(now);
+
     const startOfWeek = new Date(now);
     startOfWeek.setDate(now.getDate() - now.getDay());
     startOfWeek.setHours(0, 0, 0, 0);
-    
     const endOfWeek = new Date(startOfWeek);
     endOfWeek.setDate(startOfWeek.getDate() + 6);
     endOfWeek.setHours(23, 59, 59, 999);
+    const endOfMonth = new Date(now);
+    endOfMonth.setHours(23, 59, 59, 999);
+    const startOfMonth = new Date(now);
+    startOfMonth.setDate(now.getDate() - 29);
+    startOfMonth.setHours(0, 0, 0, 0);
 
-    let totalBalance = 0;
-    let weeklyExpense = 0;
-    let weeklyGain = 0;
-    let dailyExpense = 0;
-    let dailyGain = 0;
+    let totalBalance = 0, weeklyExpense = 0, weeklyGain = 0, dailyExpense = 0, dailyGain = 0, monthlyExpense = 0, monthlyGain = 0;
 
     this.transactions.forEach(transaction => {
       const transactionDate = new Date(transaction.date + 'T00:00:00');
       const value = transaction.type === 'gasto' ? -transaction.value : transaction.value;
-      
       totalBalance += value;
-
-      if (transactionDate >= startOfWeek && transactionDate <= endOfWeek) {
-        if (transaction.type === 'gasto') {
-          weeklyExpense += transaction.value;
-        } else {
-          weeklyGain += transaction.value;
-        }
+      if (transactionDate >= startOfMonth && transactionDate <= endOfMonth) {
+        if (transaction.type === 'gasto') monthlyExpense += transaction.value;
+        else monthlyGain += transaction.value;
       }
-
+      if (transactionDate >= startOfWeek && transactionDate <= endOfWeek) {
+        if (transaction.type === 'gasto') weeklyExpense += transaction.value;
+        else weeklyGain += transaction.value;
+      }
       if (transaction.date === today) {
-        if (transaction.type === 'gasto') {
-          dailyExpense += transaction.value;
-        } else {
-          dailyGain += transaction.value;
-        }
+        if (transaction.type === 'gasto') dailyExpense += transaction.value;
+        else dailyGain += transaction.value;
       }
     });
 
     document.getElementById('totalBalance').textContent = this.formatCurrency(totalBalance);
     document.getElementById('totalBalance').className = totalBalance >= 0 ? 'font-bold text-green-600' : 'font-bold text-red-600';
-
+    document.getElementById('monthlyExpense').textContent = this.formatCurrency(monthlyExpense);
+    document.getElementById('monthlyGain').textContent = this.formatCurrency(monthlyGain);
+    document.getElementById('monthlyRevenue').textContent = this.formatCurrency(monthlyGain - monthlyExpense);
+    const monthPeriod = `${startOfMonth.toLocaleDateString('pt-BR')} - ${endOfMonth.toLocaleDateString('pt-BR')}`;
+    document.getElementById('monthlyPeriod').textContent = monthPeriod;
+    document.getElementById('monthlyPeriodGain').textContent = monthPeriod;
+    document.getElementById('monthlyPeriodRevenue').textContent = monthPeriod;
     document.getElementById('weeklyExpense').textContent = this.formatCurrency(weeklyExpense);
     document.getElementById('weeklyGain').textContent = this.formatCurrency(weeklyGain);
     document.getElementById('weeklyRevenue').textContent = this.formatCurrency(weeklyGain - weeklyExpense);
-
-    document.getElementById('dailyExpense').textContent = this.formatCurrency(dailyExpense);
-    document.getElementById('dailyGain').textContent = this.formatCurrency(dailyGain);
-    document.getElementById('dailyBalance').textContent = this.formatCurrency(dailyGain - dailyExpense);
-
     const weekPeriod = `${startOfWeek.toLocaleDateString('pt-BR')} - ${endOfWeek.toLocaleDateString('pt-BR')}`;
     document.getElementById('weeklyPeriod').textContent = weekPeriod;
     document.getElementById('weeklyPeriodGain').textContent = weekPeriod;
     document.getElementById('weeklyPeriodRevenue').textContent = weekPeriod;
-
+    document.getElementById('dailyExpense').textContent = this.formatCurrency(dailyExpense);
+    document.getElementById('dailyGain').textContent = this.formatCurrency(dailyGain);
+    document.getElementById('dailyBalance').textContent = this.formatCurrency(dailyGain - dailyExpense);
     const todayFormatted = now.toLocaleDateString('pt-BR');
     document.getElementById('dailyExpenseDate').textContent = todayFormatted;
     document.getElementById('dailyGainDate').textContent = todayFormatted;
     document.getElementById('dailyBalanceDate').textContent = todayFormatted;
   }
 
+  // NOVO: Define as datas padrão para os filtros do histórico.
+  initializeFilters() {
+    const endDateInput = document.getElementById('filterEndDate');
+    const startDateInput = document.getElementById('filterStartDate');
+    
+    const today = new Date();
+    const thirtyDaysAgo = new Date();
+    thirtyDaysAgo.setDate(today.getDate() - 29);
+
+    // Usa a função auxiliar para evitar bugs de fuso horário
+    endDateInput.value = this.getLocalDateAsString(today);
+    startDateInput.value = this.getLocalDateAsString(thirtyDaysAgo);
+  }
+
+  // ATUALIZADO: A função de histórico agora filtra os resultados.
   updateHistory() {
     const historyContainer = document.getElementById('historyContainer');
     
-    if (this.transactions.length === 0) {
-      historyContainer.innerHTML = '<div class="text-gray-500 text-center py-4">Nenhum registro encontrado</div>';
+    // Pega os valores atuais dos filtros
+    const startDateFilter = document.getElementById('filterStartDate').value;
+    const endDateFilter = document.getElementById('filterEndDate').value;
+    const apostaFilter = document.getElementById('filterAposta').value;
+    
+    let filteredTransactions = [...this.transactions];
+
+    // 1. Filtra por aposta
+    if (apostaFilter === 'somente_apostas') {
+      filteredTransactions = filteredTransactions.filter(t => t.isBet === 'Sim');
+    } else if (apostaFilter === 'excluir_apostas') {
+      filteredTransactions = filteredTransactions.filter(t => t.isBet === 'Não');
+    }
+
+    // 2. Filtra por período
+    if (startDateFilter && endDateFilter) {
+      const start = new Date(startDateFilter + 'T00:00:00');
+      const end = new Date(endDateFilter + 'T23:59:59'); // Garante que o dia final seja incluído
+      filteredTransactions = filteredTransactions.filter(t => {
+        const transactionDate = new Date(t.date + 'T00:00:00');
+        return transactionDate >= start && transactionDate <= end;
+      });
+    }
+
+    if (filteredTransactions.length === 0) {
+      historyContainer.innerHTML = '<div class="text-gray-500 text-center py-4">Nenhum registro encontrado para o filtro selecionado</div>';
       return;
     }
 
-    const sortedTransactions = [...this.transactions].sort((a, b) => new Date(b.date) - new Date(a.date) || new Date(b.timestamp) - new Date(a.timestamp));
+    // Ordena as transações filtradas
+    const sortedTransactions = filteredTransactions.sort((a, b) => new Date(b.date) - new Date(a.date) || new Date(b.timestamp) - new Date(a.timestamp));
 
     historyContainer.innerHTML = sortedTransactions.map(transaction => {
       const isExpense = transaction.type === 'gasto';
       const textColor = isExpense ? 'text-red-600' : 'text-green-600';
       const sign = isExpense ? '-' : '+';
       const dateFormatted = new Date(transaction.date + 'T00:00:00').toLocaleDateString('pt-BR');
+      const betTag = transaction.isBet === 'Sim' ? '<span class="bet-tag">(Aposta)</span>' : ''; // Lógica atualizada para "Sim"
 
       return `
         <div class="flex justify-between items-center bg-white p-3 rounded-md shadow-sm">
-          <div>
-            <div class="font-medium">${transaction.description}</div>
+          <div class="flex-1">
+            <div class="font-medium">${transaction.description} ${betTag}</div>
             <div class="text-sm text-gray-500">${dateFormatted}</div>
           </div>
-          <div class="${textColor} font-medium">${sign} ${this.formatCurrency(transaction.value)}</div>
+          <div class="flex items-center">
+            <div class="${textColor} font-medium mr-4">${sign} ${this.formatCurrency(transaction.value)}</div>
+            <button class="btn-delete-transaction" data-id="${transaction.id}" title="Excluir transação">&#x1F5D1;</button>
+          </div>
         </div>
       `;
     }).join('');
+
+    document.querySelectorAll('.btn-delete-transaction').forEach(button => {
+      button.addEventListener('click', (event) => {
+        const transactionId = parseFloat(event.currentTarget.getAttribute('data-id'));
+        this.deleteTransaction(transactionId);
+      });
+    });
+  }
+
+  getLocalDateAsString(date = new Date()) {
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
   }
 
   formatInputAsCurrency(event) {
     const input = event.target;
     let value = input.value.replace(/\D/g, '');
-    
-    if (value === '') {
-        input.value = '';
-        return;
-    }
-    
+    if (value === '') { input.value = ''; return; }
     value = (parseInt(value, 10) / 100).toFixed(2);
-    
-    input.value = new Intl.NumberFormat('pt-BR', {
-        style: 'currency',
-        currency: 'BRL'
-    }).format(value);
+    input.value = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
   }
 
   formatCurrency(value) {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL'
-    }).format(value);
-  }
-
-  showExportOptions() {
-    const format = prompt('Qual formato você deseja exportar? Digite "csv" ou "xlsx".');
-    if (format && format.toLowerCase() === 'csv') {
-      this.exportDataToCsv();
-    } else if (format && format.toLowerCase() === 'xlsx') {
-      this.exportDataToXlsx();
-    } else if (format) {
-      alert('Formato inválido. Por favor, digite "csv" ou "xlsx".');
-    }
-  }
-
-  exportDataToCsv() {
-    if (this.transactions.length === 0) {
-      alert('Não há dados para exportar.');
-      return;
-    }
-
-    const header = ["Tipo", "Valor", "Data", "Descrição", "Timestamp"];
-    const rows = this.transactions.map(t => [
-      t.type,
-      t.value.toFixed(2).replace('.', ','),
-      t.date,
-      t.description.replace(/"/g, '""'),
-      t.timestamp
-    ]);
-
-    let csvContent = header.join(";") + "\n";
-    rows.forEach(row => {
-      csvContent += row.map(field => `"${field}"`).join(";") + "\n";
-    });
-
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.setAttribute('download', 'gastos_travajogo.csv');
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
   }
 
   exportDataToXlsx() {
@@ -468,7 +506,7 @@ class PainelGastos {
       Valor: t.value,
       Data: t.date,
       Descrição: t.description,
-      Timestamp: t.timestamp
+      'Aposta': t.isBet,
     }));
 
     const ws = XLSX.utils.json_to_sheet(data);
@@ -479,73 +517,24 @@ class PainelGastos {
 
   handleImportFile(event) {
     const file = event.target.files[0];
-    if (!file) {
-      return;
+    if (!file) return;
+
+    if (!file.name.endsWith('.xlsx')) {
+        alert('Formato de arquivo não suportado. Por favor, importe um arquivo .xlsx.');
+        event.target.value = '';
+        return;
     }
 
     const reader = new FileReader();
     reader.onload = (e) => {
       const fileContent = e.target.result;
-      if (file.name.endsWith('.csv')) {
-        this.importDataFromCsv(fileContent);
-      } else if (file.name.endsWith('.xlsx')) {
-        this.importDataFromXlsx(fileContent);
-      } else {
-        alert('Formato de arquivo não suportado. Por favor, importe .csv ou .xlsx.');
-      }
+      this.importDataFromXlsx(fileContent);
       event.target.value = ''; 
     };
-
-    reader.onerror = () => {
-      alert('Erro ao ler o arquivo.');
-    };
-
-    if (file.name.endsWith('.csv')) {
-      reader.readAsText(file);
-    } else if (file.name.endsWith('.xlsx')) {
-      reader.readAsArrayBuffer(file);
-    }
+    reader.onerror = () => alert('Erro ao ler o arquivo.');
+    reader.readAsArrayBuffer(file);
   }
-
-  importDataFromCsv(csvContent) {
-    const lines = csvContent.split('\n').filter(line => line.trim() !== '');
-    if (lines.length <= 1) {
-      alert('O arquivo CSV está vazio ou não contém dados válidos.');
-      return;
-    }
-
-    const header = lines[0].split(';').map(h => h.trim().replace(/"/g, ''));
-    const newTransactions = [];
-
-    for (let i = 1; i < lines.length; i++) {
-      const values = lines[i].split(';').map(v => v.trim().replace(/"/g, ''));
-      if (values.length !== header.length) {
-        console.warn(`Linha mal formatada ignorada: ${lines[i]}`);
-        continue;
-      }
-
-      const transaction = {};
-      header.forEach((key, index) => {
-        let value = values[index];
-        if (key === 'Valor') {
-          transaction[key.toLowerCase()] = parseFloat(value.replace(',', '.'));
-        }else {
-          transaction[key.toLowerCase()] = value;
-        }
-      });
-      if (!transaction.type || !transaction.value || !transaction.date) {
-        console.warn(`Transação inválida ignorada: ${JSON.stringify(transaction)}`);
-        continue;
-      }
-      newTransactions.push(transaction);
-    }
-
-    this.transactions = this.transactions.concat(newTransactions);
-    this.saveData();
-    this.updateDisplay();
-    alert(`Dados importados com sucesso: ${newTransactions.length} registros adicionados.`);
-  }
-
+  
   importDataFromXlsx(arrayBuffer) {
     const workbook = XLSX.read(arrayBuffer, { type: 'array' });
     const sheetName = workbook.SheetNames[0];
@@ -560,11 +549,13 @@ class PainelGastos {
     const newTransactions = [];
     jsonData.forEach(row => {
       const transaction = {
+        id: Date.now() + Math.random(), // ID único para a transação importada
         type: row.Tipo,
         value: row.Valor,
         date: row.Data,
         description: row.Descrição,
-        timestamp: row.Timestamp || new Date().toISOString()
+        isBet: row['Aposta'] === 'Sim' ? 'Sim' : 'Não', // Garante que o valor seja "Sim" ou "Não"
+        timestamp: new Date().toISOString() // Adiciona um timestamp de importação
       };
 
       if (!transaction.type || typeof transaction.value !== 'number' || !transaction.date) {
